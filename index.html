@@ -2,53 +2,86 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pivas Store</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пив@с - все товары</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+header{background:#111;color:#fff;padding:12px;position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search{flex:1;min-width:160px;padding:10px 14px;border-radius:22px;border:none}
+#cartBtn{background:#ff3b30;color:#fff;border:none;padding:10px 16px;border-radius:22px;font-weight:800}
+#info{background:#d1e7dd;color:#0f5132;padding:8px;text-align:center;font-weight:700;font-size:14px}
+#grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
+@media(min-width:700px){#grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+.card{background:#fff;border-radius:14px;padding:10px;display:flex;flex-direction:column;box-shadow:0 1px 3px #0001}
+.card b{font-size:13px;line-height:1.2;min-height:38px}
+.price{color:#ff3b30;font-weight:800;margin:6px 0}
+.card button{margin-top:auto;background:#111;color:#fff;border:none;padding:8px;border-radius:10px}
+#cart{position:fixed;inset:0;background:#fff;z-index:50;display:none;flex-direction:column}
+#cartList{flex:1;overflow:auto;padding:12px}
+</style>
 </head>
-<body style="background:#000;color:#fff;padding-bottom:90px">
-<script>const WA="77017531337";</script>
-<header class="sticky top-0 z-20 p-4 flex justify-between items-center bg-black border-b border-yellow-500">
-<b style="color:#fbbf24">ПИВАС STORE</b>
-<button onclick="openCart()" class="bg-yellow-400 text-black px-4 py-2 rounded-full font-black">🛒 <span id="cnt">0</span></button>
-</header>
-<img src="IMG-20261118-WA8679.jpg" style="width:100%" onerror="this.src='banner.jpg'">
-<div class="p-3 flex gap-2 overflow-auto bg-black">
-<button onclick="show('all')" class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold">Все</button>
-<button onclick="show('Пиво')" class="bg-zinc-800 px-4 py-2 rounded-full">🍺 Пиво</button>
-<button onclick="show('Снеки')" class="bg-zinc-800 px-4 py-2 rounded-full">🥨 Снеки</button>
-<button onclick="show('Орехи')" class="bg-zinc-800 px-4 py-2 rounded-full">🥜 Орехи</button>
-</div>
-<div id="list" class="p-4 grid grid-cols-2 gap-3 bg-zinc-900"></div>
-<div id="cart" class="fixed inset-0 bg-black/80 z-50 hidden">
-<div class="bg-white text-black h-full max-w-md ml-auto p-5 flex flex-col">
-<div class="flex justify-between mb-4"><h2 class="font-black text-xl">Корзина</h2><button onclick="closeCart()" class="text-2xl">✕</button></div>
-<div id="cartItems" class="flex-1 overflow-auto space-y-2"></div>
-<div class="border-t pt-3">
-<div class="flex justify-between font-black text-lg mb-3">Итого: <span id="total">0 ₸</span></div>
-<button onclick="order()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-black">💬 Заказать в WhatsApp</button>
-<p class="text-xs text-center text-gray-500 mt-2">Можно 1, 5, 50, 100 шт — без лимита!</p>
-</div>
-</div>
+<body>
+<header><h1>🍺 Пив@с</h1><input id="search" placeholder="Поиск: Прага, Чечил, кола..."><button id="cartBtn" onclick="openCart()">Корзина 0</button></header>
+<div id="info">Загружаю...</div>
+<div id="grid"></div>
+<div id="cart">
+<div style="display:flex;justify-content:space-between;padding:14px;border-bottom:1px solid #eee"><h2>Корзина</h2><button onclick="closeCart()" style="font-size:22px;background:none;border:none">✕</button></div>
+<div id="cartList"></div>
+<div style="padding:14px;border-top:1px solid #eee"><div id="total" style="font-weight:800;font-size:18px"></div><button onclick="orderWA()" style="width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;margin-top:10px;font-weight:800">Заказать в WhatsApp</button></div>
 </div>
 <script>
-let DATA=[
-{id:1,n:"Лагер 0.5л",p:990,c:"Пиво",img:"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
-{id:2,n:"Темный Эль 0.5л",p:1190,c:"Пиво",img:"https://images.unsplash.com/photo-1558346489-19413928158b?w=300"},
-{id:3,n:"Чипсы Паприка",p:690,c:"Снеки",img:"https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=300"},
-{id:4,n:"Арахис 100г",p:590,c:"Орехи",img:"https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=300"},
-{id:5,n:"Фисташки 80г",p:1290,c:"Орехи",img:"https://images.unsplash.com/photo-1573551089778-46a7abc39d9f?w=300"},
-{id:6,n:"Сухарики",p:490,c:"Снеки",img:"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"}
-];
-let CART=[];let cur="all";
-function show(c){if(c)cur=c;let f=cur=="all"?DATA:DATA.filter(x=>x.c==cur);document.getElementById("list").innerHTML=f.map(x=>`<div class="bg-zinc-800 rounded-2xl p-3"><img src="${x.img}" style="width:100%;height:100px;object-fit:cover;border-radius:10px"><div class="font-bold text-sm mt-2 h-8">${x.n}</div><div class="flex justify-between items-center mt-2"><b class="text-yellow-400">${x.p} ₸</b><button onclick="add(${x.id})" class="bg-yellow-400 text-black w-8 h-8 rounded-full font-black">+</button></div></div>`).join("")}
-function add(id){let pr=DATA.find(x=>x.id==id);let f=CART.find(x=>x.id==id);if(f)f.q++;else CART.push({...pr,q:1});upd()}
-function upd(){document.getElementById("cnt").innerText=CART.reduce((s,x)=>s+x.q,0);document.getElementById("total").innerText=CART.reduce((s,x)=>s+x.p*x.q,0)+" ₸";let box=document.getElementById("cartItems");if(CART.length==0)box.innerHTML="<p class='text-center text-gray-400 mt-10'>Корзина пуста<br>Добавь пиво! 🍺</p>";else box.innerHTML=CART.map(x=>`<div class="flex justify-between items-center bg-gray-100 p-3 rounded-xl"><div><b class="text-sm">${x.n}</b><div class="text-xs">${x.p} x ${x.q} = ${x.p*x.q} ₸</div></div><div class="flex gap-1 items-center"><button onclick="chg(${x.id},-1)" class="border w-8 h-8 rounded-full">-</button><b>${x.q}</b><button onclick="chg(${x.id},1)" class="border w-8 h-8 rounded-full">+</button></div></div>`).join("")}
-function chg(id,d){let f=CART.find(x=>x.id==id);f.q+=d;if(f.q<=0)CART=CART.filter(x=>x.id!=id);upd()}
-function openCart(){document.getElementById("cart").classList.remove("hidden")}
-function closeCart(){document.getElementById("cart").classList.add("hidden")}
-function order(){if(CART.length==0){alert("Пусто!");return}let t="🍺 Заказ PIVAS%0A";CART.forEach(x=>t+=`• ${x.n} - ${x.q}шт = ${x.q*x.p}₸%0A`);t+=`%0AИтого: ${CART.reduce((s,x)=>s+x.p*x.q,0)}₸`;window.open("https://wa.me/"+WA+"?text="+t,"_blank")}
-show("all");upd();
+let ALL=[],CART=[];
+async function load(){
+ const r=await fetch('./tovar.xls?v='+Date.now());
+ const buf=await r.arrayBuffer();
+ const wb=XLSX.read(buf,{type:'array'});
+ const sh=wb.Sheets[wb.SheetNames[0]];
+ const rows=XLSX.utils.sheet_to_json(sh,{header:1,defval:''});
+ let countRows=rows.length;
+ ALL=[];
+ for(let i=0;i<rows.length;i++){
+  let row=rows[i]; if(!row||!row.join('').trim()=='') continue;
+  let name=(row[0]||'').toString().trim();
+  if(!name) continue;
+  let low=name.toLowerCase();
+  if(i<3 && (low.includes('наимен')||low.includes('товар')||low.includes('название'))) continue;
+  if(low.includes('итого')||low.includes('всего')) continue;
+  if(name.length<2) continue;
+  let price=0;
+  // ищем цену в любых колонках
+  for(let c=1;c<row.length;c++){
+   let v=row[c];
+   if(v===''||v==null) continue;
+   let s=v.toString().replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'');
+   let n=parseFloat(s);
+   if(!isNaN(n)&&n>=1&&n<1000000){ price=n; }
+  }
+  if(price==0){
+   let m=name.match(/(\d+[\.,]?\d*)\s*₸|(\d+)\s*тг/i);
+   if(m) price=parseFloat(m[1]||m[2]);
+  }
+  ALL.push({name,price:price||0});
+ }
+ document.getElementById('info').innerText='Товаров: '+ALL.length+' / строк в Excel: '+countRows;
+ render(ALL);
+}
+function render(list){
+ const g=document.getElementById('grid'); g.innerHTML='';
+ list.forEach((p,i)=>{
+  let orig=ALL.indexOf(p);
+  let d=document.createElement('div'); d.className='card';
+  d.innerHTML=`<b>${p.name}</b><div class=price>${p.price?p.price+' ₸':'цена по запросу'}</div><button onclick="add(${orig})">В корзину</button>`;
+  g.appendChild(d);
+ });
+}
+function add(i){let p=ALL[i];let f=CART.find(x=>x.name==p.name);if(f)f.q++;else CART.push({...p,q:1});update();}
+function update(){let cnt=CART.reduce((s,x)=>s+x.q,0);document.getElementById('cartBtn').innerText='Корзина '+cnt;let sum=CART.reduce((s,x)=>s+x.price*x.q,0);document.getElementById('total').innerText='Итого: '+sum+' ₸';document.getElementById('cartList').innerHTML=CART.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span style="flex:1">${x.name} x${x.q}</span><span>${(x.price*x.q)} ₸ <button onclick="CART.splice(${i},1);update()" style="border:none;background:#eee;border-radius:6px;padding:2px 6px">x</button></span></div>`).join('');}
+function openCart(){document.getElementById('cart').style.display='flex';update();}
+function closeCart(){document.getElementById('cart').style.display='none';}
+function orderWA(){if(!CART.length)return alert('Корзина пуста');let text='Заказ Пив@с:%0A'+CART.map(x=>`- ${x.name} x${x.q} = ${x.price*x.q} ₸`).join('%0A')+'%0A%0AИтого: '+CART.reduce((s,x)=>s+x.price*x.q,0)+' ₸';window.open('https://wa.me/77000000000?text='+text,'_blank');}
+document.getElementById('search').oninput=e=>{let q=e.target.value.toLowerCase().trim();if(!q)render(ALL);else render(ALL.filter(x=>x.name.toLowerCase().includes(q)));};
+load();
 </script>
 </body>
 </html>
