@@ -3,31 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Пив@с - все товары</title>
+<title>Пив@с</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
-header{background:#111;color:#fff;padding:12px;position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-#search{flex:1;min-width:160px;padding:10px 14px;border-radius:22px;border:none}
+header{background:#111;color:#fff;padding:12px;position:sticky;top:0;z-index:10;display:flex;gap:8px;align-items:center}
+#search{flex:1;padding:10px 14px;border-radius:22px;border:none}
 #cartBtn{background:#ff3b30;color:#fff;border:none;padding:10px 16px;border-radius:22px;font-weight:800}
-#info{background:#d1e7dd;color:#0f5132;padding:8px;text-align:center;font-weight:700;font-size:14px}
+#info{background:#d1e7dd;padding:8px;text-align:center;font-weight:700}
 #grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
-@media(min-width:700px){#grid{grid-template-columns:1fr 1fr 1fr 1fr}}
-.card{background:#fff;border-radius:14px;padding:10px;display:flex;flex-direction:column;box-shadow:0 1px 3px #0001}
-.card b{font-size:13px;line-height:1.2;min-height:38px}
+.card{background:#fff;border-radius:12px;padding:10px;display:flex;flex-direction:column;box-shadow:0 1px 3px #0001}
+.card b{font-size:13px;min-height:36px}
 .price{color:#ff3b30;font-weight:800;margin:6px 0}
-.card button{margin-top:auto;background:#111;color:#fff;border:none;padding:8px;border-radius:10px}
-#cart{position:fixed;inset:0;background:#fff;z-index:50;display:none;flex-direction:column}
-#cartList{flex:1;overflow:auto;padding:12px}
+.card button{margin-top:auto;background:#111;color:#fff;border:none;padding:8px;border-radius:8px}
+#cart{position:fixed;inset:0;background:#fff;z-index:99;display:none;flex-direction:column}
 </style>
 </head>
 <body>
-<header><h1>🍺 Пив@с</h1><input id="search" placeholder="Поиск: Прага, Чечил, кола..."><button id="cartBtn" onclick="openCart()">Корзина 0</button></header>
-<div id="info">Загружаю...</div>
+<header>🍺 <b style="flex:0 0 auto">Пив@с</b> <input id="search" placeholder="Поиск..."> <button id="cartBtn" onclick="openCart()">Корзина 0</button></header>
+<div id="info">Загрузка...</div>
 <div id="grid"></div>
 <div id="cart">
-<div style="display:flex;justify-content:space-between;padding:14px;border-bottom:1px solid #eee"><h2>Корзина</h2><button onclick="closeCart()" style="font-size:22px;background:none;border:none">✕</button></div>
-<div id="cartList"></div>
+<div style="display:flex;justify-content:space-between;padding:14px;border-bottom:1px solid #eee"><h2>Корзина</h2><button onclick="closeCart()" style="font-size:22px;border:none;background:none">✕</button></div>
+<div id="cartList" style="flex:1;overflow:auto;padding:12px"></div>
 <div style="padding:14px;border-top:1px solid #eee"><div id="total" style="font-weight:800;font-size:18px"></div><button onclick="orderWA()" style="width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;margin-top:10px;font-weight:800">Заказать в WhatsApp</button></div>
 </div>
 <script>
@@ -38,48 +36,53 @@ async function load(){
  const wb=XLSX.read(buf,{type:'array'});
  const sh=wb.Sheets[wb.SheetNames[0]];
  const rows=XLSX.utils.sheet_to_json(sh,{header:1,defval:''});
- let countRows=rows.length;
+ let ok=0;
  ALL=[];
  for(let i=0;i<rows.length;i++){
-  let row=rows[i]; if(!row||!row.join('').trim()=='') continue;
-  let name=(row[0]||'').toString().trim();
+  let row=rows[i];
+  if(!row||row.join('').trim()=='') continue;
+  // НАЙТИ НАЗВАНИЕ - первая ячейка с буквами длиной >2
+  let name='';
+  for(let c=0;c<row.length;c++){
+    let v=(row[c]||'').toString().trim();
+    if(v.length>=3 && /[А-Яа-яA-Za-z]/.test(v)){
+      // не цена и не чисто число
+      if(!/^\d+[\.,]?\d*\s*(₸|тг|р|р\.)?$/i.test(v)){
+        name=v; break;
+      }
+    }
+  }
   if(!name) continue;
   let low=name.toLowerCase();
-  if(i<3 && (low.includes('наимен')||low.includes('товар')||low.includes('название'))) continue;
-  if(low.includes('итого')||low.includes('всего')) continue;
-  if(name.length<2) continue;
+  if(low.includes('наимен')||low.includes('итого')||low.includes('всего')||low.includes('прайс')||low.includes('цена')){ if(i<5) continue; }
+  // НАЙТИ ЦЕНУ - последнее число в строке
   let price=0;
-  // ищем цену в любых колонках
-  for(let c=1;c<row.length;c++){
-   let v=row[c];
-   if(v===''||v==null) continue;
-   let s=v.toString().replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'');
-   let n=parseFloat(s);
-   if(!isNaN(n)&&n>=1&&n<1000000){ price=n; }
+  for(let c=row.length-1;c>=0;c--){
+    let v=row[c]; if(v===''||v==null) continue;
+    let s=v.toString().replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'');
+    let n=parseFloat(s);
+    if(!isNaN(n)&&n>=1&&n<=1000000){ price=n; break; }
   }
-  if(price==0){
-   let m=name.match(/(\d+[\.,]?\d*)\s*₸|(\d+)\s*тг/i);
-   if(m) price=parseFloat(m[1]||m[2]);
-  }
-  ALL.push({name,price:price||0});
+  ok++;
+  ALL.push({name,price});
  }
- document.getElementById('info').innerText='Товаров: '+ALL.length+' / строк в Excel: '+countRows;
+ document.getElementById('info').innerText='Товаров: '+ALL.length+' / строк: '+rows.length+' (найдено имён: '+ok+')';
  render(ALL);
 }
 function render(list){
  const g=document.getElementById('grid'); g.innerHTML='';
- list.forEach((p,i)=>{
-  let orig=ALL.indexOf(p);
+ list.slice(0,2000).forEach((p)=>{
+  let idx=ALL.indexOf(p);
   let d=document.createElement('div'); d.className='card';
-  d.innerHTML=`<b>${p.name}</b><div class=price>${p.price?p.price+' ₸':'цена по запросу'}</div><button onclick="add(${orig})">В корзину</button>`;
+  d.innerHTML=`<b>${p.name}</b><div class=price>${p.price?p.price+' ₸':'—'}</div><button onclick="add(${idx})">В корзину</button>`;
   g.appendChild(d);
  });
 }
-function add(i){let p=ALL[i];let f=CART.find(x=>x.name==p.name);if(f)f.q++;else CART.push({...p,q:1});update();}
-function update(){let cnt=CART.reduce((s,x)=>s+x.q,0);document.getElementById('cartBtn').innerText='Корзина '+cnt;let sum=CART.reduce((s,x)=>s+x.price*x.q,0);document.getElementById('total').innerText='Итого: '+sum+' ₸';document.getElementById('cartList').innerHTML=CART.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span style="flex:1">${x.name} x${x.q}</span><span>${(x.price*x.q)} ₸ <button onclick="CART.splice(${i},1);update()" style="border:none;background:#eee;border-radius:6px;padding:2px 6px">x</button></span></div>`).join('');}
-function openCart(){document.getElementById('cart').style.display='flex';update();}
+function add(i){let p=ALL[i];let f=CART.find(x=>x.name==p.name);if(f)f.q++;else CART.push({...p,q:1});upd();}
+function upd(){let c=CART.reduce((s,x)=>s+x.q,0);document.getElementById('cartBtn').innerText='Корзина '+c;let sum=CART.reduce((s,x)=>s+x.price*x.q,0);document.getElementById('total').innerText='Итого: '+sum+' ₸';document.getElementById('cartList').innerHTML=CART.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span style="flex:1">${x.name} x${x.q}</span><span>${x.price*x.q} ₸ <button onclick="CART.splice(${i},1);upd()" style="border:none;background:#eee;border-radius:6px;padding:2px 6px">x</button></span></div>`).join('');}
+function openCart(){document.getElementById('cart').style.display='flex';upd();}
 function closeCart(){document.getElementById('cart').style.display='none';}
-function orderWA(){if(!CART.length)return alert('Корзина пуста');let text='Заказ Пив@с:%0A'+CART.map(x=>`- ${x.name} x${x.q} = ${x.price*x.q} ₸`).join('%0A')+'%0A%0AИтого: '+CART.reduce((s,x)=>s+x.price*x.q,0)+' ₸';window.open('https://wa.me/77000000000?text='+text,'_blank');}
+function orderWA(){if(!CART.length)return alert('Корзина пуста');let t='Заказ Пив@с:%0A'+CART.map(x=>`- ${x.name} x${x.q} = ${x.price*x.q} ₸`).join('%0A')+'%0A%0AИтого: '+CART.reduce((s,x)=>s+x.price*x.q,0)+' ₸';window.open('https://wa.me/77000000000?text='+t,'_blank');}
 document.getElementById('search').oninput=e=>{let q=e.target.value.toLowerCase().trim();if(!q)render(ALL);else render(ALL.filter(x=>x.name.toLowerCase().includes(q)));};
 load();
 </script>
