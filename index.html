@@ -1,101 +1,54 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pivas Store - Пиво и Снеки</title>
+<title>Pivas Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="background:#f7f7f7;padding-bottom:100px">
-<script>
-const WHATSAPP_NUMBER = "77017531337";
-</script>
-
-<header class="bg-white sticky top-0 z-30 shadow-sm p-4 flex justify-between items-center">
-<div class="font-black text-xl">Pivas <span style="color:#f97316">Store 🍺</span></div>
-<button onclick="openCart()" style="background:#f97316" class="text-white px-4 py-2 rounded-full font-bold">🛒 Корзина <span id="cart-count" class="bg-white text-orange-500 rounded-full px-2 ml-1">0</span></button>
+<body style="background:#000;color:#fff;padding-bottom:90px">
+<script>const WA="77017531337";</script>
+<header class="sticky top-0 z-20 p-4 flex justify-between items-center bg-black border-b border-yellow-500">
+<b style="color:#fbbf24">ПИВАС STORE</b>
+<button onclick="openCart()" class="bg-yellow-400 text-black px-4 py-2 rounded-full font-black">🛒 <span id="cnt">0</span></button>
 </header>
-
-<div class="m-4 bg-gradient-to-r from-orange-400 to-orange-200 rounded-2xl p-5 text-white">
-<h2 class="font-bold text-lg">Скидка 15% на набор к пятнице!</h2>
-<p class="text-sm opacity-90">Пиво и снеки с доставкой за 30 мин</p>
+<img src="IMG-20261118-WA8679.jpg" style="width:100%" onerror="this.src='banner.jpg'">
+<div class="p-3 flex gap-2 overflow-auto bg-black">
+<button onclick="show('all')" class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold">Все</button>
+<button onclick="show('Пиво')" class="bg-zinc-800 px-4 py-2 rounded-full">🍺 Пиво</button>
+<button onclick="show('Снеки')" class="bg-zinc-800 px-4 py-2 rounded-full">🥨 Снеки</button>
+<button onclick="show('Орехи')" class="bg-zinc-800 px-4 py-2 rounded-full">🥜 Орехи</button>
 </div>
-
-<div class="px-4 flex gap-2 overflow-x-auto pb-2">
-<button onclick="filterCat('all')" class="cat-btn bg-orange-500 text-white px-4 py-2 rounded-full font-bold">Все</button>
-<button onclick="filterCat('Пиво')" class="cat-btn bg-white px-4 py-2 rounded-full font-bold">🍺 Пиво</button>
-<button onclick="filterCat('Снеки')" class="cat-btn bg-white px-4 py-2 rounded-full font-bold">🥨 Снэки</button>
-<button onclick="filterCat('Орехи')" class="cat-btn bg-white px-4 py-2 rounded-full font-bold">🥜 Орехи</button>
-</div>
-
-<div id="products" class="p-4 grid grid-cols-2 gap-4"></div>
-
-<div id="cart-modal" class="fixed inset-0 bg-black/50 z-50 hidden">
-<div class="bg-white h-full w-full max-w-md ml-auto p-5 flex flex-col">
-<div class="flex justify-between items-center mb-4">
-<h2 class="font-black text-2xl">Корзина</h2>
-<button onclick="closeCart()" class="text-2xl">✕</button>
-</div>
-<div id="cart-items" class="flex-1 overflow-auto space-y-3"></div>
-<div class="border-t pt-4">
-<div class="flex justify-between font-bold text-lg mb-4"><span>Итого:</span><span id="cart-total">0 ₸</span></div>
-<button onclick="orderWhatsApp()" class="w-full bg-green-500 text-white py-4 rounded-2xl font-black text-lg">💬 Заказать в WhatsApp</button>
-<p class="text-xs text-gray-500 text-center mt-2">Заказ придет на 701-753-13-37</p>
+<div id="list" class="p-4 grid grid-cols-2 gap-3 bg-zinc-900"></div>
+<div id="cart" class="fixed inset-0 bg-black/80 z-50 hidden">
+<div class="bg-white text-black h-full max-w-md ml-auto p-5 flex flex-col">
+<div class="flex justify-between mb-4"><h2 class="font-black text-xl">Корзина</h2><button onclick="closeCart()" class="text-2xl">✕</button></div>
+<div id="cartItems" class="flex-1 overflow-auto space-y-2"></div>
+<div class="border-t pt-3">
+<div class="flex justify-between font-black text-lg mb-3">Итого: <span id="total">0 ₸</span></div>
+<button onclick="order()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-black">💬 Заказать в WhatsApp</button>
+<p class="text-xs text-center text-gray-500 mt-2">Можно 1, 5, 50, 100 шт — без лимита!</p>
 </div>
 </div>
 </div>
-
 <script>
-const productsData = [
-{id:1,name:"Лагер Светлое 0.5л",price:990,cat:"Пиво",img:"🍺"},
-{id:2,name:"Эль Темный 0.5л",price:1190,cat:"Пиво",img:"🍺"},
-{id:3,name:"Pilsner 0.5л",price:1090,cat:"Пиво",img:"🍺"},
-{id:4,name:"Чипсы паприка 80г",price:690,cat:"Снеки",img:"🥔"},
-{id:5,name:"Сухарики чесночные",price:490,cat:"Снеки",img:"🥖"},
-{id:6,name:"Арахис соленый 100г",price:590,cat:"Орехи",img:"🥜"},
-{id:7,name:"Фисташки 80г",price:1290,cat:"Орехи",img:"🥜"},
-{id:8,name:"Сыр косичка",price:790,cat:"Снеки",img:"🧀"},
+let DATA=[
+{id:1,n:"Лагер 0.5л",p:990,c:"Пиво",img:"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
+{id:2,n:"Темный Эль 0.5л",p:1190,c:"Пиво",img:"https://images.unsplash.com/photo-1558346489-19413928158b?w=300"},
+{id:3,n:"Чипсы Паприка",p:690,c:"Снеки",img:"https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=300"},
+{id:4,n:"Арахис 100г",p:590,c:"Орехи",img:"https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=300"},
+{id:5,n:"Фисташки 80г",p:1290,c:"Орехи",img:"https://images.unsplash.com/photo-1573551089778-46a7abc39d9f?w=300"},
+{id:6,n:"Сухарики",p:490,c:"Снеки",img:"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"}
 ];
-let cart=[];let curCat='all';
-function render(){
-  const cont=document.getElementById('products');
-  const filtered=curCat==='all'?productsData:productsData.filter(p=>p.cat===curCat);
-  cont.innerHTML=filtered.map(p=>`<div class="bg-white rounded-2xl p-4 shadow-sm"><div class="text-5xl text-center mb-3">${p.img}</div><div class="font-bold text-sm h-10">${p.name}</div><div class="flex justify-between items-center mt-3"><span class="font-black">${p.price} ₸</span><button onclick="addToCart(${p.id})" class="bg-orange-500 text-white w-9 h-9 rounded-full font-black text-xl">+</button></div></div>`).join('');
-}
-function filterCat(c){curCat=c;render();}
-function addToCart(id){
-  const prod=productsData.find(p=>p.id===id);
-  const found=cart.find(c=>c.id===id);
-  if(found) found.qty++; else cart.push({...prod,qty:1});
-  updateCart();
-}
-function updateCart(){
-  document.getElementById('cart-count').textContent=cart.reduce((s,c)=>s+c.qty,0);
-  const total=cart.reduce((s,c)=>s+c.price*c.qty,0);
-  document.getElementById('cart-total').textContent=total+' ₸';
-  const cont=document.getElementById('cart-items');
-  if(cart.length===0) cont.innerHTML='<p class="text-center text-gray-400 mt-10">Корзина пуста<br>Добавь пиво и снеки!</p>';
-  else cont.innerHTML=cart.map(i=>`<div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl"><div><div class="font-bold">${i.name}</div><div class="text-sm text-gray-500">${i.price} ₸ x ${i.qty}</div></div><div class="flex gap-2 items-center"><button onclick="changeQty(${i.id},-1)" class="bg-white border w-8 h-8 rounded-full">-</button><span class="font-bold">${i.qty}</span><button onclick="changeQty(${i.id},1)" class="bg-white border w-8 h-8 rounded-full">+</button></div></div>`).join('');
-}
-function changeQty(id,d){
-  const f=cart.find(c=>c.id===id);
-  if(!f) return;
-  f.qty+=d;
-  if(f.qty<=0) cart=cart.filter(c=>c.id!==id);
-  updateCart();
-}
-function openCart(){document.getElementById('cart-modal').classList.remove('hidden');}
-function closeCart(){document.getElementById('cart-modal').classList.add('hidden');}
-function orderWhatsApp(){
-  if(cart.length===0){alert('Корзина пуста!');return;}
-  let msg=`🍺 *Заказ Pivas Store*%0A%0A`;
-  cart.forEach(i=>{msg+=`• ${i.name} - ${i.qty} шт x ${i.price} ₸ = ${i.qty*i.price} ₸%0A`;});
-  const total=cart.reduce((s,c)=>s+c.price*c.qty,0);
-  msg+=`%0A*Итого: ${total} ₸*%0A%0AДоставка за 30 мин?`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');
-}
-render();updateCart();
+let CART=[];let cur="all";
+function show(c){if(c)cur=c;let f=cur=="all"?DATA:DATA.filter(x=>x.c==cur);document.getElementById("list").innerHTML=f.map(x=>`<div class="bg-zinc-800 rounded-2xl p-3"><img src="${x.img}" style="width:100%;height:100px;object-fit:cover;border-radius:10px"><div class="font-bold text-sm mt-2 h-8">${x.n}</div><div class="flex justify-between items-center mt-2"><b class="text-yellow-400">${x.p} ₸</b><button onclick="add(${x.id})" class="bg-yellow-400 text-black w-8 h-8 rounded-full font-black">+</button></div></div>`).join("")}
+function add(id){let pr=DATA.find(x=>x.id==id);let f=CART.find(x=>x.id==id);if(f)f.q++;else CART.push({...pr,q:1});upd()}
+function upd(){document.getElementById("cnt").innerText=CART.reduce((s,x)=>s+x.q,0);document.getElementById("total").innerText=CART.reduce((s,x)=>s+x.p*x.q,0)+" ₸";let box=document.getElementById("cartItems");if(CART.length==0)box.innerHTML="<p class='text-center text-gray-400 mt-10'>Корзина пуста<br>Добавь пиво! 🍺</p>";else box.innerHTML=CART.map(x=>`<div class="flex justify-between items-center bg-gray-100 p-3 rounded-xl"><div><b class="text-sm">${x.n}</b><div class="text-xs">${x.p} x ${x.q} = ${x.p*x.q} ₸</div></div><div class="flex gap-1 items-center"><button onclick="chg(${x.id},-1)" class="border w-8 h-8 rounded-full">-</button><b>${x.q}</b><button onclick="chg(${x.id},1)" class="border w-8 h-8 rounded-full">+</button></div></div>`).join("")}
+function chg(id,d){let f=CART.find(x=>x.id==id);f.q+=d;if(f.q<=0)CART=CART.filter(x=>x.id!=id);upd()}
+function openCart(){document.getElementById("cart").classList.remove("hidden")}
+function closeCart(){document.getElementById("cart").classList.add("hidden")}
+function order(){if(CART.length==0){alert("Пусто!");return}let t="🍺 Заказ PIVAS%0A";CART.forEach(x=>t+=`• ${x.n} - ${x.q}шт = ${x.q*x.p}₸%0A`);t+=`%0AИтого: ${CART.reduce((s,x)=>s+x.p*x.q,0)}₸`;window.open("https://wa.me/"+WA+"?text="+t,"_blank")}
+show("all");upd();
 </script>
 </body>
 </html>
