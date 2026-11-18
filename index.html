@@ -1,39 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pivas Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<style>body{background:#0f0f0f;color:#fff;font-family:system-ui}.gold{color:#d4af37}.gold-bg{background:linear-gradient(135deg,#d4af37,#f5e6a3,#d4af37)}.card{background:#1a1a1a;border:1px solid #333}.active{background:linear-gradient(135deg,#d4af37,#f5e6a3)!important;color:#000!important}</style>
+<style>body{background:#0f0f0f;color:#fff}.gold{color:#d4af37}.gold-bg{background:linear-gradient(135deg,#d4af37,#f5e6a3,#d4af37)}.card{background:#1a1a1a;border:1px solid #333}.active{background:linear-gradient(135deg,#d4af37,#f5e6a3)!important;color:#000!important}</style>
 </head>
 <body>
-<header class="flex justify-between items-center p-4 border-b border-yellow-600/30 sticky top-0 bg-black z-50">
+<header class="flex justify-between items-center p-4 sticky top-0 bg-black z-50 border-b border-yellow-600/30">
 <div class="font-black text-xl">Pivas <span class="gold">Store</span></div>
-<a href="https://wa.me/77001234567" class="bg-[#1a1a1a] border px-4 py-2 rounded-full text-sm">💬 WhatsApp</a>
+<a href="https://wa.me/77001234567" class="bg-[#1a1a1a] border px-4 py-2 rounded-full text-sm">WhatsApp</a>
 </header>
-<div class="m-3 rounded-2xl border-2 border-yellow-500/50 bg-black p-5 flex gap-4 items-center">
-<div class="text-5xl">🍺</div>
-<div><div class="text-xs gold tracking-widest">PIVAS STORE</div><div class="font-black text-lg leading-tight">Твой стиль - твоя сила<br><span class="gold">& Холодное пиво - горячие скидки</span></div></div>
-</div>
+<img src="banner.jpg" class="w-full">
 <div class="px-3 py-3 flex gap-2 overflow-x-auto">
-<button onclick="filterCat('all',this)" class="filter-btn active px-4 py-2 rounded-full bg-[#222] border whitespace-nowrap">Все</button>
-<button onclick="filterCat('pivo',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border whitespace-nowrap">🍺 Пиво</button>
-<button onclick="filterCat('sneki',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border whitespace-nowrap">🥜 Снеки</button>
-<button onclick="filterCat('zakuski',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border whitespace-nowrap">🌭 Закуски</button>
-<button onclick="filterCat('napitki',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border whitespace-nowrap">🥤 Напитки</button>
+<button onclick="filterCat('all',this)" class="filter-btn active px-4 py-2 rounded-full bg-[#222] border">Все</button>
+<button onclick="filterCat('pivo',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border">Пиво</button>
+<button onclick="filterCat('sneki',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border">Снеки</button>
+<button onclick="filterCat('zakuski',this)" class="filter-btn px-4 py-2 rounded-full bg-[#222] border">Закуски</button>
 </div>
-<div id="grid" class="p-3 grid grid-cols-2 gap-3 pb-20">
-<div data-cat="pivo" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🍺</div><div class="mt-2 font-bold text-sm">Пиво Чешское</div><div class="text-xs opacity-60">разливное 1л</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">850 ₸</span><button onclick="order('Пиво Чешское')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
-<div data-cat="pivo" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🍻</div><div class="mt-2 font-bold text-sm">Pivas Lager</div><div class="text-xs opacity-60">бутылка 0.5</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">650 ₸</span><button onclick="order('Pivas Lager')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
-<div data-cat="sneki" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🥜</div><div class="mt-2 font-bold text-sm">Арахис соленый</div><div class="text-xs opacity-60">100г</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">450 ₸</span><button onclick="order('Арахис')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
-<div data-cat="sneki" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🥔</div><div class="mt-2 font-bold text-sm">Чипсы Lays</div><div class="text-xs opacity-60">краб, 140г</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">750 ₸</span><button onclick="order('Чипсы')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
-<div data-cat="zakuski" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🐟</div><div class="mt-2 font-bold text-sm">Рыба вяленая</div><div class="text-xs opacity-60">лещ, 1шт</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">1200 ₸</span><button onclick="order('Рыба')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
-<div data-cat="zakuski" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🧀</div><div class="mt-2 font-bold text-sm">Сыр косичка</div><div class="text-xs opacity-60">копченый</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">600 ₸</span><button onclick="order('Сыр косичка')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
-<div data-cat="napitki" class="prod card rounded-2xl p-3"><div class="h-24 rounded-xl bg-[#222] flex items-center justify-center text-3xl">🥤</div><div class="mt-2 font-bold text-sm">Coca-Cola</div><div class="text-xs opacity-60">0.5л</div><div class="flex justify-between items-center mt-2"><span class="gold font-bold">400 ₸</span><button onclick="order('Coca-Cola')" class="gold-bg text-black w-7 h-7 rounded-full font-bold">+</button></div></div>
+<div class="p-3 grid grid-cols-2 gap-3 pb-20">
+<div data-cat="pivo" class="prod card rounded-2xl p-3"><div class="h-24 bg-[#222] flex items-center justify-center text-3xl rounded-xl">🍺</div><div class="mt-2 font-bold text-sm">Чешское 1л</div><div class="flex justify-between mt-2"><span class="gold font-bold">850 ₸</span><button onclick="order('Чешское')" class="gold-bg text-black w-7 h-7 rounded-full">+</button></div></div>
+<div data-cat="pivo" class="prod card rounded-2xl p-3"><div class="h-24 bg-[#222] flex items-center justify-center text-3xl rounded-xl">🍻</div><div class="mt-2 font-bold text-sm">Lager 0.5</div><div class="flex justify-between mt-2"><span class="gold font-bold">650 ₸</span><button onclick="order('Lager')" class="gold-bg text-black w-7 h-7 rounded-full">+</button></div></div>
+<div data-cat="sneki" class="prod card rounded-2xl p-3"><div class="h-24 bg-[#222] flex items-center justify-center text-3xl rounded-xl">🥜</div><div class="mt-2 font-bold text-sm">Арахис</div><div class="flex justify-between mt-2"><span class="gold font-bold">450 ₸</span><button onclick="order('Арахис')" class="gold-bg text-black w-7 h-7 rounded-full">+</button></div></div>
+<div data-cat="zakuski" class="prod card rounded-2xl p-3"><div class="h-24 bg-[#222] flex items-center justify-center text-3xl rounded-xl">🐟</div><div class="mt-2 font-bold text-sm">Рыба</div><div class="flex justify-between mt-2"><span class="gold font-bold">1200 ₸</span><button onclick="order('Рыба')" class="gold-bg text-black w-7 h-7 rounded-full">+</button></div></div>
 </div>
 <script>
-function filterCat(cat,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.prod').forEach(p=>{if(cat==='all'||p.dataset.cat===cat) p.style.display='block'; else p.style.display='none';});}
-function order(name){window.open('https://wa.me/77001234567?text=Привет! Хочу заказать: '+encodeURIComponent(name),'_blank');}
+function filterCat(c,b){document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.prod').forEach(p=>{p.style.display=(c==='all'||p.dataset.cat===c)?'block':'none'})}
+function order(n){window.open('https://wa.me/77001234567?text=Заказ: '+encodeURIComponent(n),'_blank')}
 </script>
 </body>
 </html>
