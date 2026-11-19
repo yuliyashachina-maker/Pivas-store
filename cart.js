@@ -1,12 +1,21 @@
-function addToCart(n,p){
- var c=JSON.parse(localStorage.getItem('cart')||'[]');
- c.push({name:n,price:p});
- localStorage.setItem('cart',JSON.stringify(c));
- var e=document.getElementById('cart-count');
- if(e){e.textContent=c.length;e.style.display='inline-block';}
- alert(n+' добавлен! Всего: '+c.length);
+let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+
+function addToCart(name, price){
+  cart.push({name:name, price:price});
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(name + ' добавлен! Всего: ' + cart.length);
+  location.reload();
 }
-function setLang(l){
- localStorage.setItem('lang',l);
- location.reload();
+
+function updateBottom(){
+  let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+  let total = 0;
+  cart.forEach(i=> total+=i.price);
+  
+  // ищем внизу надписи и меняем
+  document.body.innerHTML = document.body.innerHTML
+    .replace('Корзина пуста', cart.length>0 ? 'В корзине: '+cart.length+' шт' : 'Корзина пуста')
+    .replace(/Итого: \d+ ₸/, 'Итого: '+total+' ₸');
 }
+
+window.addEventListener('DOMContentLoaded', updateBottom);
