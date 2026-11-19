@@ -115,23 +115,36 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 
 </div>
 </section>
-  <script>
-function setLang(l){
-  localStorage.setItem('lang', l);
-  location.reload();
-}
-if(!localStorage.getItem('lang')){
-  localStorage.setItem('lang','kz');
-}
+ <script>
+function setLang(l){localStorage.setItem('lang',l);location.reload();}
+if(!localStorage.getItem('lang')) localStorage.setItem('lang','ru');
+window.addEventListener('DOMContentLoaded', function(){
+  if(!document.getElementById('lang-switch')){
+    let d=document.createElement('div');
+    d.id='lang-switch';
+    d.style='position:fixed;top:10px;right:10px;z-index:9999;background:#000;padding:5px;border-radius:8px;display:flex;gap:4px;';
+    d.innerHTML='<button onclick="setLang(\'kz\')" style="padding:6px 10px;">🇰🇿 KZ</button><button onclick="setLang(\'ru\')" style="padding:6px 10px;">🇷🇺 RU</button>';
+    document.body.appendChild(d);
+  }
+});
 if(localStorage.getItem('lang')=='kz'){
-  let b=document.body.innerHTML;
-  b=b.replaceAll('Разливное пиво','Құйылмалы сыра');
-  b=b.replaceAll('Квас Шымкентский','Шымкенттік квас');
-  b=b.replaceAll('Закуски','Тіскебасарлар');
-  document.body.innerHTML=b;
+let b=document.body.innerHTML;
+b=b.replace(/Разливное пиво/gi,'Құйылмалы сыра');
+b=b.replace(/Лимонады и квас/gi,'Лимонадтар мен квас');
+b=b.replace(/Закуски/gi,'Тіскебасарлар');
+b=b.replace(/Колбаски, Легкая Поляна/gi,'Шұжықтар, Жеңіл Алаң');
+b=b.replace(/Доставка до Лесной Поляны, Коксака, Астана/gi,'Лесная Поляна, Қоқсақ, Астанаға жеткізу');
+b=b.replace(/Все 10 сортов всегда свежие!/gi,'Барлық 10 сұрып әрқашан жаңа!');
+b=b.replace(/Написать в WhatsApp/gi,'WhatsApp-қа жазу');
+b=b.replace(/Мохито/gi,'Мохито');
+b=b.replace(/Квас Шымкентский/gi,'Шымкенттік квас');
+b=b.replace(/Корзина пуста/gi,'Себет бос');
+b=b.replace(/Итого/gi,'Барлығы');
+b=b.replace(/Заказать в WhatsApp/gi,'WhatsApp арқылы тапсырыс беру');
+b=b.replace(/в корзину/gi,'себетке');
+document.body.innerHTML=b;
 }
-</script>
-
+ </script> 
   
 </body>
 </html>
