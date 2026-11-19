@@ -28,14 +28,14 @@ button.buy{background:#d4af37;color:#000;border:none;padding:8px 12px;border-rad
 <h1>Pivas Store 🍺</h1>
 <div class="sub" id="t-sub">Сенің стилің - сенің күшің</div>
 <div class="products">
-<div class="card"><img src="1-gus.jpg" loading="lazy"><div>Žatecký Gus</div><b>500 тг</b><button class="buy" onclick="addToCart('Gus',500)">Себетке</button></div>
-<div class="card"><img src="10-chesh.jpg" loading="lazy"><div>Чешское</div><b>600 тг</b><button class="buy" onclick="addToCart('Чешское',600)">Себетке</button></div>
-<div class="card"><img src="2-shym-praga.jpg" loading="lazy"><div>Шым Прага</div><b>600 тг</b><<div class="langs" style="position:fixed;top:10px;left:10px;z-index:999;display:flex;gap:6px"><button onclick="setLang('kz')" style="background:#d4afbutton class="buy" onclick="addToCart('Шым Прага',600)">Себетке</button></div>
-<div class="card"><img src="11-shym-myag.jpg" loading="lazy"><div>Шым Мягкое</div><b>600 тг</b><button class="buy" onclick="addToCart('Шым Мягкое',600)">Себетке</button></div>
-<div class="card"><img src="3-sssr.jpg" loading="lazy"><div>СССР</div><b>550 тг</b><button class="buy" onclick="addToCart('СССР',550)">Себетке</button></div>
-<div class="card"><img src="4-alma-ata.jpg" loading="lazy"><div>Алма-Ата</div><b>550 тг</b><button class="buy" onclick="addToCart('Алма-Ата',550)">Себетке</button></div>
-<div class="card"><img src="5-birhan.jpg" loading="lazy"><div>Birhan</div><b>600 тг</b><button class="buy" onclick="addToCart('Birhan',600)">Себетке</button></div>
-<div class="card"><img src="6-milborg.jpg" loading="lazy"><div>Milborg</div><b>650 тг</b><button class="buy" onclick="addToCart('Milborg',650)">Себетке</button></div>
+<div class="card"><img src="1-gus.jpg"><h3>Гусь</h3><div class="price">650 ₸ / л</div><button onclick="addToCart('Гусь',650)">В корзину</button></div>
+<div class="card"><img src="2-shym-praga.jpg"><h3>Шымкент Прага</h3><div class="price">650 ₸ / л</div><button onclick="addToCart('Шымкент Прага',650)">В корзину</button></div>
+<div class="card"><img src="3-sssr.jpg"><h3>СССР</h3><div class="price">650 ₸ / л</div><button onclick="addToCart('СССР',650)">В корзину</button></div>
+<div class="card"><img src="4-alma-ata.jpg"><h3>Алма-Ата Жигулёвское</h3><div class="price">650 ₸ / л</div><button onclick="addToCart('Алма-Ата Жигулёвское',650)">В корзину</button></div>
+<div class="card"><img src="5-birhan.jpg"><h3>Бирхан</h3><div class="price">1000 ₸ / л</div><button onclick="addToCart('Бирхан',1000)">В корзину</button></div>
+<div class="card"><img src="6-milborg.jpg"><h3>MILBORG</h3><div class="price">900 ₸ / л</div><button onclick="addToCart('MILBORG',900)">В корзину</button></div>
+<div class="card"><img src="10-chesh.jpg"><h3>Чешское Элитное</h3><div class="price">700 ₸ / л</div><button onclick="addToCart('Чешское Элитное',700)">В корзину</button></div>
+<div class="card"><img src="11-shym-myag.jpg"><h3>Шымкент Мягкое</h3><div class="price">750 ₸ / л</div><button onclick="addToCart('Шымкент Мягкое',750)">В корзину</button></div>
 </div>
 <script>
 let cart=JSON.parse(localStorage.getItem('cart')||'[]');
