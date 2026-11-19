@@ -1,90 +1,53 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Пив@с</title>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<html lang="ru"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ПИВАС Целиноград</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
-header{background:#111;color:#fff;padding:12px;position:sticky;top:0;z-index:10;display:flex;gap:8px;align-items:center}
-#search{flex:1;padding:10px 14px;border-radius:22px;border:none}
-#cartBtn{background:#ff3b30;color:#fff;border:none;padding:10px 16px;border-radius:22px;font-weight:800}
-#info{background:#d1e7dd;padding:8px;text-align:center;font-weight:700}
-#grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
-.card{background:#fff;border-radius:12px;padding:10px;display:flex;flex-direction:column;box-shadow:0 1px 3px #0001}
-.card b{font-size:13px;min-height:36px}
-.price{color:#ff3b30;font-weight:800;margin:6px 0}
-.card button{margin-top:auto;background:#111;color:#fff;border:none;padding:8px;border-radius:8px}
-#cart{position:fixed;inset:0;background:#fff;z-index:99;display:none;flex-direction:column}
-</style>
-</head>
+body{margin:0;font-family:system-ui;background:#FFF8E0}
+header{background:#111;color:#FFD700;padding:12px;text-align:center;font-weight:800}
+.banner-img{width:100%;max-height:300px;object-fit:cover;display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;max-width:900px;margin:auto}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.card img.prod{width:100%;height:130px;object-fit:cover}
+.price{color:#E65100;font-weight:800;margin:6px 0;font-size:17px}
+.btn{background:#111;color:#FFD700;border:none;border-radius:20px;padding:9px;width:100%;font-weight:800;cursor:pointer}
+#cart{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;border-top:3px solid #FFD700;padding:12px;display:none;z-index:10}
+#cart.show{display:block}
+#search{width:calc(100% - 20px);margin:10px;padding:12px;border-radius:25px;border:2px solid #FFD700;font-size:16px}
+</style></head>
 <body>
-<header>🍺 <b style="flex:0 0 auto">Пив@с</b> <input id="search" placeholder="Поиск..."> <button id="cartBtn" onclick="openCart()">Корзина 0</button></header>
-<div id="info">Загрузка...</div>
-<div id="grid"></div>
-<div id="cart">
-<div style="display:flex;justify-content:space-between;padding:14px;border-bottom:1px solid #eee"><h2>Корзина</h2><button onclick="closeCart()" style="font-size:22px;border:none;background:none">✕</button></div>
-<div id="cartList" style="flex:1;overflow:auto;padding:12px"></div>
-<div style="padding:14px;border-top:1px solid #eee"><div id="total" style="font-weight:800;font-size:18px"></div><button onclick="orderWA()" style="width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;margin-top:10px;font-weight:800">Заказать в WhatsApp</button></div>
-</div>
+<header>🍺 ПИВАС • 8-701-753-13-37 • Целиноград</header>
+<img src="banner.jpg" class="banner-img">
+<div style="max-width:900px;margin:auto"><input id="search" placeholder="Поиск..." oninput="doFilter()"></div>
+<div class="grid" id="grid"></div>
+<div id="cart"><div id="items"></div><b>Итого: <span id="total">0</span> ₸</b><br><button onclick="order()" style="background:#25D366;color:#fff;border:none;padding:14px;width:100%;border-radius:25px;font-size:18px;font-weight:800;margin-top:8px">Заказать в WhatsApp</button></div>
 <script>
-let ALL=[],CART=[];
-async function load(){
- const r=await fetch('./tovar.xls?v='+Date.now());
- const buf=await r.arrayBuffer();
- const wb=XLSX.read(buf,{type:'array'});
- const sh=wb.Sheets[wb.SheetNames[0]];
- const rows=XLSX.utils.sheet_to_json(sh,{header:1,defval:''});
- let ok=0;
- ALL=[];
- for(let i=0;i<rows.length;i++){
-  let row=rows[i];
-  if(!row||row.join('').trim()=='') continue;
-  // НАЙТИ НАЗВАНИЕ - первая ячейка с буквами длиной >2
-  let name='';
-  for(let c=0;c<row.length;c++){
-    let v=(row[c]||'').toString().trim();
-    if(v.length>=3 && /[А-Яа-яA-Za-z]/.test(v)){
-      // не цена и не чисто число
-      if(!/^\d+[\.,]?\d*\s*(₸|тг|р|р\.)?$/i.test(v)){
-        name=v; break;
-      }
-    }
-  }
-  if(!name) continue;
-  let low=name.toLowerCase();
-  if(low.includes('наимен')||low.includes('итого')||low.includes('всего')||low.includes('прайс')||low.includes('цена')){ if(i<5) continue; }
-  // НАЙТИ ЦЕНУ - последнее число в строке
-  let price=0;
-  for(let c=row.length-1;c>=0;c--){
-    let v=row[c]; if(v===''||v==null) continue;
-    let s=v.toString().replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'');
-    let n=parseFloat(s);
-    if(!isNaN(n)&&n>=1&&n<=1000000){ price=n; break; }
-  }
-  ok++;
-  ALL.push({name,price});
- }
- document.getElementById('info').innerText='Товаров: '+ALL.length+' / строк: '+rows.length+' (найдено имён: '+ok+')';
- render(ALL);
-}
-function render(list){
- const g=document.getElementById('grid'); g.innerHTML='';
- list.slice(0,2000).forEach((p)=>{
-  let idx=ALL.indexOf(p);
-  let d=document.createElement('div'); d.className='card';
-  d.innerHTML=`<b>${p.name}</b><div class=price>${p.price?p.price+' ₸':'—'}</div><button onclick="add(${idx})">В корзину</button>`;
-  g.appendChild(d);
- });
-}
-function add(i){let p=ALL[i];let f=CART.find(x=>x.name==p.name);if(f)f.q++;else CART.push({...p,q:1});upd();}
-function upd(){let c=CART.reduce((s,x)=>s+x.q,0);document.getElementById('cartBtn').innerText='Корзина '+c;let sum=CART.reduce((s,x)=>s+x.price*x.q,0);document.getElementById('total').innerText='Итого: '+sum+' ₸';document.getElementById('cartList').innerHTML=CART.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee"><span style="flex:1">${x.name} x${x.q}</span><span>${x.price*x.q} ₸ <button onclick="CART.splice(${i},1);upd()" style="border:none;background:#eee;border-radius:6px;padding:2px 6px">x</button></span></div>`).join('');}
-function openCart(){document.getElementById('cart').style.display='flex';upd();}
-function closeCart(){document.getElementById('cart').style.display='none';}
-function orderWA(){if(!CART.length)return alert('Корзина пуста');let t='Заказ Пив@с:%0A'+CART.map(x=>`- ${x.name} x${x.q} = ${x.price*x.q} ₸`).join('%0A')+'%0A%0AИтого: '+CART.reduce((s,x)=>s+x.price*x.q,0)+' ₸';window.open('https://wa.me/77000000000?text='+t,'_blank');}
-document.getElementById('search').oninput=e=>{let q=e.target.value.toLowerCase().trim();if(!q)render(ALL);else render(ALL.filter(x=>x.name.toLowerCase().includes(q)));};
-load();
-</script>
-</body>
-</html>
+const all=[
+ {"name":"Стакан","price":13,"img":"https://images.unsplash.com/photo-1560512823-5a67de3e1a5d?w=300"},
+{"name":"Пакет","price":20,"img":"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"},
+{"name":"Спички","price":27,"img":"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"},
+{"name":"Бутылка","price":27,"img":"https://images.unsplash.com/photo-1560512823-5a67de3e1a5d?w=300"},
+{"name":"Дербес Прага 1.5","price":594,"img":"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
+{"name":"Чечил Кнут/Грузинский","price":432,"img":"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300"},
+{"name":"Дербес Немецкое 1,5","price":550,"img":"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
+{"name":"Алма-Ата Жигулевское 1.5","price":594,"img":"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
+{"name":"Уральское Жигулевское 1.5","price":594,"img":"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
+{"name":"Дербес Немецкое 0.5","price":283,"img":"https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300"},
+{"name":"Тара","price":135,"img":"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"},
+{"name":"Пробка пласт","price":7,"img":"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"},
+{"name":"Лещ 10% Вяленый","price":2025,"img":"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300"},
+{"name":"Miller б/а стекло 0.33","price":459,"img":"https://images.unsplash.com/photo-1560512823-5a67de3e1a5d?w=300"},
+{"name":"ABSOLUT 1л","price":9991,"img":"https://images.unsplash.com/photo-1560512823-5a67de3e1a5d?w=300"},
+{"name":"Вобла 20% вяленая","price":4050,"img":"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300"},
+{"name":"Бычок Азовский","price":2025,"img":"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300"},
+{"name":"Lays рифл 70гр","price":486,"img":"https://images.unsplash.com/photo-1599490659213-cebb6435d4d1?w=300"},
+{"name":"Щука с икрой вяленая","price":6750,"img":"https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300"},
+ ];
+let cart={};
+function render(list){let h='';list.forEach(p=>{h+=`<div class="card"><img class="prod" src="${p.img}" loading="lazy"><div style="padding:10px"><b>${p.name}</b><div class="price">${p.price} ₸</div><button class="btn" onclick="add('${p.name.replace(/'/g,"")}')">В корзину</button></div></div>`;});document.getElementById('grid').innerHTML=h;}
+function add(name){let p=all.find(x=>x.name===name);if(!cart[name])cart[name]={...p,count:0};cart[name].count++;upd();}
+function upd(){let t=0,html='';for(let k in cart){t+=cart[k].count*cart[k].price;html+=`${k} x${cart[k].count}<br>`;}document.getElementById('items').innerHTML=html;document.getElementById('total').innerText=t;document.getElementById('cart').classList.toggle('show',t>0);}
+function order(){let msg='Здравствуйте, ПИВАС! Заказ:%0A';for(let k in cart)msg+=`- ${k} x${cart[k].count} = ${cart[k].count*cart[k].price} ₸%0A`;msg+=`Итого ${document.getElementById('total').innerText} ₸`;window.open('https://wa.me/77017531337?text='+msg,'_blank');}
+function doFilter(){let q=document.getElementById('search').value.toLowerCase();render(all.filter(p=>p.name.toLowerCase().includes(q)));}
+render(all);
+</script></body></html>
