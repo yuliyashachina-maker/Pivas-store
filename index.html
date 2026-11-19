@@ -53,29 +53,32 @@ button.buy{background:#d4af37;color:#000;border:none;padding:8px 12px;border-rad
 <div class="card"><img src="11-shym-myag.jpg"><h3>Шымкент Мягкое</h3><div class="price">750 ₸ / л</div><button onclick="addToCart('Шымкент Мягкое',750)">В корзину</button></div>
 </div>
 <script>
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-function updateBadge(){let x=document.getElementById('cartBadge');if(x)x.innerText=cart.length}
-function addToCart(n,p){cart.push({name:n,price:p});localStorage.setItem('cart',JSON.stringify(cart));updateBadge()}
-function setLang(l){
-localStorage.setItem('lang',l);
-const d={
-kz:{beer:"🍺 Сыра",krep:"🥃 Мықты",snek:"🥨 Тіскебасар",ryba:"🐟 Балық",cart:" Себет: ",go:"Өту →"},
-ru:{beer:"🍺 Пиво",krep:"🥃 Крепкое",snek:"🥨 Снэки",ryba:"🐟 Рыба",cart:" Корзина: ",go:"Перейти →"}
-};
-let t=d[l]||d['kz'];
-document.querySelectorAll('a[href="index.html"],a[href="krepkiy.html"],a[href="snacks.html"],a[href="ryba.html"]').forEach((b,i)=>{
-if(i==0) b.innerHTML=t.beer;
-if(i==1) b.innerHTML=t.krep;
-if(i==2) b.innerHTML=t.snek;
-if(i==3) b.innerHTML=t.ryba;
-});
+function setLang(lang){
+localStorage.setItem('lang',lang);
+document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+let t=translations[lang];
+// категории
+let cats=document.querySelectorAll('.cat-btn');
+if(cats[0]) cats[0].innerHTML='🍺 '+t.beer;
+if(cats[1]) cats[1].innerHTML='🥃 '+t.strong;
+if(cats[2]) cats[2].innerHTML='🥨 '+t.snacks;
+if(cats[3]) cats[3].innerHTML='🐟 '+t.fish;
+// корзина внизу
 let info=document.querySelector('.cart-bar-info');
-if(info && info.firstChild) info.firstChild.textContent=t.cart;
+if(info){ info.innerHTML='🛒 '+t.cart+' <b>'+(document.getElementById('cartCount')?.textContent||0)+' </b> <span>'+(document.getElementById('cartTotal')?.textContent||'0 ₸')+'</span>'; }
 let btn=document.querySelector('.cart-bar-btn');
 if(btn) btn.textContent=t.go;
+// БАННЕР сверху
+let banner=document.querySelector('.hero-text, .banner-title, h1');
+let all=document.body.innerHTML;
+if(document.querySelector('.top-banner')||true){
+  // найдем заголовок баннера по тексту
+  let h=document.evaluate("//*[contains(text(),'Твой стиль') or contains(text(),'Сенің стилің')]", document, null, 6, null);
+  let el=h.iterateNext();
+  if(el) el.innerHTML = lang==='kz' ? "Сенің стилің - сенің күшің <br>& Салқын сыра - ыстық жеңілдіктер" : "Твой стиль - твоя сила <br>& Холодное пиво - горячие скидки";
 }
-setLang(localStorage.getItem('lang')||'kz');
-updateBadge();    
+
+    
 
 
 </script>
@@ -85,5 +88,9 @@ updateBadge();
 <div class="cart-bar-info">🛒 Себет: <b><span id="cart-count">0</span></b><br><span id="cart-total">0 ₸</span></div>
 <a class="cart-bar-btn">Перейти →</a>
 </div>
+<script>
+setLang(localStorage.getItem('lang')||'kz');setLang(localStorage.getItem('lang')||'kz');
+updateBadge();
+</script>    
 </body>
 </html>
