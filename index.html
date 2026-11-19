@@ -23,13 +23,13 @@ button.buy{background:#d4af37;color:#000;border:none;padding:8px 12px;border-rad
 <body>
 <a href="cart.html" class="cart-btn">🛒 <span id="t-cart">Себет</span> <span id="cart-count"></span></a>
 <div class="banner"><img src="banner.jpg"></div>
-<div class="langs"><button onclick="setLang('ru')">RU</button><button onclick="setLang('kz')">KZ 🇰🇿</button></div>
+<div class="langs" style="position:fixed;top:10px;left:10px;z-index:999;display:flex;gap:6px"><button onclick="setLang('kz')" style="background:#d4af37;color:#000;padding:6px 12px;border-radius:20px;font-weight:bold">🇰🇿 KZ</button><button onclick="setLang('ru')" style="background:#000;border:1px solid #d4af37;color:#fff;padding:6px 12px;border-radius:20px">🇷🇺 RU</button></div>
 <h1>Pivas Store 🍺</h1>
 <div class="sub" id="t-sub">Сенің стилің - сенің күшің</div>
 <div class="products">
 <div class="card"><img src="1-gus.jpg" loading="lazy"><div>Žatecký Gus</div><b>500 тг</b><button class="buy" onclick="addToCart('Gus',500)">Себетке</button></div>
 <div class="card"><img src="10-chesh.jpg" loading="lazy"><div>Чешское</div><b>600 тг</b><button class="buy" onclick="addToCart('Чешское',600)">Себетке</button></div>
-<div class="card"><img src="2-shym-praga.jpg" loading="lazy"><div>Шым Прага</div><b>600 тг</b><button class="buy" onclick="addToCart('Шым Прага',600)">Себетке</button></div>
+<div class="card"><img src="2-shym-praga.jpg" loading="lazy"><div>Шым Прага</div><b>600 тг</b><<div class="langs" style="position:fixed;top:10px;left:10px;z-index:999;display:flex;gap:6px"><button onclick="setLang('kz')" style="background:#d4afbutton class="buy" onclick="addToCart('Шым Прага',600)">Себетке</button></div>
 <div class="card"><img src="11-shym-myag.jpg" loading="lazy"><div>Шым Мягкое</div><b>600 тг</b><button class="buy" onclick="addToCart('Шым Мягкое',600)">Себетке</button></div>
 <div class="card"><img src="3-sssr.jpg" loading="lazy"><div>СССР</div><b>550 тг</b><button class="buy" onclick="addToCart('СССР',550)">Себетке</button></div>
 <div class="card"><img src="4-alma-ata.jpg" loading="lazy"><div>Алма-Ата</div><b>550 тг</b><button class="buy" onclick="addToCart('Алма-Ата',550)">Себетке</button></div>
