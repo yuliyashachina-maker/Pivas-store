@@ -39,11 +39,12 @@ button.buy{background:#d4af37;color:#000;border:none;padding:8px 12px;border-rad
 </div>
 <script>
 let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-function updateBadge(){let b=document.getElementById('cartBadge');if(b)b.innerText=cart.length}
+function updateBadge(){let x=document.getElementById('cartBadge');if(x)x.innerText=cart.length}
 function addToCart(n,p){cart.push({name:n,price:p});localStorage.setItem('cart',JSON.stringify(cart));updateBadge()}
-function setLang(l){localStorage.setItem('lang',l);lang=l;render();let b=document.getElementById('waBtn');if(b){if(l=='kz'){b.innerHTML='💬 WhatsApp-қа жазу';b.href='https://wa.me/77017531337?text=Сәлем!'}else{b.innerHTML='💬 Написать в WhatsApp';b.href='https://wa.me/77017531337?text=Привет!'}}}
-updateBadge();setLang(localStorage.getItem('lang')||'kz');
+function setLang(l){localStorage.setItem('lang',l);lang=l;render();var b=document.getElementById('waBtn');if(b){if(l=='kz'){b.textContent='💬 WhatsApp-қа жазу'}else{b.textContent='💬 Написать в WhatsApp'}}}
+updateBadge();
+setLang(localStorage.getItem('lang')||'kz');
 </script>
-<a id="waBtn" href="https://wa.me/77017531337?text=Сәлем!" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 22px;border-radius:30px;font-weight:900;text-decoration:none;z-index:9999;box-shadow:0 4px 10px rgba(0,0,0,0.3)">💬 WhatsApp-қа жазу</a>
+<a id="waBtn" href="https://wa.me/77017531337" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 22px;border-radius:30px;font-weight:900;text-decoration:none;z-index:9999">💬 WhatsApp-қа жазу</a>
 </body>
 </html>
