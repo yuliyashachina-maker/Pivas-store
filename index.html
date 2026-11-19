@@ -133,26 +133,32 @@ window.addEventListener('DOMContentLoaded', function(){
     document.body.appendChild(d);
   }
 });
+<script>
+function addToCart(name, price){
+let c=JSON.parse(localStorage.getItem('cart')||'[]');
+c.push({name:name,price:price});
+localStorage.setItem('cart',JSON.stringify(c));
+alert('✅ '+name+' - '+price+' тг\nСебетке қосылды!');
+}
+window.addToCart=addToCart;
+
 if(localStorage.getItem('lang')=='kz'){
 let b=document.body.innerHTML;
 b=b.replace(/Разливное пиво/gi,'Құйылмалы сыра');
-b=b.replace(/Лимонады и квас/gi,'Лимонадтар мен квас');
+b=b.replace(/Лимонады и квас/gi,'Лимонад және квас');
 b=b.replace(/Закуски/gi,'Тіскебасарлар');
-b=b.replace(/Колбаски, Легкая Поляна/gi,'Шұжықтар, Жеңіл Алаң');
-b=b.replace(/Доставка до Лесной Поляны, Коксака, Астана/gi,'Лесная Поляна, Қоқсақ, Астанаға жеткізу');
-b=b.replace(/Все 10 сортов всегда свежие!/gi,'Барлық 10 сұрып әрқашан жаңа!');
-b=b.replace(/Написать в WhatsApp/gi,'WhatsApp-қа жазу');
-b=b.replace(/Мохито/gi,'Мохито');
+b=b.replace(/Колбаски, Легкая Поляна/gi,'Шұжықтар');
+b=b.replace(/Доставка до Лесной Поляны/gi,'Орман Алаңына дейін жеткізу');
+b=b.replace(/Все 10 сортов всегда свежие/gi,'Барлық 10 сұрып әрқашан жаңа');
+b=b.replace(/Написать в WhatsApp/gi,'WhatsApp жазу');
 b=b.replace(/Квас Шымкентский/gi,'Шымкенттік квас');
 b=b.replace(/Корзина пуста/gi,'Себет бос');
 b=b.replace(/Итого/gi,'Барлығы');
-b=b.replace(/Заказать в WhatsApp/gi,'WhatsApp арқылы тапсырыс беру');
-b=b.replace(/в корзину/gi,'себетке');
+b=b.replace(/Заказать в WhatsApp/gi,'WhatsApp тапсырыс');
+b=b.replace(/В корзину/gi,'Себетке');
 document.body.innerHTML=b;
-} 
-a=document.all[10]
-a.prepend(a.lastChild)
- </script> 
-  
+window.addToCart=addToCart;
+}
+</script>
 </body>
 </html>
