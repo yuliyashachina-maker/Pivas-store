@@ -5,38 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ПИВАС - Разливное пиво</title>
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#fdf6e3}
-header{background:#111;color:#FFD700;text-align:center;padding:20px}
+body{font-family:Arial,sans-serif;margin:0;background:#fdf6e3;padding-bottom:100px}
+header{background:#111;color:#FFD700;text-align:center;padding:18px}
 h1{margin:0}
 .banner{width:100%;max-height:340px;object-fit:cover;display:block}
 .catalog{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:12px}
-.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.12);text-align:center;padding-bottom:10px}
-.card img{width:100%;height:200px;object-fit:cover}
+.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);text-align:center;padding-bottom:10px}
+.card img{width:100%;height:200px;object-fit:cover;background:#eee}
 .card h3{margin:8px 0 2px;font-size:16px}
 .price{color:#b8860b;font-weight:800;margin:4px 0 8px;font-size:17px}
 .btn{background:#111;color:#FFD700;border:none;border-radius:20px;padding:9px 12px;font-weight:800;width:90%}
-footer{text-align:center;padding:20px;background:#333;color:white;margin-top:20px;line-height:1.4}
+.wa-btn{background:#25D366;color:white;padding:10px 18px;border-radius:25px;text-decoration:none;font-weight:800;display:inline-block;margin-top:10px}
+#cart{position:fixed;bottom:0;left:0;right:0;background:#111;color:white;border-top:3px solid #FFD700;padding:12px;z-index:99}
+#cartItems{max-height:90px;overflow:auto;font-size:14px;margin-bottom:6px}
+footer{text-align:center;padding:20px;background:#333;color:white;margin-top:20px;line-height:1.5}
 </style>
 </head>
 <body>
-<header><h1>ПИВАС - Разливное пиво</h1><p>Косшы, Лесная Поляна - свежее и холодное!</p><p>8-701-753-13-37</p></header>
-<img src="banner.jpg" class="banner" alt="banner">
+<header>
+<h1>ПИВАС - Разливное пиво</h1>
+<p>Косшы, Лесная Поляна - свежее и холодное!</p>
+<a class="wa-btn" href="https://wa.me/77017531337" target="_blank">💬 Написать в WhatsApp</a>
+</header>
+<img src="banner.jpg" class="banner" onerror="this.style.display='none'">
 <div class="catalog">
-<div class="card"><img src="1-gus.jpg"><h3>Гусь</h3><div class="price">770 ₸ / л</div><button class="btn" onclick="order('Гусь')">Заказать</button></div>
-<div class="card"><img src="2-shym-praga.jpg"><h3>Шымкент Прага</h3><div class="price">770 ₸ / л</div><button class="btn" onclick="order('Шымкент Прага')">Заказать</button></div>
-<div class="card"><img src="3-sssr.jpg"><h3>СССР</h3><div class="price">770 ₸ / л</div><button class="btn" onclick="order('СССР')">Заказать</button></div>
-<div class="card"><img src="4-alma-ata.jpg"><h3>Алма-Ата</h3><div class="price">850 ₸ / л</div><button class="btn" onclick="order('Алма-Ата')">Заказать</button></div>
-<div class="card"><img src="5-birhan.jpg"><h3>Бирхан</h3><div class="price">800 ₸ / л</div><button class="btn" onclick="order('Бирхан')">Заказать</button></div>
-<div class="card"><img src="6-milborg.jpg"><h3>Милборг</h3><div class="price">990 ₸ / л</div><button class="btn" onclick="order('Милборг')">Заказать</button></div>
-<div class="card"><img src="7-stuttgart.jpg"><h3>Штутгарт</h3><div class="price">990 ₸ / л</div><button class="btn" onclick="order('Штутгарт')">Заказать</button></div>
-<div class="card"><img src="8-derbes-nem.jpg"><h3>Дербес Немецкое</h3><div class="price">900 ₸ / л</div><button class="btn" onclick="order('Дербес Немецкое')">Заказать</button></div>
-<div class="card"><img src="9-derbes-praga.jpg"><h3>Дербес Прага</h3><div class="price">900 ₸ / л</div><button class="btn" onclick="order('Дербес Прага')">Заказать</button></div>
-<div class="card"><img src="10-chesh.jpg"><h3>Чешское</h3><div class="price">950 ₸ / л</div><button class="btn" onclick="order('Чешское')">Заказать</button></div>
-<div class="card"><img src="11-shym-myag.jpg"><h3>Шымкент Мягкое</h3><div class="price">770 ₸ / л</div><button class="btn" onclick="order('Шымкент Мягкое')">Заказать</button></div>
+<div class="card"><img src="1-gus.jpg" onerror="this.src='https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400'"><h3>Гусь</h3><div class="price">770 ₸ / л</div><button class="btn" onclick="add('Гусь',770)">В корзину</button></div>
+<div class="card"><img src="2-shym-praga.jpg" onerror="this.src='https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400'"><h3>Шымкент Прага</h3><div class="price">770 ₸</div><button class="btn" onclick="add('Шымкент Прага',770)">В корзину</button></div>
+<div class="card"><img src="3-sssr.jpg"><h3>СССР</h3><div class="price">770 ₸</div><button class="btn" onclick="add('СССР',770)">В корзину</button></div>
+<div class="card"><img src="4-alma-ata.jpg"><h3>Алма-Ата</h3><div class="price">850 ₸</div><button class="btn" onclick="add('Алма-Ата',850)">В корзину</button></div>
+<div class="card"><img src="5-birhan.jpg"><h3>Бирхан</h3><div class="price">800 ₸</div><button class="btn" onclick="add('Бирхан',800)">В корзину</button></div>
+<div class="card"><img src="6-milborg.jpg"><h3>Милборг</h3><div class="price">990 ₸</div><button class="btn" onclick="add('Милборг',990)">В корзину</button></div>
+<div class="card"><img src="7-stuttgart.jpg"><h3>Штутгарт</h3><div class="price">990 ₸</div><button class="btn" onclick="add('Штутгарт',990)">В корзину</button></div>
+<div class="card"><img src="8-derbes-nem.jpg"><h3>Дербес Немецкое</h3><div class="price">900 ₸</div><button class="btn" onclick="add('Дербес Немецкое',900)">В корзину</button></div>
+<div class="card"><img src="9-derbes-praga.jpg"><h3>Дербес Прага</h3><div class="price">900 ₸</div><button class="btn" onclick="add('Дербес Прага',900)">В корзину</button></div>
+<div class="card"><img src="10-chesh.jpg"><h3>Чешское</h3><div class="price">950 ₸</div><button class="btn" onclick="add('Чешское',950)">В корзину</button></div>
+<div class="card"><img src="11-shym-myag.jpg"><h3>Шымкент Мягкое</h3><div class="price">770 ₸</div><button class="btn" onclick="add('Шымкент Мягкое',770)">В корзину</button></div>
 </div>
-<footer>Косшы, Лесная Поляна | Доставка по Лесной Поляне, Косшы, Астана<br>Заказы на WhatsApp: 8-701-753-13-37<br>Все 11 сортов всегда свежие!</footer>
+
+<div id="cart"><div id="cartItems">Корзина пуста</div><b>Итого: <span id="total">0</span> ₸</b> <button onclick="send()" style="background:#25D366;color:#fff;border:none;padding:10px 14px;border-radius:20px;font-weight:800;float:right">Заказать в WhatsApp</button></div>
+
+<footer>Косшы, Лесная Поляна<br>Доставка по Лесной Поляне, Косшы, Астана<br>Все 11 сортов всегда свежие!</footer>
+
 <script>
-function order(name){window.open('https://wa.me/77017531337?text=Привет! Хочу заказать пиво: '+encodeURIComponent(name),'_blank')}
+let cart={};
+function add(name,price){
+cart[name]=(cart[name]||0)+1;
+render();
+}
+function render(){
+let items=document.getElementById('cartItems');
+let total=0;
+let txt='';
+for(let k in cart){
+let c=cart[k];
+let p=0;
+if(k=='Гусь')p=770; else if(k=='Шымкент Прага')p=770; else if(k=='СССР')p=770; else if(k=='Алма-Ата')p=850; else if(k=='Бирхан')p=800; else if(k=='Милборг')p=990; else if(k=='Штутгарт')p=990; else if(k=='Дербес Немецкое')p=900; else if(k=='Дербес Прага')p=900; else if(k=='Чешское')p=950; else p=770;
+total+=c*p;
+txt+=k+' x'+c+' = '+(c*p)+'₸ <button onclick="minus(\''+k+'\')">-</button> <button onclick="plus(\''+k+'\')">+</button><br>';
+}
+if(txt=='')txt='Корзина пуста';
+items.innerHTML=txt;
+document.getElementById('total').innerText=total;
+}
+function minus(k){cart[k]--; if(cart[k]<=0)delete cart[k]; render();}
+function plus(k){cart[k]++; render();}
+function send(){
+let msg='Привет! Заказ ПИВАС:%0A';
+for(let k in cart){msg+=k+' x'+cart[k]+'%0A';}
+msg+='Итого: '+document.getElementById('total').innerText+' ₸%0AДоставка: Лесная Поляна / Косшы / Астана';
+window.open('https://wa.me/77017531337?text='+msg,'_blank');
+}
 </script>
 </body>
 </html>
