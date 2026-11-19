@@ -5,30 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pivas Store</title>
 <style>
-body{background:#000;color:#fff;font-family:Arial;margin:0;padding:0}
-.banner img{width:100%;display:block;border-bottom:3px solid #d4af37}
-h1{text-align:center;color:#d4af37;margin:18px 0 4px}
-.sub{text-align:center;color:#aaa;margin-bottom:18px}
-.products{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 10px 90px}
-.card{background:#121212;border:1px solid #d4af37;border-radius:14px;padding:10px;text-align:center}
-.card img{width:100%;height:170px;object-fit:cover;border-radius:10px}
+body{background:#000;color:#fff;font-family:Arial;margin:0}
+.banner img{width:100%;display:block}
+.langs{text-align:center;padding:8px}
+.langs button{background:#222;color:#d4af37;border:1px solid #d4af37;padding:6px 14px;border-radius:20px;margin:0 5px}
+h1{text-align:center;color:#d4af37;margin:10px 0 4px}
+.sub{text-align:center;color:#aaa;margin-bottom:12px}
+.products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 10px 90px}
+.card{background:#121212;border:1px solid #d4af37;border-radius:14px;padding:8px;text-align:center}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:10px;background:#000}
 .card b{color:#d4af37;display:block;margin:5px 0}
-button{background:#d4af37;color:#000;border:none;padding:8px 15px;border-radius:8px;font-weight:bold}
+button.buy{background:#d4af37;color:#000;border:none;padding:8px 14px;border-radius:8px;font-weight:bold;width:90%}
 .cart-btn{position:fixed;top:10px;right:10px;background:#d4af37;color:#000;padding:10px 16px;border-radius:22px;text-decoration:none;z-index:999;font-weight:bold}
-#cart-count{background:#000;color:#d4af37;border-radius:50%;padding:2px 7px;margin-left:6px;border:1px solid #d4af37}
+#cart-count{background:#000;color:#d4af37;border-radius:50%;padding:2px 7px;margin-left:6px}
 </style>
 </head>
 <body>
-<a href="cart.html" class="cart-btn">🛒 Корзина <span id="cart-count"></span></a>
-<div class="banner"><img src="banner.jpg"></div>
+<a href="cart.html" class="cart-btn">🛒 <span id="lang-cart">Корзина</span> <span id="cart-count"></span></a>
+<div class="banner"><img src="banner.jpg" loading="lazy"></div>
+<div class="langs"><button onclick="setLang('ru')">RU</button><button onclick="setLang('kz')">KZ</button></div>
 <h1>Pivas Store 🍺</h1>
-<div class="sub">Твой стиль - твоя сила</div>
+<div class="sub" id="sub">Твой стиль - твоя сила</div>
 <div class="products">
-<div class="card"><img src="1-gus.jpg"><div>Гусь 1</div><b>500 тг</b><br><button onclick="addToCart('Гусь 1',500)">В корзину</button></div>
-<div class="card"><img src="2-chesh.jpg"><div>Чешское</div><b>600 тг</b><br><button onclick="addToCart('Чешское',600)">В корзину</button></div>
-<div class="card"><img src="3-arbuz.jpg"><div>Арбуз</div><b>600 тг</b><br><button onclick="addToCart('Арбуз',600)">В корзину</button></div>
-<div class="card"><img src="4-mohito.jpg"><div>Мохито</div><b>600 тг</b><br><button onclick="addToCart('Мохито',600)">В корзину</button></div>
+<div class="card"><img src="1-gus.jpg" loading="lazy"><div>Гусь 1</div><b>500 тг</b><br><button class="buy" onclick="addToCart('Гусь 1',500)">В корзину</button></div>
+<div class="card"><img src="2-chesh.jpg" loading="lazy" onerror="this.src='2-ches.jpg'"><div>Чешское</div><b>600 тг</b><br><button class="buy" onclick="addToCart('Чешское',600)">В корзину</button></div>
+<div class="card"><img src="3-arbuz.jpg" loading="lazy"><div>Арбуз</div><b>600 тг</b><br><button class="buy" onclick="addToCart('Арбуз',600)">В корзину</button></div>
+<div class="card"><img src="4-mohito.jpg" loading="lazy"><div>Мохито</div><b>600 тг</b><br><button class="buy" onclick="addToCart('Мохито',600)">В корзину</button></div>
 </div>
-<script src="cart.js"></script>
+<script>
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+function updateBadge(){let b=document.getElementById('cart-count');if(b)b.textContent=cart.length>0?cart.length:''}
+function addToCart(n,p){cart.push({name:n,price:p});localStorage.setItem('cart',JSON.stringify(cart));updateBadge();alert(n+' - добавлен!')}
+function setLang(l){localStorage.setItem('lang',l);let k=l==='kz';document.getElementById('lang-cart').textContent=k?'Себет':'Корзина';document.getElementById('sub').textContent=k?'Сенің стилің - сенің күшің':'Твой стиль - твоя сила';document.querySelectorAll('.buy').forEach(b=>b.textContent=k?'Себетке':'В корзину')}
+updateBadge();setLang(localStorage.getItem('lang')||'ru');
+</script>
 </body>
 </html>
