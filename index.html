@@ -135,14 +135,14 @@ document.body.appendChild(d);
 });
  </script>
 <script>
-function addToCart(name, price){
+function addToCart(name,price){
 let c=JSON.parse(localStorage.getItem('cart')||'[]');
 c.push({name:name,price:price});
 localStorage.setItem('cart',JSON.stringify(c));
-alert('✅ '+name+' - '+price+' тг');
+if(document.getElementById('cart-count')) document.getElementById('cart-count').textContent=c.length;
+alert('✅ '+name+' - '+price+' тг. Товар в корзине!');
 }
 window.addToCart=addToCart;
-
 function setLang(l){
 localStorage.setItem('lang',l);
 location.reload();
