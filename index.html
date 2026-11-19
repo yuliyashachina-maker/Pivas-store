@@ -121,23 +121,7 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 
 
 </section>
- <script>
-
-function addToCart(n,p){
-let c=[]; try{ c=JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ c=[]; }
-c.push({name:n,price:p});
-localStorage.setItem('cart',JSON.stringify(c));
-let e=document.getElementById('cart-count');
-if(e){ e.textContent=c.length; e.style.display='inline-block'; }
-alert(n+' добавлен!');
-}
-window.addToCart=addToCart;
-function setLang(l){
-localStorage.setItem('lang',l);
-location.reload();
-}
-window.setLang=setLang;   
-</script>
+ <script>function addToCart(n,p){var c=JSON.parse(localStorage.getItem('cart')||'[]');c.push({n:n,p:p});localStorage.setItem('cart',JSON.stringify(c));var d=document.getElementById('cart-count');if(d){d.textContent=c.length;d.style.display='inline-block'}alert(n+' добавлен!')}window.addToCart=addToCart;function setLang(l){localStorage.setItem('lang',l);location.reload()}window.setLang=setLang;</script>
 </body>
 </html>
 
