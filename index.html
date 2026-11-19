@@ -44,5 +44,6 @@ function addToCart(n,p){cart.push({name:n,price:p});localStorage.setItem('cart',
 function setLang(l){localStorage.setItem('lang',l);let kz=l==='kz';document.getElementById('t-cart').textContent=kz?'Себет':'Корзина';document.getElementById('t-sub').textContent=kz?'Сенің стилің - сенің күшің':'Твой стиль - твоя сила';document.querySelectorAll('.buy').forEach(b=>b.textContent=kz?'Себетке':'В корзину')}
 updateBadge();setLang(localStorage.getItem('lang')||'kz');
 </script>
+<a href="https://wa.me/77017531337?text=Сәлем!%20Pivas%20Store%20тапсырыс%20бергім%20келеді" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:12px 20px;border-radius:30px;font-weight:900;font-family:sans-serif;text-decoration:none;z-index:1002;box-shadow:0 4px 12px rgba(0,0,0,0.4);display:flex;align-items:center;gap:8px">💬 WhatsApp-қа жазу</a>
 </body>
 </html>
