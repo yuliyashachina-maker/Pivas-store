@@ -56,8 +56,22 @@ button.buy{background:#d4af37;color:#000;border:none;padding:8px 12px;border-rad
 let cart=JSON.parse(localStorage.getItem('cart')||'[]');
 function updateBadge(){let x=document.getElementById('cartBadge');if(x)x.innerText=cart.length}
 function addToCart(n,p){cart.push({name:n,price:p});localStorage.setItem('cart',JSON.stringify(cart));updateBadge()}
-function setLang(l){localStorage.setItem('lang',l);lang=l;var b=document.getElementById('waBtn');if(b){b.textContent=l=='kz'?'💬 WhatsApp-қа жазу':'💬 Написать в WhatsApp'}try{render()}catch(e){}}
+function setLang(l){
+localStorage.setItem('lang',l);
+const d={
+kz:{beer:"🍺 Сыра",krep:"🥃 Мықты",snek:"🥨 Тіскебасар",ryba:"🐟 Балық"},
+ru:{beer:"🍺 Пиво",krep:"🥃 Крепкое",snek:"🥨 Снэки",ryba:"🐟 Рыба"}
+};
+let t=d[l]||d['kz'];
+document.querySelectorAll('a[href="index.html"],a[href="krepkiy.html"],a[href="snacks.html"],a[href="ryba.html"]').forEach((b,i)=>{
+if(i==0) b.innerHTML=t.beer;
+if(i==1) b.innerHTML=t.krep;
+if(i==2) b.innerHTML=t.snek;
+if(i==3) b.innerHTML=t.ryba;
+});
+}
 setLang(localStorage.getItem('lang')||'kz');
+updateBadge();
 updateBadge();
 </script>
 <a id="waBtn" href="https://wa.me/77017531337" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 22px;border-radius:30px;font-weight:900;text-decoration:none;z-index:9999">💬 WhatsApp-қа жазу</a>
