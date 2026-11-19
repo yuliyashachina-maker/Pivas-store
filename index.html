@@ -89,32 +89,37 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 <section style="padding:20px;">
 <h2 style="text-align:center;">🍹 Лимонады и квас</h2>
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-
-<div style="text-align:center; background:#fff; border-radius:15px; padding:10px;">
-<img src="arbuz.png" style="width:100%; border-radius:15px;">
-<h3>Арбуз-Мята 1л</h3>
+<div style="text-align:center; background:white; padding:10px; border-radius:12px;">
+<img src="arbuz.png" style="width:100%; border-radius:10px;">
+<h3 data-ru="Арбуз-Мята 1л" data-kz="Қарбыз-Жалбыз 1л">Арбуз-Мята 1л</h3>
 <p style="font-weight:bold; color:#e63946;">650 тг</p>
+<button onclick="addToCart('Арбуз-Мята 1л', 650)" style="margin-top:8px; padding:8px 14px; background:#e63946; color:white; border:none; border-radius:8px; font-weight:bold; width:100%;">🛒 Себетке қосу</button>
 </div>
 
-<div style="text-align:center; background:#fff; border-radius:15px; padding:10px;">
-<img src="dyushes.png" style="width:100%; border-radius:15px;">
-<h3>Дюшес 1л</h3>
+<div style="text-align:center; background:white; padding:10px; border-radius:12px;">
+<img src="dyushes.png" style="width:100%; border-radius:10px;">
+<h3 data-ru="Дюшес 1л" data-kz="Дюшес 1л">Дюшес 1л</h3>
 <p style="font-weight:bold; color:#e63946;">650 тг</p>
+<button onclick="addToCart('Дюшес 1л', 650)" style="margin-top:8px; padding:8px 14px; background:#e63946; color:white; border:none; border-radius:8px; font-weight:bold; width:100%;">🛒 Себетке қосу</button>
 </div>
 
-<div style="text-align:center; background:#fff; border-radius:15px; padding:10px;">
-<img src="mohito.png" style="width:100%; border-radius:15px;">
-<h3>Мохито 1л</h3>
+<div style="text-align:center; background:white; padding:10px; border-radius:12px;">
+<img src="mohito.png" style="width:100%; border-radius:10px;">
+<h3 data-ru="Мохито 1л" data-kz="Мохито 1л">Мохито 1л</h3>
 <p style="font-weight:bold; color:#e63946;">750 тг</p>
+<button onclick="addToCart('Мохито 1л', 750)" style="margin-top:8px; padding:8px 14px; background:#e63946; color:white; border:none; border-radius:8px; font-weight:bold; width:100%;">🛒 Себетке қосу</button>
 </div>
 
-<div style="text-align:center; background:#fff; border-radius:15px; padding:10px;">
-<img src="kvas.png" style="width:100%; border-radius:15px;">
-<h3>Квас Шымкентский 1л</h3>
+<div style="text-align:center; background:white; padding:10px; border-radius:12px;">
+<img src="kvas.png" style="width:100%; border-radius:10px;">
+<h3 data-ru="Квас Шымкентский 1л" data-kz="Шымкенттік квас 1л">Квас Шымкентский 1л</h3>
 <p style="font-weight:bold; color:#e63946;">550 тг</p>
+<button onclick="addToCart('Квас Шымкентский 1л', 550)" style="margin-top:8px; padding:8px 14px; background:#e63946; color:white; border:none; border-radius:8px; font-weight:bold; width:100%;">🛒 Себетке қосу</button>
 </div>
 
-</div>
+
+
+
 </section>
  <script>
 function setLang(l){localStorage.setItem('lang',l);location.reload();}
