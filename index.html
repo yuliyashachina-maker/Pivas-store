@@ -128,7 +128,7 @@ let c=[]; try{ c=JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ c=[]
 c.push({name:n,price:p});
 localStorage.setItem('cart',JSON.stringify(c));
 let e=document.getElementById('cart-count');
-if(e) e.textContent=c.length;
+if(e){ e.textContent=c.length; e.style.display='inline-block'; }
 alert(n+' добавлен!');
 }
 window.addToCart=addToCart;
