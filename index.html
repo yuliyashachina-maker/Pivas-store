@@ -64,7 +64,7 @@ let cats=document.querySelectorAll('a,button');
 let list=[];
 for(let el of cats){
 let tt=(el.textContent||'').trim()
- if(/Пиво|Сыра|Креп|Мықты|Закус|Тіске|Рыба|Балық/.test(tt))list.push(el);}   
+ if(/Пиво|Сыра|Креп|Мықты|Снэк|Тіске|Рыба|Балық/.test(tt))list.push(el);}   
 if(list[0]) list[0].textContent=lang==='kz'?'🍺 Сыра':'🍺 Пиво';
 if(list[1]) list[1].textContent=lang==='kz'?'💪 Мықты':'💪 Крепкое';
 if(list[2]) list[2].textContent=lang==='kz'?'🥨 Тіскебасар':'🥨 Закуски';
