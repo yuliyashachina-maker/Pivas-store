@@ -124,12 +124,12 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
  <script>
 
 function addToCart(n,p){
-let c=JSON.parse(localStorage.getItem('cart')||'[]');
+let c=[]; try{ c=JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ c=[]; }
 c.push({name:n,price:p});
 localStorage.setItem('cart',JSON.stringify(c));
 let e=document.getElementById('cart-count');
 if(e) e.textContent=c.length;
-alert('✅ '+n+' - '+p+' тг');
+alert(n+' добавлен!');
 }
 window.addToCart=addToCart;
 function setLang(l){
