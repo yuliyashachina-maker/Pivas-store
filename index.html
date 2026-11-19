@@ -122,50 +122,21 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 
 </section>
  <script>
-function addToCart(n,p){let c=JSON.parse(localStorage.getItem('cart')||'[]');c.push({name:n,price:p});localStorage.setItem('cart',JSON.stringify(c));alert('✅ '+n+' - '+p+' тг');}
-function setLang(l){localStorage.setItem('lang',l);location.reload();}
-if(!localStorage.getItem('lang')) localStorage.setItem('lang','ru');
-window.addEventListener('DOMContentLoaded',function(){
-if(!document.getElementById('lang-switch')){
-let d=document.createElement('div');d.id='lang-switch';
-d.style='position:fixed;top:10px;right:10px;z-index:9999';
-d.innerHTML='<button onclick="setLang(\'ru\')">RU</button> <button onclick="setLang(\'kz\')">KZ</button>';
-document.body.appendChild(d);
-}
-});
- </script>
-<script>
-function addToCart(name,price){
+
+function addToCart(n,p){
 let c=JSON.parse(localStorage.getItem('cart')||'[]');
-c.push({name:name,price:price});
+c.push({name:n,price:p});
 localStorage.setItem('cart',JSON.stringify(c));
-if(document.getElementById('cart-count')) document.getElementById('cart-count').textContent=c.length;
-alert('✅ '+name+' - '+price+' тг. Товар в корзине!');
+let e=document.getElementById('cart-count');
+if(e) e.textContent=c.length;
+alert('✅ '+n+' - '+p+' тг');
 }
 window.addToCart=addToCart;
 function setLang(l){
 localStorage.setItem('lang',l);
 location.reload();
 }
-
-if(localStorage.getItem('lang')=='kz'){
-let b=document.body.innerHTML;
-b=b.replace(/Разливное пиво/gi,'Құйылмалы сыра');
-b=b.replace(/Лимонады и квас/gi,'Лимонадтар және квас');
-b=b.replace(/Закуски/gi,'Тіскебасарлар');
-b=b.replace(/Корзина пуста/gi,'Себет бос');
-b=b.replace(/Итого/gi,'Барлығы');
-b=b.replace(/Заказать в WhatsApp/gi,'WhatsApp арқылы тапсырыс');
-b=b.replace(/В корзину/gi,'Себетке');
-document.body.innerHTML=b;
-}
-
-if(!document.getElementById('lang-switch')){
-let d=document.createElement('div');d.id='lang-switch';
-d.style='position:fixed;top:10px;right:10px;z-index:9999;background:white;padding:5px;border-radius:5px';
-d.innerHTML='<button onclick="setLang(\'ru\')">RU</button> <button onclick="setLang(\'kz\')">KZ</button>';
-document.body.appendChild(d);
-}
+window.setLang=setLang;   
 </script>
 </body>
 </html>
