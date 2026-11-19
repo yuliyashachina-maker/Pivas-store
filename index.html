@@ -3,57 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Корзина</title>
+<title>Pivas Store</title>
 <style>
 body{background:#0f0f0f;color:#fff;font-family:Arial;padding:20px}
 a{color:#e63946;text-decoration:none}
-.item{display:flex;justify-content:space-between;padding:12px;background:#1a1a1a;margin:8px 0;border-radius:8px}
-button{background:#e63946;color:#fff;border:none;padding:10px 15px;border-radius:6px;cursor:pointer}
-#total{font-size:20px;font-weight:bold;margin-top:15px}
+.products{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.card{background:#1a1a1a;padding:10px;border-radius:10px;text-align:center}
+.card img{width:100%;border-radius:8px}
+button{background:#e63946;color:#fff;border:none;padding:8px 12px;border-radius:6px;margin-top:8px;cursor:pointer}
+.cart-link{position:fixed;top:15px;right:15px;background:#e63946;padding:10px 15px;border-radius:20px}
 </style>
 </head>
 <body>
-<a href="index.html">← Назад в магазин</a>
-<h1>🛒 Корзина</h1>
-<div id="cart-items"></div>
-<div id="total"></div>
-<br>
-<button onclick="clearCart()">Очистить корзину</button>
-<button onclick="orderWhatsApp()" style="background:#25D366;margin-left:10px">Заказать в WhatsApp</button>
+<a href="cart.html" class="cart-link">🛒 Корзина</a>
+<h1>Pivas Store 🍺</h1>
 
-<script>
-function loadCart(){
- var c=JSON.parse(localStorage.getItem('cart')||'[]');
- var div=document.getElementById('cart-items');
- var total=0;
- if(c.length==0){div.innerHTML='<p>Корзина пуста</p>';return}
- div.innerHTML='';
- c.forEach((it,i)=>{
-  total+=it.price;
-  div.innerHTML+=`<div class="item"><span>${it.name} - ${it.price} тг</span><span onclick="removeItem(${i})" style="color:red;cursor:pointer">✕</span></div>`;
- });
- document.getElementById('total').textContent='Итого: '+total+' тг ('+c.length+' шт)';
-}
-function removeItem(i){
- var c=JSON.parse(localStorage.getItem('cart')||'[]');
- c.splice(i,1);
- localStorage.setItem('cart',JSON.stringify(c));
- loadCart();
-}
-function clearCart(){
- localStorage.removeItem('cart');
- loadCart();
-}
-function orderWhatsApp(){
- var c=JSON.parse(localStorage.getItem('cart')||'[]');
- if(c.length==0){alert('Корзина пуста');return}
- var text='Здравствуйте! Хочу заказать:%0A';
- var total=0;
- c.forEach(it=>{text+=`- ${it.name} ${it.price}тг%0A`;total+=it.price});
- text+=`%0AИтого: ${total} тг`;
- window.open('https://wa.me/77000000000?text='+text,'_blank');
-}
-loadCart();
-</script>
+<div class="products">
+<div class="card">
+<img src="1-gus.jpg">
+<p>Гусь 1</p><b>500 тг</b><br>
+<button onclick="addToCart('Гусь 1',500)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="10-chesh.jpg">
+<p>Чешское</p><b>600 тг</b><br>
+<button onclick="addToCart('Чешское',600)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="arbuz.png">
+<p>Арбуз</p><b>550 тг</b><br>
+<button onclick="addToCart('Арбуз',550)">В корзину</button>
+</div>
+
+<div class="card">
+<img src="mohito.png">
+<p>Мохито</p><b>650 тг</b><br>
+<button onclick="addToCart('Мохито',650)">В корзину</button>
+</div>
+</div>
+
+<script src="cart.js"></script>
 </body>
 </html>
