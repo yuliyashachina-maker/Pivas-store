@@ -68,15 +68,7 @@ let info=document.querySelector('.cart-bar-info');
 if(info){ info.innerHTML='🛒 '+t.cart+' <b>'+(document.getElementById('cartCount')?.textContent||0)+' </b> <span>'+(document.getElementById('cartTotal')?.textContent||'0 ₸')+'</span>'; }
 let btn=document.querySelector('.cart-bar-btn');
 if(btn) btn.textContent=t.go;
-// БАННЕР сверху
-let banner=document.querySelector('.hero-text, .banner-title, h1');
-let all=document.body.innerHTML;
-if(document.querySelector('.top-banner')||true){
-  // найдем заголовок баннера по тексту
-  let h=document.evaluate("//*[contains(text(),'Твой стиль') or contains(text(),'Сенің стилің')]", document, null, 6, null);
-  let el=h.iterateNext();
-  if(el) el.innerHTML = lang==='kz' ? "Сенің стилің - сенің күшің <br>& Салқын сыра - ыстық жеңілдіктер" : "Твой стиль - твоя сила <br>& Холодное пиво - горячие скидки";
-}
+
 
     
 
