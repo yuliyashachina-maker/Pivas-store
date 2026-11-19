@@ -58,17 +58,23 @@ localStorage.setItem('lang',lang);
 document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
 let t=translations[lang];
 // категории
-let cats=document.querySelectorAll('.cat-btn');
-if(cats[0]) cats[0].innerHTML='🍺 '+t.beer;
-if(cats[1]) cats[1].innerHTML='🥃 '+t.strong;
-if(cats[2]) cats[2].innerHTML='🥨 '+t.snacks;
-if(cats[3]) cats[3].innerHTML='🐟 '+t.fish;
+
+// категории - 4 кнопки
+let cats=document.querySelectorAll('a,button');
+let list=[];
+for(let el of cats){
+let tt=(el.textContent||'').trim()
+ if(/Пиво|Сыра|Креп|Мықты|Закус|Тіске|Рыба|Балық/.test(tt))list.push(el);}   
+if(list[0]) list[0].textContent=lang==='kz'?'🍺 Сыра':'🍺 Пиво';
+if(list[1]) list[1].textContent=lang==='kz'?'💪 Мықты':'💪 Крепкое';
+if(list[2]) list[2].textContent=lang==='kz'?'🥨 Тіскебасар':'🥨 Закуски';
+if(list[3]) list[3].textContent=lang==='kz'?'🐟 Балық':'🐟 Рыба';
 // корзина внизу
 let info=document.querySelector('.cart-bar-info');
-if(info){ info.innerHTML='🛒 '+t.cart+' <b>'+(document.getElementById('cartCount')?.textContent||0)+' </b> <span>'+(document.getElementById('cartTotal')?.textContent||'0 ₸')+'</span>'; }
 let btn=document.querySelector('.cart-bar-btn');
 if(btn) btn.textContent=t.go;
-}    
+}
+    }
 
 
     
