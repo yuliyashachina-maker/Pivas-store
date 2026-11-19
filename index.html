@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ПИВАС - Разливное пиво</title>
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#fdf6e3;padding-bottom:100px}
+.lang-switch{position:fixed; top:10px; right:10px; z-index:10000; background:white; border-radius:20px; padding:5px; box-shadow:0 2px 10px rgba(0,0,0,0.3); display:flex; gap:5px;}
+.lang-switch button{border:none; padding:6px 12px; border-radius:15px; font-weight:bold; cursor:pointer; font-size:14px;}
+.lang-switch .active{background:#111; color:#FFD700;}
+.lang-switch .inactive{background:#eee; color:#333;}
+</style>
+  <style>
+body {font-family:Arial,sans-serif;margin:0;background:#fdf6e3;padding-bottom:100px}
 header{background:#111;color:#FFD700;text-align:center;padding:18px}
 h1{margin:0}
 .banner{width:100%;max-height:340px;object-fit:cover;display:block}
@@ -22,6 +28,10 @@ footer{text-align:center;padding:20px;background:#333;color:white;margin-top:20p
 </style>
 </head>
 <body>
+  <div class="lang-switch">
+<button id="btn-ru" class="active" onclick="setLang('ru')">🇷🇺 RU</button>
+<button id="btn-kz" class="inactive" onclick="setLang('kz')">🇰🇿 KZ</button>
+  </div>
 <header>
 <h1>ПИВАС - Разливное пиво</h1>
 <p>Косшы, Лесная Поляна - свежее и холодное!</p>
@@ -107,5 +117,20 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 
 </div>
 </section>
+  <script>
+function setLang(l){
+ localStorage.setItem('lang',l);
+ document.getElementById('btn-ru').className=l=='ru'?'active':'inactive';
+ document.getElementById('btn-kz').className=l=='kz'?'active':'inactive';
+ if(l=='kz'){
+  let b=document.body.innerHTML;
+  b=b.replaceAll('Разливное пиво','Құйылмалы сыра');
+  b=b.replaceAll('Квас Шымкентский','Шымкент квасы');
+  b=b.replaceAll('Закуски','Тіскебасарлар');
+  document.body.innerHTML=b;
+ } else { location.reload(); }
+}
+  </script>
+  
 </body>
 </html>
