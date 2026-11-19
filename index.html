@@ -117,20 +117,21 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 </section>
   <script>
 function setLang(l){
-  localStorage.setItem('lang',l);
- document.getElementById('btn-ru').className=l=='ru'?'active':'inactive';
- document.getElementById('btn-kz').className=l=='kz'?'active':'inactive';
- if(l=='kz'){
+  localStorage.setItem('lang', l);
+  location.reload();
+}
+if(!localStorage.getItem('lang')){
+  localStorage.setItem('lang','kz');
+}
+if(localStorage.getItem('lang')=='kz'){
   let b=document.body.innerHTML;
   b=b.replaceAll('Разливное пиво','Құйылмалы сыра');
-  b=b.replaceAll('Квас Шымкентский','Шымкент квасы');
+  b=b.replaceAll('Квас Шымкентский','Шымкенттік квас');
   b=b.replaceAll('Закуски','Тіскебасарлар');
   document.body.innerHTML=b;
- } else { location.reload(); }
 }
-if(!localStorage.getItem('lang')) localStorage.setItem('lang','kz');
-setLang(localStorage.getItem('lang'));  
-  </script>
+</script>
+
   
 </body>
 </html>
