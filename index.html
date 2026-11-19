@@ -122,43 +122,51 @@ window.open('https://wa.me/77017531337?text='+msg,'_blank');
 
 </section>
  <script>
+function addToCart(n,p){let c=JSON.parse(localStorage.getItem('cart')||'[]');c.push({name:n,price:p});localStorage.setItem('cart',JSON.stringify(c));alert('✅ '+n+' - '+p+' тг');}
 function setLang(l){localStorage.setItem('lang',l);location.reload();}
 if(!localStorage.getItem('lang')) localStorage.setItem('lang','ru');
-window.addEventListener('DOMContentLoaded', function(){
-  if(!document.getElementById('lang-switch')){
-    let d=document.createElement('div');
-    d.id='lang-switch';
-    d.style='position:fixed;top:10px;right:10px;z-index:9999;background:#000;padding:5px;border-radius:8px;display:flex;gap:4px;';
-    d.innerHTML='<button onclick="setLang(\'kz\')" style="padding:6px 10px;">🇰🇿 KZ</button><button onclick="setLang(\'ru\')" style="padding:6px 10px;">🇷🇺 RU</button>';
-    document.body.appendChild(d);
-  }
+window.addEventListener('DOMContentLoaded',function(){
+if(!document.getElementById('lang-switch')){
+let d=document.createElement('div');d.id='lang-switch';
+d.style='position:fixed;top:10px;right:10px;z-index:9999';
+d.innerHTML='<button onclick="setLang(\'ru\')">RU</button> <button onclick="setLang(\'kz\')">KZ</button>';
+document.body.appendChild(d);
+}
 });
+ </script>
 <script>
 function addToCart(name, price){
 let c=JSON.parse(localStorage.getItem('cart')||'[]');
 c.push({name:name,price:price});
 localStorage.setItem('cart',JSON.stringify(c));
-alert('✅ '+name+' - '+price+' тг\nСебетке қосылды!');
+alert('✅ '+name+' - '+price+' тг');
 }
 window.addToCart=addToCart;
+
+function setLang(l){
+localStorage.setItem('lang',l);
+location.reload();
+}
 
 if(localStorage.getItem('lang')=='kz'){
 let b=document.body.innerHTML;
 b=b.replace(/Разливное пиво/gi,'Құйылмалы сыра');
-b=b.replace(/Лимонады и квас/gi,'Лимонад және квас');
+b=b.replace(/Лимонады и квас/gi,'Лимонадтар және квас');
 b=b.replace(/Закуски/gi,'Тіскебасарлар');
-b=b.replace(/Колбаски, Легкая Поляна/gi,'Шұжықтар');
-b=b.replace(/Доставка до Лесной Поляны/gi,'Орман Алаңына дейін жеткізу');
-b=b.replace(/Все 10 сортов всегда свежие/gi,'Барлық 10 сұрып әрқашан жаңа');
-b=b.replace(/Написать в WhatsApp/gi,'WhatsApp жазу');
-b=b.replace(/Квас Шымкентский/gi,'Шымкенттік квас');
 b=b.replace(/Корзина пуста/gi,'Себет бос');
 b=b.replace(/Итого/gi,'Барлығы');
-b=b.replace(/Заказать в WhatsApp/gi,'WhatsApp тапсырыс');
+b=b.replace(/Заказать в WhatsApp/gi,'WhatsApp арқылы тапсырыс');
 b=b.replace(/В корзину/gi,'Себетке');
 document.body.innerHTML=b;
-window.addToCart=addToCart;
+}
+
+if(!document.getElementById('lang-switch')){
+let d=document.createElement('div');d.id='lang-switch';
+d.style='position:fixed;top:10px;right:10px;z-index:9999;background:white;padding:5px;border-radius:5px';
+d.innerHTML='<button onclick="setLang(\'ru\')">RU</button> <button onclick="setLang(\'kz\')">KZ</button>';
+document.body.appendChild(d);
 }
 </script>
 </body>
 </html>
+
