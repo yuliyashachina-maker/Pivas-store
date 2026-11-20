@@ -1,8 +1,60 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Снэки +40% | Pivas Store</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#fff;font-family:Arial,sans-serif;padding:10px}.banner{width:100%;border-radius:15px;overflow:hidden;margin-bottom:15px;border:2px solid #ffcc0022}.banner img{width:100%;display:block}.nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px 0}.nav a{padding:10px 18px;border-radius:25px;text-decoration:none;font-weight:bold;font-size:14px;border:1px solid #333}.nav a.active{background:#ffcc00;color:#000}.nav a:not(.active){background:#1a1a1a;color:#fff}h1{text-align:center;color:#ffcc00;margin:15px 0;font-size:22px}h1 span{color:#fff;font-size:14px;display:block;margin-top:5px;font-weight:normal}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}.card{background:linear-gradient(145deg,#1a1a1a,#161616);border:1px solid #2a2a2a;border-radius:14px;padding:12px;position:relative}.card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00ff88,#00cc6a)}.card h3{font-size:13px;min-height:36px;margin-bottom:6px}.sales{font-size:11px;color:#888;margin-bottom:8px}.inp{width:100%;padding:8px;background:#000;border:1px solid #333;border-radius:8px;color:#fff;margin:5px 0}.price{background:#000;border-radius:8px;padding:8px;text-align:center;color:#00ff88;font-weight:bold;font-size:16px;margin-top:5px;border:1px dashed #00ff8822}</style></head><body>
-<div class="nav"><a href="index.html">🍺 Пиво</a><a href="krepkiy.html">🥃 Крепкое</a><a href="#" class="active">🥜 Снэки +40%</a><a href="ryba.html">🐟 Рыба</a></div>
-<h1>🥜 СНЭКИ<span>Введи закупку → продажа +40%</span></h1>
-<div class="grid" id="g"></div>
-<script>
-const p=[["Чечел Кнут 1802",1802],["Крутики 844",844],["Курт Домашн 690",690],["Чечел Паутинка 461",461],["Курт Аул 390",390],["Семечки Городские 244",244],["Фисташки 132",132],["Гренки Баффало 103",103],["Кириешки 86",86],["Lays 140гр 82",82],["Арахис 76",76],["Сыр косичка 71",71],["Семена подсолн 64",64],["Чипсы Принглс 58",58]];
-const g=document.getElementById('g');p.forEach((x,i)=>{let d=document.createElement('div');d.className='card';d.innerHTML=`<h3>${x[0]}</h3><div class="sales">Продаж: ${x[1]}</div><input class="inp" type="number" placeholder="500" oninput="document.getElementById('p${i}').innerText=this.value?Math.round(this.value*1.4)+' ₸':'—'"><div class="price" id="p${i}">—</div>`;g.appendChild(d);});
-</script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Снэки - Pivas Store</title>
+<style>
+body{font-family:Arial;background:#fff8e1;margin:0;padding:15px}
+h1{text-align:center}
+a{color:#d35400}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px #0002}
+.card b{font-size:15px}
+.price{color:#e67e22;font-size:18px;font-weight:bold;margin-top:6px}
+</style>
+</head>
+<body>
+<a href="index.html">← На главную</a>
+<h1>🥨 Снэки</h1>
+<div class="grid">
+<div class="card"><b>Великан соль 100гр</b><div class="price">530 ₸</div></div>
+<div class="card"><b>Великан семечки 100гр</b><div class="price">530 ₸</div></div>
+<div class="card"><b>Джинн великан соль 200гр</b><div class="price">1040 ₸</div></div>
+<div class="card"><b>Джинн с солью 70г</b><div class="price">347 ₸</div></div>
+<div class="card"><b>Городские семечки 100гр соль</b><div class="price">455 ₸</div></div>
+<div class="card"><b>Семечки Джинн с солью 300гр</b><div class="price">1495 ₸</div></div>
+<div class="card"><b>Джинн Арахис Соленый 50гр</b><div class="price">260 ₸</div></div>
+<div class="card"><b>Караван 90гр</b><div class="price">325 ₸</div></div>
+<div class="card"><b>Бирка Фисташки соленые</b><div class="price">989 ₸</div></div>
+<div class="card"><b>Lays Краб 140гр</b><div class="price">1138 ₸</div></div>
+<div class="card"><b>Lays Сыр 140гр</b><div class="price">1138 ₸</div></div>
+<div class="card"><b>Lays Сметана и зелень 140гр</b><div class="price">1138 ₸</div></div>
+<div class="card"><b>Lays Паприка 140гр</b><div class="price">1138 ₸</div></div>
+<div class="card"><b>Lays Лобстер 140гр</b><div class="price">1138 ₸</div></div>
+<div class="card"><b>Lays Лосось 140гр</b><div class="price">1138 ₸</div></div>
+<div class="card"><b>Lays Краб 70гр</b><div class="price">663 ₸</div></div>
+<div class="card"><b>Lays Сыр 70гр</b><div class="price">663 ₸</div></div>
+<div class="card"><b>Чипсы шашлык 250гр</b><div class="price">1069 ₸</div></div>
+<div class="card"><b>Луковые кольца сладкий чили 200гр</b><div class="price">816 ₸</div></div>
+<div class="card"><b>Чипсоны Зеленый Лук</b><div class="price">1069 ₸</div></div>
+<div class="card"><b>Пеллет краб 200гр</b><div class="price">793 ₸</div></div>
+<div class="card"><b>Сухарики Флинт 100гр</b><div class="price">420 ₸</div></div>
+<div class="card"><b>Сухарики Флинт 190гр</b><div class="price">719 ₸</div></div>
+<div class="card"><b>Гренки Флинт 100гр</b><div class="price">420 ₸</div></div>
+<div class="card"><b>Греночки 100гр</b><div class="price">585 ₸</div></div>
+<div class="card"><b>Курт Домашний</b><div class="price">42 ₸</div></div>
+<div class="card"><b>Курт Керемет</b><div class="price">37 ₸</div></div>
+<div class="card"><b>Курт таблетка</b><div class="price">416 ₸</div></div>
+<div class="card"><b>Курт Жаннур 40гр</b><div class="price">345 ₸</div></div>
+<div class="card"><b>Био Курт Молочный</b><div class="price">99 ₸</div></div>
+<div class="card"><b>Крутики</b><div class="price">2015 ₸ / кг</div></div>
+<div class="card"><b>Чечел Кнут</b><div class="price">4160 ₸ / кг</div></div>
+<div class="card"><b>Шоколад Яшкино</b><div class="price">390 ₸</div></div>
+<div class="card"><b>Шоколад Озера с Фундуком</b><div class="price">898 ₸</div></div>
+<div class="card"><b>Батончик Супер 40гр</b><div class="price">104 ₸</div></div>
+<div class="card"><b>Чиссбер 50гр</b><div class="price">481 ₸</div></div>
+<div class="card"><b>Мармеладки 70гр</b><div class="price">137 ₸</div></div>
+</div>
+</body>
+</html>
