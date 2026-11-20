@@ -43,7 +43,7 @@ function render(){
 document.getElementById('list').innerHTML=items.map((it,i)=>`<div class="card"><h3>${it[0]}</h3><div class="price">${fmt(it[1])}</div><div class="unit">за 1 кг</div><button class="add" onclick="add(${i})">+ В корзину</button></div>`).join('');
 update();
 }
-function add(i){cart.push({name:items[i][0],price:items[i][1]});localStorage.setItem('cart',JSON.stringify(cart));update();alert(items[i][0]+' — добавлено! 🛒')}
+function add(i){cart.push({name:items[i][0],price:items[i][1]});localStorage.setItem('cart',JSON.stringify(cart));update();
 function update(){let c=cart.reduce((a,b)=>a+1,0);document.getElementById('cartCount').innerText=c;}
 function showCart(){if(cart.length==0){alert('Корзина пустая');return}let t=cart.map((x,idx)=>(idx+1)+'. '+x.name+' — '+fmt(x.price)).join('\n');let sum=cart.reduce((a,b)=>a+b.price,0);alert(t+'\n\nИтого: '+fmt(sum)+'\n\nНапиши нам в WhatsApp для заказа!');}
 render();
