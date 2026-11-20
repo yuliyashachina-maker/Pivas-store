@@ -1,9 +1,78 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>КРЕПКИЙ АЛКОГОЛЬ</title>
-<style>body{font-family:Arial;background:#fff8e1;padding:15px}h1{text-align:center} .card{background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;margin:10px 0} input{width:100%;padding:10px;font-size:16px;margin:5px 0;border-radius:8px;border:1px solid #ccc} .res{font-weight:bold;color:green;font-size:18px}</style></head>
-<body><h1>🥃 КРЕПКИЙ АЛКОГОЛЬ +30%</h1>
-<div class="card"><b>Водка Белая Березка 0.5</b><input type="number" placeholder="Введи закупку" oninput="this.nextElementSibling.innerText='Продажа: '+Math.round(this.value*1.3)+' тг'"><div class="res"></div></div>
-<div class="card"><b>Водка Хаома 0.5</b><input type="number" placeholder="Введи закупку" oninput="this.nextElementSibling.innerText='Продажа: '+Math.round(this.value*1.3)+' тг'"><div class="res"></div></div>
-<div class="card"><b>Коньяк Казахстан 0.5</b><input type="number" placeholder="Введи закупку" oninput="this.nextElementSibling.innerText='Продажа: '+Math.round(this.value*1.3)+' тг'"><div class="res"></div></div>
-<div style="text-align:center;margin-top:20px"><a href="index.html">⬅ На главную</a></div>
-</body></html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Крепкий алкоголь</title>
+<style>
+body{font-family:Arial;background:#111;color:#fff;padding:15px;margin:0}
+h1{color:#ffcc00;text-align:center;font-size:22px}
+.nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px}
+.nav a{background:#222;padding:10px 16px;border-radius:8px;color:#fff;text-decoration:none;border:1px solid #444}
+.nav a.active{background:#ffcc00;color:#000;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:#1e1e1e;border:1px solid #333;border-radius:12px;padding:14px}
+.card h3{color:#fff;font-size:15px;margin:0 0 8px}
+.price{color:#00ff88;font-weight:bold;font-size:20px}
+</style>
+</head>
+<body>
+<h1>КРЕПКИЙ АЛКОГОЛЬ +30%</h1>
+<div class="nav"><a href="index.html">Главная</a><a href="pivo.html">Пиво</a><a href="#" class="active">Крепкое</a><a href="snacks.html">Снэки</a><a href="ryba.html">Рыба</a></div>
+<div class="grid">
+<div class="card"><h3>Хаома 0.5 Зеренда</h3><div class="price">2343 ₸</div></div>
+<div class="card"><h3>Хаома Зеренда 0.2</h3><div class="price">1150 ₸</div></div>
+<div class="card"><h3>Хаома 1л Зеренда</h3><div class="price">4293 ₸</div></div>
+<div class="card"><h3>Коньяк Казахстан 0.5л</h3><div class="price">4159 ₸</div></div>
+<div class="card"><h3>Коньяк Казахстан 0,5 5 звезд</h3><div class="price">2171 ₸</div></div>
+<div class="card"><h3>Коньяк Казахстан 0,5 3 звезды</h3><div class="price">2158 ₸</div></div>
+<div class="card"><h3>Казахстан коньяк 0.375л</h3><div class="price">3120 ₸</div></div>
+<div class="card"><h3>Казахстан коньяк 0.75</h3><div class="price">5511 ₸</div></div>
+<div class="card"><h3>Коньяк Казахстан 0,350</h3><div class="price">1625 ₸</div></div>
+<div class="card"><h3>Коньяк Казахстан 0,2</h3><div class="price">949 ₸</div></div>
+<div class="card"><h3>Коньяк Казахстан 0.2л</h3><div class="price">1769 ₸</div></div>
+<div class="card"><h3>Коньяк AL FARABI 0.5</h3><div class="price">2704 ₸</div></div>
+<div class="card"><h3>Коньяк Шустов 5 звезд 0,5</h3><div class="price">2769 ₸</div></div>
+<div class="card"><h3>Коньяк Глобал Вайн 0,5</h3><div class="price">2504 ₸</div></div>
+<div class="card"><h3>Коньячок 0,2</h3><div class="price">942 ₸</div></div>
+<div class="card"><h3>Водка Родная Степь 0,2</h3><div class="price">718 ₸</div></div>
+<div class="card"><h3>Родная Степь 0,5</h3><div class="price">1529 ₸</div></div>
+<div class="card"><h3>Водка Кызыл жар черная 0,5</h3><div class="price">3263 ₸</div></div>
+<div class="card"><h3>Водка кызыл жар черная 0,2</h3><div class="price">1530 ₸</div></div>
+<div class="card"><h3>Водка Кызыл жар черная 0,7</h3><div class="price">3913 ₸</div></div>
+<div class="card"><h3>Кызыл жар 1л</h3><div class="price">6079 ₸</div></div>
+<div class="card"><h3>Водка Синяя гора мягкая</h3><div class="price">1963 ₸</div></div>
+<div class="card"><h3>Водка Синяя Гора 0,65</h3><div class="price">2829 ₸</div></div>
+<div class="card"><h3>Водка Синяя Гора 0,9</h3><div class="price">3588 ₸</div></div>
+<div class="card"><h3>Водка Полюс 0.5</h3><div class="price">2396 ₸</div></div>
+<div class="card"><h3>Водка Полюс Платинум 0,7</h3><div class="price">3100 ₸</div></div>
+<div class="card"><h3>TauSamali водка 0,5</h3><div class="price">1638 ₸</div></div>
+<div class="card"><h3>Водка GODUNOFF GOLD 0.5</h3><div class="price">2167 ₸</div></div>
+<div class="card"><h3>Godunov 0.7</h3><div class="price">2655 ₸</div></div>
+<div class="card"><h3>Godunov 1л</h3><div class="price">3653 ₸</div></div>
+<div class="card"><h3>Годунов 0,2</h3><div class="price">1092 ₸</div></div>
+<div class="card"><h3>Хортица 0.7</h3><div class="price">3939 ₸</div></div>
+<div class="card"><h3>Хортица Айс 0,5</h3><div class="price">3055 ₸</div></div>
+<div class="card"><h3>ХОРТИЦА 1л</h3><div class="price">5512 ₸</div></div>
+<div class="card"><h3>Хортица классическая 0,25</h3><div class="price">1339 ₸</div></div>
+<div class="card"><h3>Хортица клюква с мятой</h3><div class="price">2444 ₸</div></div>
+<div class="card"><h3>MOROSHA 0.5</h3><div class="price">2769 ₸</div></div>
+<div class="card"><h3>Мороша №1 0,2</h3><div class="price">1313 ₸</div></div>
+<div class="card"><h3>NEMIROV ДЕЛИКАТ 0.5</h3><div class="price">4160 ₸</div></div>
+<div class="card"><h3>Немироф деликат 0.7</h3><div class="price">5688 ₸</div></div>
+<div class="card"><h3>Nemiroff Delikat 1л</h3><div class="price">7176 ₸</div></div>
+<div class="card"><h3>Виски JAMESON 0.5</h3><div class="price">12245 ₸</div></div>
+<div class="card"><h3>Виски Ballantines Finest 0,5</h3><div class="price">7792 ₸</div></div>
+<div class="card"><h3>Виски Ballantines 0.7</h3><div class="price">10508 ₸</div></div>
+<div class="card"><h3>Виски Brothers 0.5</h3><div class="price">5000 ₸</div></div>
+<div class="card"><h3>WILLIAM LAWSON</h3><div class="price">6369 ₸</div></div>
+<div class="card"><h3>WILLIAM LAWSON 0.7</h3><div class="price">8376 ₸</div></div>
+<div class="card"><h3>ABSOLUT 0.7</h3><div class="price">9621 ₸</div></div>
+<div class="card"><h3>АБСОЛЮТ 0,5</h3><div class="price">7381 ₸</div></div>
+<div class="card"><h3>Вино Bacchus Classic Red</h3><div class="price">2703 ₸</div></div>
+<div class="card"><h3>Вино Bacchus Classic White</h3><div class="price">2703 ₸</div></div>
+<div class="card"><h3>Вино Bacchus Chardonnay</h3><div class="price">2703 ₸</div></div>
+<div class="card"><h3>Семиз козы рюмка</h3><div class="price">1855 ₸</div></div>
+<div class="card"><h3>Семыз Козы 0,7</h3><div class="price">3169 ₸</div></div>
+<div class="card"><h3>Семыз Козы 0,2</h3><div class="price">746 ₸</div></div>
+</div>
+</body>
+</html>
