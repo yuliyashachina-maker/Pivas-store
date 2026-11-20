@@ -63,6 +63,6 @@
 <div class="card"><h3>Семыз Козы 0.7</h3><b>3169 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Семыз Козы 0.7',3169)">+ В корзину</button></div>
 <div class="card"><h3>Семыз Козы 0.2</h3><b>746 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Семыз Козы 0.2',746)">+ В корзину</button></div>
 </div>
-<script>function add(n,p){let c=JSON.parse(localStorage.getItem('cart')||'[]');let f=c.find(x=>x.name==n);if(f)f.qty++;else c.push({name:n,price:p,qty:1});localStorage.setItem('cart',JSON.stringify(c));document.getElementById('cartCount').textContent=c.reduce((a,b)=>a+b.qty,0);alert(n+' добавлен!')}let cc=JSON.parse(localStorage.getItem('cart')||'[]');document.getElementById('cartCount').textContent=cc.reduce((a,b)=>a+b.qty,0);</script>
+<script>function add(n,p){let c=JSON.parse(localStorage.getItem('cart')||'[]');let f=c.find(x=>x.name==n);if(f)f.qty++;else c.push({name:n,price:p,qty:1});localStorage.setItem('cart',JSON.stringify(c));document.getElementById('cartCount').textContent=c.reduce((a,b)=>a+b.qty,0);}let cc=JSON.parse(localStorage.getItem('cart')||'[]');document.getElementById('cartCount').textContent=cc.reduce((a,b)=>a+b.qty,0);</script>
 </body>
 </html>
