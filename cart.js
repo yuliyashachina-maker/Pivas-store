@@ -7,6 +7,6 @@ function addToCart(name,price){
   cart.push({name,price});
   localStorage.setItem('cart',JSON.stringify(cart));
   updateBadge();
-  alert(name+' добавлен в корзину!');
+
 }
 updateBadge();
