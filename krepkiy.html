@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Крепкое | Pivas Store</title>
-<style>
-body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:0}
-.top{display:flex;gap:8px;justify-content:center;padding:12px;flex-wrap:wrap;align-items:center}
-.top a{background:#2a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
-.top a.active{background:#ff8c00}
-.cart-btn{background:#ff8c00!important;font-weight:bold}
-h1{text-align:center;color:#ff8c00;margin:5px 0 0;font-size:22px}
-p{text-align:center;color:#ccc;font-size:13px;margin:5px 0 15px}
-.container{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
-.card{background:#222244;border-radius:10px;padding:12px;text-align:center}
-.card h3{font-size:14px;margin:5px 0;min-height:32px}
-.price{font-size:19px;font-weight:bold;color:#ff8c00;margin-top:8px}
-.unit{font-size:11px;color:#aaa}
-.add{background:#ff8c00;color:white;border:none;padding:8px 12px;border-radius:20px;margin-top:8px;font-weight:bold;cursor:pointer;width:100%}
-@media(max-width:600px){.container{grid-template-columns:1fr 1fr}}
-</style>
+<style>body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:0}.top{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:12px}.top a{background:#2a2a44;color:white;text-decoration:none;padding:6px 14px;border-radius:20px;font-size:14px}.top a.active{background:#ff8c00}.cart-btn{background:#ff8c00!important;font-weight:bold}h1{text-align:center;color:#ff8c00;margin:5px 0;font-size:22px}p{text-align:center;color:#ccc;margin:5px 0 15px}.container{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}.card{background:#222244;border-radius:10px;padding:15px;text-align:center}.card h3{font-size:14px;margin:0 0 8px;min-height:32px}.card b{color:#ff8c00;font-size:22px}.card small{color:#aaa}.card button{background:#ff8c00;color:white;border:none;padding:10px;width:100%;border-radius:20px;margin-top:10px;font-weight:bold;cursor:pointer}@media(max-width:700px){.container{grid-template-columns:1fr 1fr}}</style>
 </head>
 <body>
-<div class="top">
-<a href="index.html">🍺 Пиво</a>
-<a href="krepkoe.html" class="active">🥃 Крепкое</a>
-<a href="sneki.html">🍿 Снэки</a>
-<a href="ryba.html">🐟 Рыба</a>
-<a href="#" class="cart-btn" onclick="showCart()">🛒 Корзина (<span id="cartCount">0</span>)</a>
+<div class="top"><a href="pivo.html">🍺 Пиво</a><a href="krepkiy.html" class="active">🥃 Крепкое</a><a href="snacks.html">🍿 Снэки</a><a href="ryba.html">🐟 Рыба</a><a href="cart.html" class="cart-btn">🛒 Корзина (<span id="cartCount">0</span>)</a></div>
+<h1>🥃 КРЕПКОЕ</h1><p>Нажми «В корзину»</p>
+<div class="container">
+<div class="card"><h3>Водка Родная Степь 0.2</h3><b>718 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Родная Степь 0.2',718)">+ В корзину</button></div>
+<div class="card"><h3>Родная Степь 0.5</h3><b>1529 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Родная Степь 0.5',1529)">+ В корзину</button></div>
+<div class="card"><h3>Хаома Зеренда 0.2</h3><b>1150 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хаома Зеренда 0.2',1150)">+ В корзину</button></div>
+<div class="card"><h3>Хаома 0.5 Зеренда</h3><b>2343 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хаома 0.5 Зеренда',2343)">+ В корзину</button></div>
+<div class="card"><h3>Хаома 1л Зеренда</h3><b>4293 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хаома 1л Зеренда',4293)">+ В корзину</button></div>
+<div class="card"><h3>Водка Кызыл Жар черная 0.5</h3><b>3263 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Кызыл Жар 0.5',3263)">+ В корзину</button></div>
+<div class="card"><h3>Водка Кызыл Жар черная 0.2</h3><b>1530 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Кызыл Жар 0.2',1530)">+ В корзину</button></div>
+<div class="card"><h3>Водка Кызыл Жар черная 0.7</h3><b>3913 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Кызыл Жар 0.7',3913)">+ В корзину</button></div>
+<div class="card"><h3>Кызыл Жар 1л</h3><b>6079 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Кызыл Жар 1л',6079)">+ В корзину</button></div>
+<div class="card"><h3>Водка Синяя Гора мягкая</h3><b>1963 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Синяя Гора мягкая',1963)">+ В корзину</button></div>
+<div class="card"><h3>Водка Синяя Гора 0.65</h3><b>2829 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Синяя Гора 0.65',2829)">+ В корзину</button></div>
+<div class="card"><h3>Водка Синяя Гора 0.9</h3><b>3588 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Синяя Гора 0.9',3588)">+ В корзину</button></div>
+<div class="card"><h3>Водка Полюс 0.5</h3><b>2396 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Полюс 0.5',2396)">+ В корзину</button></div>
+<div class="card"><h3>Водка Полюс Платинум 0.7</h3><b>3100 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Водка Полюс Платинум 0.7',3100)">+ В корзину</button></div>
+<div class="card"><h3>TauSamali водка 0.5</h3><b>1638 ₸</b><br><small>за 1 шт</small><br><button onclick="add('TauSamali 0.5',1638)">+ В корзину</button></div>
+<div class="card"><h3>Водка GODUNOFF GOLD 0.5</h3><b>2167 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Godunoff Gold 0.5',2167)">+ В корзину</button></div>
+<div class="card"><h3>Godunov 0.7</h3><b>2655 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Godunov 0.7',2655)">+ В корзину</button></div>
+<div class="card"><h3>Godunov 1л</h3><b>3653 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Godunov 1л',3653)">+ В корзину</button></div>
+<div class="card"><h3>Годунов 0.2</h3><b>1092 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Годунов 0.2',1092)">+ В корзину</button></div>
+<div class="card"><h3>Хортица 0.7</h3><b>3939 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хортица 0.7',3939)">+ В корзину</button></div>
+<div class="card"><h3>Хортица Айс 0.5</h3><b>3055 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хортица Айс 0.5',3055)">+ В корзину</button></div>
+<div class="card"><h3>ХОРТИЦА 1л</h3><b>5512 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хортица 1л',5512)">+ В корзину</button></div>
+<div class="card"><h3>Хортица классическая 0.25</h3><b>1339 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хортица 0.25',1339)">+ В корзину</button></div>
+<div class="card"><h3>Хортица клюква с мятой</h3><b>2444 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Хортица клюква',2444)">+ В корзину</button></div>
+<div class="card"><h3>MOROSHA 0.5</h3><b>2769 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Morosha 0.5',2769)">+ В корзину</button></div>
+<div class="card"><h3>Мороша №1 0.2</h3><b>1313 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Мороша 0.2',1313)">+ В корзину</button></div>
+<div class="card"><h3>NEMIROV ДЕЛИКАТ 0.5</h3><b>4160 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Nemirov 0.5',4160)">+ В корзину</button></div>
+<div class="card"><h3>Немиров деликат 0.7</h3><b>5688 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Немиров 0.7',5688)">+ В корзину</button></div>
+<div class="card"><h3>Nemiroff Delikat 1л</h3><b>7176 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Nemiroff 1л',7176)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Казахстан 0.5л</h3><b>4159 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Казахстан 0.5',4159)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Казахстан 0.5 5 звезд</h3><b>2171 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Казахстан 5 звезд',2171)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Казахстан 0.5 3 звезды</h3><b>2158 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Казахстан 3 звезды',2158)">+ В корзину</button></div>
+<div class="card"><h3>Казахстан коньяк 0.375л</h3><b>3120 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Казахстан коньяк 0.375',3120)">+ В корзину</button></div>
+<div class="card"><h3>Казахстан коньяк 0.75</h3><b>5511 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Казахстан коньяк 0.75',5511)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Казахстан 0.350</h3><b>1625 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Казахстан 0.35',1625)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Казахстан 0.2</h3><b>949 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Казахстан 0.2',949)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк AL FARABI 0.5</h3><b>2704 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Al Farabi 0.5',2704)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Шустов 5 звезд 0.5</h3><b>2769 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Шустов 0.5',2769)">+ В корзину</button></div>
+<div class="card"><h3>Коньяк Глобал Вайн 0.5</h3><b>2504 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньяк Глобал Вайн 0.5',2504)">+ В корзину</button></div>
+<div class="card"><h3>Коньячок 0.2</h3><b>942 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Коньячок 0.2',942)">+ В корзину</button></div>
+<div class="card"><h3>Виски JAMESON 0.5</h3><b>12245 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Jameson 0.5',12245)">+ В корзину</button></div>
+<div class="card"><h3>Виски Ballantines Finest 0.5</h3><b>7792 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Ballantines 0.5',7792)">+ В корзину</button></div>
+<div class="card"><h3>Виски Ballantines 0.7</h3><b>10508 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Ballantines 0.7',10508)">+ В корзину</button></div>
+<div class="card"><h3>Виски Brothers 0.5</h3><b>5000 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Brothers 0.5',5000)">+ В корзину</button></div>
+<div class="card"><h3>WILLIAM LAWSON 0.5</h3><b>6369 ₸</b><br><small>за 1 шт</small><br><button onclick="add('William Lawson 0.5',6369)">+ В корзину</button></div>
+<div class="card"><h3>WILLIAM LAWSON 0.7</h3><b>8376 ₸</b><br><small>за 1 шт</small><br><button onclick="add('William Lawson 0.7',8376)">+ В корзину</button></div>
+<div class="card"><h3>ABSOLUT 0.7</h3><b>9621 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Absolut 0.7',9621)">+ В корзину</button></div>
+<div class="card"><h3>АБСОЛЮТ 0.5</h3><b>7381 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Абсолют 0.5',7381)">+ В корзину</button></div>
+<div class="card"><h3>Вино Bacchus Classic Red</h3><b>2703 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Bacchus Red',2703)">+ В корзину</button></div>
+<div class="card"><h3>Вино Bacchus Classic White</h3><b>2703 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Bacchus White',2703)">+ В корзину</button></div>
+<div class="card"><h3>Вино Bacchus Chardonnay</h3><b>2703 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Bacchus Chardonnay',2703)">+ В корзину</button></div>
+<div class="card"><h3>Семиз козы рюмка</h3><b>1855 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Семиз козы рюмка',1855)">+ В корзину</button></div>
+<div class="card"><h3>Семыз Козы 0.7</h3><b>3169 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Семыз Козы 0.7',3169)">+ В корзину</button></div>
+<div class="card"><h3>Семыз Козы 0.2</h3><b>746 ₸</b><br><small>за 1 шт</small><br><button onclick="add('Семыз Козы 0.2',746)">+ В корзину</button></div>
 </div>
-<h1>🥃 КРЕПКОЕ</h1>
-<p>Нажми «В корзину»</p>
-<div class="container" id="list"></div>
-<script>
-const items=[
-["Водка 0.5",3500],
-["Виски 0.5",8500],
-["Коньяк 0.5",7500],
-["Вино красное 0.75",4500],
-["Вино белое 0.75",4500],
-["Шампанское 0.75",5500]
-];
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-function fmt(n){return n.toLocaleString('ru-RU').replace(/,/g,'.')+' ₸'}
-function render(){
-document.getElementById('list').innerHTML=items.map((it,i)=>`<div class="card"><h3>${it[0]}</h3><div class="price">${fmt(it[1])}</div><div class="unit">за 1 шт</div><button class="add" onclick="add(${i})">+ В корзину</button></div>`).join('');
-update();
-}
-function add(i){cart.push({name:items[i][0],price:items[i][1]});localStorage.setItem('cart',JSON.stringify(cart));update();alert(items[i][0]+' — добавлено! 🛒')}
-function update(){document.getElementById('cartCount').innerText=cart.length;}
-function showCart(){if(cart.length==0){alert('Корзина пустая');return}let t=cart.map((x,idx)=>(idx+1)+'. '+x.name+' — '+fmt(x.price)).join('\n');let sum=cart.reduce((a,b)=>a+b.price,0);alert(t+'\n\nИтого: '+fmt(sum));}
-render();
-</script>
+<script>function add(n,p){let c=JSON.parse(localStorage.getItem('cart')||'[]');let f=c.find(x=>x.name==n);if(f)f.qty++;else c.push({name:n,price:p,qty:1});localStorage.setItem('cart',JSON.stringify(c));document.getElementById('cartCount').textContent=c.reduce((a,b)=>a+b.qty,0);alert(n+' добавлен!')}let cc=JSON.parse(localStorage.getItem('cart')||'[]');document.getElementById('cartCount').textContent=cc.reduce((a,b)=>a+b.qty,0);</script>
 </body>
 </html>
