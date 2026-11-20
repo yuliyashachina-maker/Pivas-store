@@ -1,8 +1,46 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Рыба +40% | Pivas Store</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#fff;font-family:Arial,sans-serif;padding:10px}.nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px 0}.nav a{padding:10px 18px;border-radius:25px;text-decoration:none;font-weight:bold;font-size:14px;border:1px solid #333}.nav a.active{background:#ffcc00;color:#000}.nav a:not(.active){background:#1a1a1a;color:#fff}h1{text-align:center;color:#ffcc00;margin:15px 0;font-size:22px}h1 span{color:#fff;font-size:14px;display:block;margin-top:5px;font-weight:normal}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}.card{background:linear-gradient(145deg,#1a1a1a,#161616);border:1px solid #2a2a2a;border-radius:14px;padding:12px;position:relative}.card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#0088ff,#00ccff)}.card h3{font-size:13px;min-height:36px;margin-bottom:6px}.sales{font-size:11px;color:#888;margin-bottom:8px}.inp{width:100%;padding:8px;background:#000;border:1px solid #333;border-radius:8px;color:#fff;margin:5px 0}.price{background:#000;border-radius:8px;padding:8px;text-align:center;color:#00ccff;font-weight:bold;font-size:16px;margin-top:5px;border:1px dashed #00ccff44}</style></head><body>
-<div class="nav"><a href="index.html">🍺 Пиво</a><a href="krepkiy.html">🥃 Крепкое</a><a href="snacks.html">🥜 Снэки</a><a href="#" class="active">🐟 Рыба +40%</a></div>
-<h1>🐟 РЫБА<span>Введи закупку → продажа +40%</span></h1>
-<div class="grid" id="g"></div>
-<script>
-const p=[["Пелядь 313",313],["Судак филе 111",111],["Анчоус 106",106],["Вобла Атырау 98",98],["Плавники Судака 92",92],["Окунь 76",76],["Лещ х/к 63",63],["Лещ вялен 52",52],["Янтарная с перцем 45",45],["BEERka Анчоус 35",35],["Скумбрия 30",30],["Корюшка 28",28],["Чехонь 24",24],["Камбала 20",20]];
-const g=document.getElementById('g');p.forEach((x,i)=>{let d=document.createElement('div');d.className='card';d.innerHTML=`<h3>${x[0]}</h3><div class="sales">Продаж: ${x[1]}</div><input class="inp" type="number" placeholder="800" oninput="document.getElementById('p${i}').innerText=this.value?Math.round(this.value*1.4)+' ₸':'—'"><div class="price" id="p${i}">—</div>`;g.appendChild(d);});
-</script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рыба</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f6f6f6;margin:0;padding:0}
+header{background:#1e3a5f;color:white;padding:15px;text-align:center}
+header a{color:white;text-decoration:none;font-size:16px}
+h1{margin:10px 0 0;font-size:24px}
+.container{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.card{background:white;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
+.card h3{font-size:15px;margin:8px 0}
+.price{font-size:18px;font-weight:bold;color:#1e3a5f}
+.unit{font-size:12px;color:#777}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html">← Назад в магазин</a>
+<h1>🐟 Рыба</h1>
+<p>Цена за 1 кг</p>
+</header>
+<div class="container">
+<div class="card"><h3>Лещ х/к</h3><div class="price">2000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Лещ вяленый</h3><div class="price">2200 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Карась х.к</h3><div class="price">2200 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Щука Вяленая</h3><div class="price">3000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Окунь потрошен</h3><div class="price">3000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Окунь г/к</h3><div class="price">3000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Спинки Воблы</h3><div class="price">3000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Плавники Судака с паприкой</h3><div class="price">3500 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Хребет Семги</h3><div class="price">3500 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Судак Вяленый</h3><div class="price">4000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Филе Леща</h3><div class="price">4200 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Пелядь</h3><div class="price">5000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Скумбрия без головы</h3><div class="price">5100 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Филе Щуки</h3><div class="price">5700 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Вобла Атырау</h3><div class="price">6000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Жерех</h3><div class="price">6000 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Филе Судака</h3><div class="price">7300 ₸</div><div class="unit">за 1 кг</div></div>
+<div class="card"><h3>Брюшки Семги</h3><div class="price">9800 ₸</div><div class="unit">за 1 кг</div></div>
+</div>
+</body>
+</html>
