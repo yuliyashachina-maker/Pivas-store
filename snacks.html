@@ -89,20 +89,20 @@ h2{text-align:center;color:#ffbc00;font-size:18px;margin:20px 0 5px}
 </div>
 <script>
 function addToCart(btn,name,price){
-  let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-  let m=name.match(/(\d+)\s*гр/);
-  let w=m?parseInt(m[1]):0;
-  let f=cart.find(i=>i.name===name);
-  if(f){f.qty=(Number(f.qty)||1)+1; f.weight=w; f.price=Number(price)||0;}
-  else{cart.push({name:name,price:Number(price)||0,weight:w,qty:1});}
-  localStorage.setItem('cart',JSON.stringify(cart));
-  updateCartCount();
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+let m=name.match(/(\d+)/);
+let w=m?parseInt(m[1]):0;
+let f=cart.find(i=>i.name===name);
+if(f){f.qty=(Number(f.qty)||1)+1; f.weight=(Number(f.weight)||0)+w;}
+else{cart.push({name:name,price:Number(price),qty:1,weight:w});}
+localStorage.setItem('cart',JSON.stringify(cart));
+updateCartCount();
 }
-
 function updateCartCount(){
-  let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-  let total=cart.reduce((s,i)=>s+(Number(i.qty)||0),0);
-  let el=document.getElementById('cartCount');
-  if(el) el.textContent=total;
-}  
- updateCartCount();
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+let total=cart.reduce((s,i)=>s+(Number(i.qty)||0),0);
+let el=document.getElementById('cartCount');
+if(el) el.textContent=total;
+}
+updateCartCount();
+</script>
