@@ -1,2 +1,89 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Корзина</title><style>body{background:#111;color:#fff;font-family:Arial;padding:15px}a{color:#e63946}.item{background:#222;padding:12px;margin:8px 0;border-radius:10px;display:flex;justify-content:space-between}button{background:#e63946;color:#fff;border:0;padding:10px 16px;border-radius:8px}</style></head><body><a href="index.html">← Магазин</a><h1>🛒 Корзина</h1><div id="list"></div><h2 id="total"></h2><button onclick="localStorage.removeItem('cart');location.reload()">Очистить</button> <button onclick="order()">Заказать в WhatsApp</button><script>let c=JSON.parse(localStorage.getItem('cart')||'[]');let s=0,h='';c.forEach((x,i)=>{s+=x.price;h+=`<div class=item><span>${x.name} - ${x.price}тг</span><button onclick="c.splice(${i},1);localStorage.setItem('cart',JSON.stringify(c));location.reload()">X</button></div>`});document.getElementById('list').innerHTML=h||'Корзина пуста';document.getElementById('total').innerHTML='Итого: '+s+' тг';function order(){let m='Заказ:%0A';c.forEach(p=>m+=p.name+'-'+p.price+'%0A');m+='Итого:'+s;open('https://wa.me/77004451423?text='+m)}</script></body></html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Корзина | Pivas Store</title>
+<style>
+body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:15px}
+.top{display:flex;gap:10px;justify-content:center;padding:10px;flex-wrap:wrap}
+.top a{background:#1a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
+h1{text-align:center;color:#ffbc00}
+.item{background:#222244;border-radius:10px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.item b{font-size:14px}
+.item small{color:#aaa;font-size:12px}
+.controls{display:flex;gap:6px;align-items:center}
+.controls button{width:32px;height:32px;border:none;border-radius:50%;font-size:18px;font-weight:bold;background:#ffbc00}
+.del{background:#ff4444!important;color:white!important;width:32px!important}
+.total{font-size:18px;font-weight:bold;text-align:center;margin:15px 0;color:#ffbc00}
+.order{width:100%;background:#4CAF50;color:white;border:none;padding:14px;border-radius:25px;font-size:16px;font-weight:bold}
+.clear{width:100%;background:#555;color:white;border:none;padding:10px;border-radius:25px;margin-top:10px}
+.empty{text-align:center;color:#aaa;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="top">
+<a href="index.html">Главная</a>
+<a href="pivo.html">Пиво</a>
+<a href="ryba.html">Рыба</a>
+<a href="snacks.html">Снэки</a>
+</div>
+<h1>🛒 КОРЗИНА</h1>
+<div id="list"></div>
+<div id="totalBox"></div>
+<script>
+function render(){
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+let list = document.getElementById('list');
+let totalBox = document.getElementById('totalBox');
+if(cart.length === 0){
+list.innerHTML = '<div class="empty">Корзина пустая 😔<br>Добавь что-нибудь вкусное!</div>';
+totalBox.innerHTML = '';
+return;
+}
+let html = '';
+let totalSum = 0;
+cart.forEach(function(item, index){
+let grams = item.qty * 100;
+let sum = item.qty * item.price;
+totalSum = totalSum + sum;
+html += '<div class="item"><div><b>' + item.name + '</b><br><small>' + grams + ' г — ' + sum + ' ₸</small></div><div class="controls"><button onclick="changeQty(' + index + ',-1)">-</button><b>' + item.qty + '</b><button onclick="changeQty(' + index + ',1)">+</button><button class="del" onclick="removeItem(' + index + ')">x</button></div></div>';
+});
+list.innerHTML = html;
+totalBox.innerHTML = '<div class="total">Итого: ' + totalSum + ' ₸</div><button class="order" onclick="order()">Оформить заказ в WhatsApp</button><button class="clear" onclick="clearCart()">Очистить корзину</button>';
+}
+function changeQty(index, delta){
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+cart[index].qty = cart[index].qty + delta;
+if(cart[index].qty <= 0){ cart.splice(index, 1); }
+localStorage.setItem('cart', JSON.stringify(cart));
+render();
+}
+function removeItem(index){
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+cart.splice(index, 1);
+localStorage.setItem('cart', JSON.stringify(cart));
+render();
+}
+function clearCart(){
+localStorage.removeItem('cart');
+render();
+}
+function order(){
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+if(cart.length === 0){ alert('Корзина пустая!'); return; }
+let text = 'Здравствуйте! Хочу заказать:%0A';
+let total = 0;
+cart.forEach(function(i){
+let grams = i.qty * 100;
+let sum = i.qty * i.price;
+total = total + sum;
+text += '- ' + i.name + ' — ' + grams + ' г — ' + sum + ' ₸%0A';
+});
+text += 'Итого: ' + total + ' ₸';
+window.open('https://wa.me/77000000000?text=' + text, '_blank');
+}
+render();
+</script>
+</body>
+</html>
