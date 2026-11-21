@@ -89,20 +89,18 @@ h2{text-align:center;color:#ffbc00;font-size:18px;margin:20px 0 5px}
 </div>
 <script>
 function addToCart(btn,name,price){
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-let found=cart.find(i=>i.name===name);
-if(found){found.qty++}else{cart.push({name:name,price:price,qty:1,unit:'pack'})}
-localStorage.setItem('cart',JSON.stringify(cart));
-updateCount();
-btn.textContent='✅ Добавлено!';
-setTimeout(()=>btn.textContent='В корзину',1000);
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+  let m=name.match(/(\d+)\s*гр/);
+  let w=m?parseInt(m[1]):0;
+  let f=cart.find(i=>i.name===name);
+  if(f){f.qty=(Number(f.qty)||1)+1; f.weight=w; f.price=Number(price)||0;}
+  else{cart.push({name:name,price:Number(price)||0,weight:w,qty:1});}
+  localStorage.setItem('cart',JSON.stringify(cart));
+  updateCartCount();
 }
-function updateCount(){
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-let total=cart.reduce((s,i)=>s+i.qty,0);
-document.getElementById('cartCount').textContent=total;
+function updateCartCount(){
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+  let total=cart.reduce((s,i)=>s+(Number(i.qty)||0),0);
+  document.getElementById('cartCount').textContent=total;
 }
-updateCount();
-</script>
-</body>
-</html>      
+updateCartCount();
