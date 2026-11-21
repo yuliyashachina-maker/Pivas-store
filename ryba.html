@@ -55,16 +55,19 @@ button{background:#ffbc00;border:none;padding:8px 12px;border-radius:20px;font-w
 <script>
 function addToCart(btn, name, price){
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-cart.push({name:name, price:price});
+let found = cart.find(function(i){ return i.name === name; });
+if(found){ found.qty = found.qty + 1; } else { cart.push({name:name, price:price, qty:1}); }
 localStorage.setItem('cart', JSON.stringify(cart));
-document.getElementById('cartCount').innerText = cart.length;
+let total = 0; cart.forEach(function(i){ total = total + i.qty; });
+document.getElementById('cartCount').innerText = total;
 btn.innerText = 'Добавлено ✓';
 btn.style.background = '#4CAF50';
 btn.style.color = 'white';
 setTimeout(function(){ btn.innerText='В корзину'; btn.style.background='#ffbc00'; btn.style.color='black'; }, 1000);
 }
 let c = JSON.parse(localStorage.getItem('cart') || '[]');
-document.getElementById('cartCount').innerText = c.length;
+let t = 0; c.forEach(function(i){ t = t + i.qty; });
+document.getElementById('cartCount').innerText = t;
 </script>
 </body>
 </html>
