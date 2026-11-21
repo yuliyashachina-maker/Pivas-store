@@ -3,61 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Снэки - Pivas Store</title>
+<title>Снэки | Pivas Store</title>
 <style>
-body{font-family:Arial;background:#fff8e1;margin:0;padding:15px}
-h1{text-align:center}
-a{color:#d35400}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px #0002}
-.card b{font-size:15px}
- .item{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px #0002}
-.price{color:#e67e22;font-size:18px;font-weight:bold;margin-top:6px}
+body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:0}
+.top{display:flex;gap:8px;justify-content:center;padding:12px;flex-wrap:wrap;background:#1a2a44}
+.top a{background:#222244;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
+.top a.active{background:#ffbc00;color:black;font-weight:bold}
+h1{text-align:center;color:#ffbc00;font-size:24px;margin:15px 0}
+h2{text-align:center;color:#ffbc00;font-size:18px;margin:20px 0 5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px;max-width:600px;margin:0 auto}
+.card{background:#222244;border-radius:12px;padding:12px;text-align:center}
+.card h3{font-size:14px;margin:5px 0;min-height:38px}
+.card .weight{font-size:12px;color:#aaa}
+.card .price{font-size:18px;font-weight:bold;color:#ffbc00;margin:8px 0}
+.card button{background:#ffbc00;border:none;padding:10px;width:100%;border-radius:20px;font-weight:bold;font-size:14px}
+.cart-link{position:fixed;top:10px;right:10px;background:#ffbc00;color:black;padding:8px 12px;border-radius:20px;font-weight:bold;text-decoration:none;font-size:14px;z-index:100}
 </style>
 </head>
 <body>
-<a href="index.html">← На главную</a>
- <div style="text-align:right"><a href="cart.html">🛒 Корзина (<span id="cart-count">0</span>)</a></div> 
-<h1>🥨 Снэки</h1>
-<div class="grid">
-<div class="card"><b>Великан соль 100гр</b><div class="price">530 ₸</<button onclick="addToCart('Великан соль 100г',530)">В корзину</button>div></div>
-<div class="card"><b>Великан семечки 100гр</b><div class="price">530 ₸</<button onclick="addToCart('Великан семечки 100г',530)">В корзину</button>div></div>
-<div class="card"><b>Джинн великан соль 200гр</b><div class="price">1040 </div> <button onclick="addToCart('Джинн великан соль 200гр',1040)">В корзину</button>₸</div></div>
-<div class="card"><b>Городские семечки 100гр соль</b><div class="price">455 ₸</div><button onclick="addToCart('Городские семечки 100гр соль',455)">В корзину</button></div>
-<div class="card"><b>Семечки Джинн с солью 300гр</b><div class="price">1495 ₸</div><button onclick="addToCart('Семечки Джинн с солью 300гр',1495)">В корзину</button></div>
-<div class="card"><b>Джинн Арахис Соленый 50гр</b><div class="price">260 ₸</div><button onclick="addToCart('Джинн Арахис Соленый 50гр',260)">В корзину</button></div>
-<div class="card"><b>Караван 90гр</b><div class="price">325 ₸</div><button onclick="addToCart('Караван 90гр',325)">В корзину</button></div>
-<div class="card"><b>Бирка Фисташки соленые</b><div class="price">989 ₸</div><button onclick="addToCart('Бирка Фисташки соленые',989)">В корзину</button></div>
-<div class="card"><b>Lays Краб 140гр</b><div class="price">1138 ₸</div><button onclick="addToCart('Lays Краб 140гр',1138)">В корзину</button></div>
-<div class="card"><b>Lays Сыр 140гр</b><div class="price">1138 ₸</div><button onclick="addToCart('Lays Сыр 140гр',1138)">В корзину</button></div>
-<div class="card"><b>Lays Сметана и зелень 140гр</b><div class="price">1138 ₸</div><button onclick="addToCart('Lays Сметана и зелень 140гр',1138)">В корзину</button></div>
-<div class="card"><b>Lays Паприка 140гр</b><div class="price">1138 ₸</div><button onclick="addToCart('Lays Паприка 140гр',1138)">В корзину</button></div>
-<div class="card"><b>Lays Лобстер 140гр</b><div class="price">1138 ₸</div><button onclick="addToCart('Lays Лобстер 140гр',1138)">В корзину</button></div>
-<div class="card"><b>Lays Лосось 140гр</b><div class="price">1138 ₸</div><button onclick="addToCart('Lays Лосось 140гр',1138)">В корзину</button></div>
-<div class="card"><b>Lays Краб 70гр</b><div class="price">663 ₸</div><button onclick="addToCart('Lays Краб 70гр',663)">В корзину</button></div>
-<div class="card"><b>Lays Сыр 70гр</b><div class="price">663 ₸</div><button onclick="addToCart('Lays Сыр 70гр',663)">В корзину</button></div>
-<div class="card"><b>Чипсы шашлык 250гр</b><div class="price">1069 ₸</div><button onclick="addToCart('Чипсы шашлык 250гр',1069)">В корзину</button></div>
-<div class="card"><b>Луковые кольца сладкий чили 200гр</b><div class="price">816 ₸</div><button onclick="addToCart('Луковые кольца сладкий чили 200гр',816)">В корзину</button></div>
-<div class="card"><b>Чипсоны Зеленый Лук</b><div class="price">1069 ₸</div><button onclick="addToCart('Чипсоны Зеленый Лук',1069)">В корзину</button></div>
-<div class="card"><b>Пеллет краб 200гр</b><div class="price">793 ₸</div><button onclick="addToCart('Пеллет краб 200гр',793)">В корзину</button></div>
-<div class="card"><b>Сухарики Флинт 100гр</b><div class="price">420 ₸</div><button onclick="addToCart('Сухарики Флинт 100гр',420)">В корзину</button></div>
-<div class="card"><b>Сухарики Флинт 190гр</b><div class="price">719 ₸</div><button onclick="addToCart('Сухарики Флинт 190гр',719)">В корзину</button></div>
-<div class="card"><b>Гренки Флинт 100гр</b><div class="price">420 ₸</div><button onclick="addToCart('Гренки Флинт 100гр',420)">В корзину</button></div>
-<div class="card"><b>Греночки 100гр</b><div class="price">585 ₸</div><button onclick="addToCart('Греночки 100гр',585)">В корзину</button></div>
-<div class="card"><b>Курт Домашний</b><div class="price">42 ₸</div><button onclick="addToCart('Курт Домашний',42)">В корзину</button></div>
-<div class="card"><b>Курт Керемет</b><div class="price">37 ₸</div><button onclick="addToCart('Курт Керемет',37)">В корзину</button></div>
-<div class="card"><b>Курт таблетка</b><div class="price">416 ₸</div><button onclick="addToCart('Курт таблетка',416)">В корзину</button></div>
-<div class="card"><b>Курт Жаннур 40гр</b><div class="price">345 ₸</div><button onclick="addToCart('Курт Жаннур 40гр',345)">В корзину</button></div>
-<div class="card"><b>Био Курт Молочный</b><div class="price">99 ₸</div><button onclick="addToCart('Био Курт Молочный',99)">В корзину</button></div>
-<div class="card"><b>Крутикк</b><div class="price">2015 ₸</div><button onclick="addToCart('Крутикк',2015)">В корзину</button></div>
-<div class="card"><b>Чечел Кнут</b><div class="price">4160 ₸</div><button onclick="addToCart('Чечел Кнут',4160)">В корзину</button></div>
-<div class="card"><b>Шоколад Яшкино</b><div class="price">390 ₸</div><button onclick="addToCart('Шоколад Яшкино',390)">В корзину</button></div>
-<div class="card"><b>Шоколад Озеро с фундуком</b><div class="price">898 ₸</div><button onclick="addToCart('Шоколад Озеро с фундуком',898)">В корзину</button></div>
-<div class="card"><b>Батончик Супер 40гр</b><div class="price">104 ₸</div><button onclick="addToCart('Батончик Супер 40гр',104)">В корзину</button></div>
-<div class="card"><b>Чиссбер 50гр</b><div class="price">481 ₸</div><button onclick="addToCart('Чиссбер 50гр',481)">В корзину</button></div>
-<div class="card"><b>Мармеладки 70гр</b><div class="price">137 ₸</div><button onclick="addToCart('Мармеладки 70гр',137)">В корзину</button></div>
-<div class="item"><b>Мармеладки 70гр</b><div class="price">137 ₸</div><button onclick="addToCart('Мармеладки 70гр',137)">В корзину</button></div>
+<a href="cart.html" class="cart-link">🛒 Корзина (<span id="cartCount">0</span>)</a>
+<div class="top">
+<a href="index.html">Главная</a>
+<a href="pivo.html">Пиво</a>
+<a href="ryba.html">Рыба</a>
+<a href="snacks.html" class="active">Снэки</a>
 </div>
-<script src="cart.js"></script>
+<h1>🥨 Снэки</h1>
+<h2>🌻 Семечки Джинн</h2>
+<div class="grid">
+<div class="card"><h3>Великан соль</h3><div class="weight">100 гр</div><div class="price">530 ₸</div><button onclick="addToCart(this,'Великан соль',530)">В корзину</button></div>
+<div class="card"><h3>Великан семечки</h3><div class="weight">100 гр</div><div class="price">530 ₸</div><button onclick="addToCart(this,'Великан семечки',530)">В корзину</button></div>
+<div class="card"><h3>Джинн великан соль</h3><div class="weight">200 гр</div><div class="price">1040 ₸</div><button onclick="addToCart(this,'Джинн великан соль',1040)">В корзину</button></div>
+<div class="card"><h3>Семечки Джинн с солью</h3><div class="weight">300 гр</div><div class="price">1495 ₸</div><button onclick="addToCart(this,'Семечки Джинн с солью',1495)">В корзину</button></div>
+<div class="card"><h3>Семечки Джинн Великан</h3><div class="weight">200 гр</div><div class="price">1040 ₸</div><button onclick="addToCart(this,'Семечки Джинн Великан',1040)">В корзину</button></div>
+<div class="card"><h3>Джинн с солью</h3><div class="weight">70 гр</div><div class="price">350 ₸</div><button onclick="addToCart(this,'Джинн с солью 70г',350)">В корзину</button></div>
+<div class="card"><h3>Караван</h3><div class="weight">90 гр</div><div class="price">325 ₸</div><button onclick="addToCart(this,'Караван',325)">В корзину</button></div>
+<div class="card"><h3>Джинн Арахис Соленый</h3><div class="weight">50 гр</div><div class="price">260 ₸</div><button onclick="addToCart(this,'Джинн Арахис Соленый',260)">В корзину</button></div>
+<div class="card"><h3>Арахис в баночке</h3><div class="weight">1 шт</div><div class="price">610 ₸</div><button onclick="addToCart(this,'Арахис в баночке',610)">В корзину</button></div>
+<div class="card"><h3>Городские семечки соль</h3><div class="weight">100 гр</div><div class="price">455 ₸</div><button onclick="addToCart(this,'Городские семечки соль',455)">В корзину</button></div>
+<div class="card"><h3>Городские семечки</h3><div class="weight">100 гр</div><div class="price">455 ₸</div><button onclick="addToCart(this,'Городские семечки',455)">В корзину</button></div>
+</div>
+<h2>🥔 Lays</h2>
+<div class="grid">
+<div class="card"><h3>Lays Сыр</h3><div class="weight">70 гр</div><div class="price">665 ₸</div><button onclick="addToCart(this,'Lays Сыр 70гр',665)">В корзину</button></div>
+<div class="card"><h3>Lays Краб</h3><div class="weight">70 гр</div><div class="price">665 ₸</div><button onclick="addToCart(this,'Lays Краб 70гр',665)">В корзину</button></div>
+<div class="card"><h3>Lays Паприка</h3><div class="weight">70 гр</div><div class="price">665 ₸</div><button onclick="addToCart(this,'Lays Паприка 70гр',665)">В корзину</button></div>
+<div class="card"><h3>Lays Шашлык</h3><div class="weight">70 гр</div><div class="price">665 ₸</div><button onclick="addToCart(this,'Lays Шашлык 70гр',665)">В корзину</button></div>
+<div class="card"><h3>Lays Сметана и зелень</h3><div class="weight">140 гр</div><div class="price">1140 ₸</div><button onclick="addToCart(this,'Lays Сметана и зелень 140гр',1140)">В корзину</button></div>
+<div class="card"><h3>Lays Краб</h3><div class="weight">140 гр</div><div class="price">1140 ₸</div><button onclick="addToCart(this,'Lays Краб 140гр',1140)">В корзину</button></div>
+<div class="card"><h3>Lays Сыр</h3><div class="weight">140 гр</div><div class="price">1140 ₸</div><button onclick="addToCart(this,'Lays Сыр 140гр',1140)">В корзину</button></div>
+<div class="card"><h3>Lays Лобстер</h3><div class="weight">140 гр</div><div class="price">1140 ₸</div><button onclick="addToCart(this,'Lays Лобстер 140гр',1140)">В корзину</button></div>
+<div class="card"><h3>Lays Лосось</h3><div class="weight">140 гр</div><div class="price">1140 ₸</div><button onclick="addToCart(this,'Lays Лосось 140гр',1140)">В корзину</button></div>
+<div class="card"><h3>Lays Паприка</h3><div class="weight">140 гр</div><div class="price">1140
+ <div class="card"><h3>Lays Из Печи Лисички</h3><div class="weight">81 гр</div><div class="price">855 ₸</div><button onclick="addToCart(this,'Lays Из Печи Лисички',855)">В корзину</button></div>
+<div class="card"><h3>Lays Из Печи Лосось</h3><div class="weight">81 гр</div><div class="price">855 ₸</div><button onclick="addToCart(this,'Lays Из Печи Лосось',855)">В корзину</button></div>
+<div class="card"><h3>Lays Из Печи Сыр</h3><div class="weight">81 гр</div><div class="price">855 ₸</div><button onclick="addToCart(this,'Lays Из Печи Сыр',855)">В корзину</button></div>
+<div class="card"><h3>Lays Рифленые Креветка</h3><div class="weight">140 гр</div><div class="price">1030 ₸</div><button onclick="addToCart(this,'Lays Рифленые Креветка',1030)">В корзину</button></div>
+</div>
+<h2>🍞 Сухарики / Гренки</h2>
+<div class="grid">
+<div class="card"><h3>Сухарики Флинт Краб</h3><div class="weight">100 гр</div><div class="price">420 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Краб 100гр',420)">В корзину</button></div>
+<div class="card"><h3>Сухарики Флинт Салями</h3><div class="weight">100 гр</div><div class="price">420 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Салями 100гр',420)">В корзину</button></div>
+<div class="card"><h3>Сухарики Флинт Шашлык</h3><div class="weight">100 гр</div><div class="price">420 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Шашлык 100гр',420)">В корзину</button></div>
+<div class="card"><h3>Сухарики Флинт Сметана</h3><div class="weight">100 гр</div><div class="price">420 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Сметана',420)">В корзину</button></div>
+<div class="card"><h3>Сухарики Флинт Сыр</h3><div class="weight">100 гр</div><div class="price">420 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Сыр 100гр',420)">В корзину</button></div>
+<div class="card"><h3>Сухарики Флинт Сыр</h3><div class="weight">190 гр</div><div class="price">720 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Сыр 190гр',720)">В корзину</button></div>
+<div class="card"><h3>Сухарики Флинт Шашлык</h3><div class="weight">190 гр</div><div class="price">720 ₸</div><button onclick="addToCart(this,'Сухарики Флинт Шашлык 190гр',720)">В корзину</button></div>
+<div class="card"><h3>Гренки Флинт Томат Спайси</h3><div class="weight">100 гр</div><div class="price">420 ₸</div><button onclick="addToCart(this,'Гренки Флинт Томат Спайси',420)">В корзину</button></div>
+<div class="card"><h3>Гренки Гарлики Чеснок</h3><div class="weight">90 гр</div><div class="price">530 ₸</div><button onclick="addToCart(this,'Гренки Гарлики Чеснок',530)">В корзину</button></div>
+<div class="card"><h3>Гренки Гарлики Томат</h3><div class="weight">90 гр</div><div class="price">530 ₸</div><button onclick="addToCart(this,'Гренки Гарлики Томат',530)">В корзину</button></div>
+</div>
+<h2>🍫 Яшкино / Галион / Хрустим</h2>
+<div class="grid">
+<div class="card"><h3>Кириешки с чесноком</h3><div class="weight">1 шт</div><div class="price">305 ₸</div><button onclick="addToCart(this,'Кириешки с чесноком',305)">В корзину</button></div>
+<div class="card"><h3>Бирка Фисташки соленые</h3><div class="weight">1 шт</div><div class="price">990 ₸</div><button onclick="addToCart(this,'Бирка Фисташки соленые',990)">В корзину</button></div>
+<div class="card"><h3>Чипсоны Шашлык</h3><div class="weight">40 гр</div><div class="price">215 ₸</div><button onclick="addToCart(this,'Чипсоны Шашлык',215)">В корзину</button></div>
+<div class="card"><h3>Греночки Телятина</h3><div class="weight">1 шт</div><div class="price">585 ₸</div><button onclick="addToCart(this,'Греночки Телятина',585)">В корзину</button></div>
+<div class="card"><h3>Греночки С Чесноком</h3><div class="weight">1 шт</div><div class="price">585 ₸</div><button onclick="addToCart(this,'Греночки С Чесноком',585)">В корзину</button></div>
+<div class="card"><h3>Гренки Крылышки Баффало</h3><div class="weight">1 шт</div><div class="price">585 ₸</div><button onclick="addToCart(this,'Гренки Крылышки Баффало',585)">В корзину</button></div>
+<div class="card"><h3>Чипсы шашлык</h3><div class="weight">250 гр</div><div class="price">1070 ₸</div><button onclick="addToCart(this,'Чипсы шашлык 250гр',1070)">В корзину</button></div>
+<div class="card"><h3>Луковые кольца чили</h3><div class="weight">200 гр</div><div class="price">820 ₸</div><button onclick="addToCart(this,'Луковые кольца чили',820)">В корзину</button></div>
+<div class="card"><h3>Хрустим 60г</h3><div class="weight">60 гр</div><div class="price">295 ₸</div><button onclick="addToCart(this,'Хрустим 60г',295)">В корзину</button></div>
+<div class="card"><h3>Хрустим Краб</h3><div class="weight">1 шт</div><div class="price 
+<div class="card"><h3>Хрустим Сметана зелень</h3><div class="weight">1 шт</div><div class="price">445 ₸</div><button onclick="addToCart(this,'Хрустим Сметана зелень',445)">В корзину</button></div>
+</div>
+<script>
+function addToCart(btn,name,price){
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+let found=cart.find(i=>i.name===name);
+if(found){found.qty++}else{cart.push({name:name,price:price,qty:1,unit:'pack'})}
+localStorage.setItem('cart',JSON.stringify(cart));
+updateCount();
+btn.textContent='✅ Добавлено!';
+setTimeout(()=>btn.textContent='В корзину',1000);
+}
+function updateCount(){
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+let total=cart.reduce((s,i)=>s+i.qty,0);
+document.getElementById('cartCount').textContent=total;
+}
+updateCount();
+</script>
 </body>
-</html>
+</html>      
