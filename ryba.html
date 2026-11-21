@@ -6,8 +6,37 @@
 <title>Рыба | Pivas Store</title>
 <style>
 body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:0}
-.top{display:flex;gap:10px;justify-content:center;padding:12px;flex-wrap:wrap;align-items:center}
+.top{display:flex;gap:10px;justify-content:center;padding:12px;flex-wrap:wrap}
 .top a{background:#1a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
 .cart-btn{background:#ffbc00!important;font-weight:bold}
 h1{text-align:center;color:#ffbc00;margin:15px 0 0;font-size:22px}
-p{text-align:center;color:#ccc;font-size:13px;margin:
+p{text-align:center;color:#ccc;font-size:13px;margin:5px 10px 15px}
+.container{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+.card{background:#222244;border-radius:10px;padding:12px;text-align:center}
+.card .emoji{font-size:40px}
+.card h3{font-size:14px;margin:5px 0}
+.price{font-size:15px;font-weight:bold;color:#ffbc00;margin-top:10px}
+button{background:#ffbc00;border:none;padding:8px 12px;border-radius:20px;font-weight:bold;width:100%;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="top">
+<a href="index.html">Главная</a>
+<a href="pivo.html">Пиво</a>
+<a href="krepkoe.html">Крепкое</a>
+<a href="snacks.html">Снэки</a>
+<a href="ryba.html">Рыба</a>
+<a href="cart.html" class="cart-btn">Корзина</a>
+</div>
+<h1>РЫБА</h1>
+<p>К пиву — самая вкусная!</p>
+<div class="container">
+<div class="card"><div class="emoji">🐟</div><h3>Вобла вяленая</h3><div class="price">2500 ₸</div><button>В корзину</button></div>
+<div class="card"><div class="emoji">🐠</div><h3>Тарань вяленая</h3><div class="price">2200 ₸</div><button>В корзину</button></div>
+<div class="card"><div class="emoji">🐡</div><h3>Лещ вяленый</h3><div class="price">3500 ₸</div><button>В корзину</button></div>
+<div class="card"><div class="emoji">🦑</div><h3>Кальмар сушеный</h3><div class="price">3000 ₸</div><button>В корзину</button></div>
+<div class="card"><div class="emoji">🦐</div><h3>Креветки сушеные</h3><div class="price">4000 ₸</div><button>В корзину</button></div>
+<div class="card"><div class="emoji">🐙</div><h3>Чехонь вяленая</h3><div class="price">2800 ₸</div><button>В корзину</button></div>
+</div>
+</body>
+</html>
