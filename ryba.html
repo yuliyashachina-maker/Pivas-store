@@ -27,30 +27,41 @@ button{background:#ffbc00;border:none;padding:8px 12px;border-radius:20px;font-w
 <a href="krepkoe.html">Крепкое</a>
 <a href="snacks.html">Снэки</a>
 <a href="ryba.html">Рыба</a>
-<a href="cart.html" class="cart-btn">Корзина</a>
+<a href="cart.html" class="cart-btn">Корзина (<span id="cartCount">0</span>)</a>
 </div>
 <h1>РЫБА</h1>
-<p>Вся рыба по 100 грамм! Цена как в приходе!</p>
+<p>Вся рыба по 100 грамм! Нажми «В корзину» — и она добавится!</p>
 <div class="container">
-<div class="card"><div class="emoji">🐟</div><h3>Лещ х/к</h3><div class="ves">НАША РЫБКА</div><div class="price">200 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Лещ вяленый</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">220 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐠</div><h3>Окунь г/к</h3><div class="ves">НАША РЫБКА</div><div class="price">325 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐠</div><h3>Окунь потрошен</h3><div class="ves">НАША РЫБКА</div><div class="price">300 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Скумбрия без головы</h3><div class="ves">НАША РЫБКА</div><div class="price">510 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Судак вяленый</h3><div class="ves">НАША РЫБКА</div><div class="price">400 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Щука вяленая</h3><div class="ves">НАША РЫБКА</div><div class="price">300 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐠</div><h3>Брюшки семги</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">980 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Вобла Атырау</h3><div class="ves">Базар</div><div class="price">600 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Жерех</h3><div class="ves">Базар</div><div class="price">600 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Пелядь</h3><div class="ves">ПЕЛЯДЬ</div><div class="price">500 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Плавники судака с паприкой</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">350 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Спинки воблы</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">300 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Филе леща</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">420 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Филе судака</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">730 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Филе щуки</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">570 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Хребет семги</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">350 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🐟</div><h3>Карась х/к</h3><div class="ves">СЫРЫМ</div><div class="price">220 ₸ / 100 г</div><button>В корзину</button></div>
-<div class="card"><div class="emoji">🦐</div><h3>Шашлычки креветка-кальмар-лосось</h3><div class="ves">СЫРЫМ</div><div class="price">881 ₸ / 100 г</div><button>В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Лещ х/к</h3><div class="ves">НАША РЫБКА</div><div class="price">200 ₸ / 100 г</div><button onclick="addToCart('Лещ х/к',200)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Лещ вяленый</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">220 ₸ / 100 г</div><button onclick="addToCart('Лещ вяленый',220)">В корзину</button></div>
+<div class="card"><div class="emoji">🐠</div><h3>Окунь г/к</h3><div class="ves">НАША РЫБКА</div><div class="price">325 ₸ / 100 г</div><button onclick="addToCart('Окунь г/к',325)">В корзину</button></div>
+<div class="card"><div class="emoji">🐠</div><h3>Окунь потрошен</h3><div class="ves">НАША РЫБКА</div><div class="price">300 ₸ / 100 г</div><button onclick="addToCart('Окунь потрошен',300)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Скумбрия без головы</h3><div class="ves">НАША РЫБКА</div><div class="price">510 ₸ / 100 г</div><button onclick="addToCart('Скумбрия без головы',510)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Судак вяленый</h3><div class="ves">НАША РЫБКА</div><div class="price">400 ₸ / 100 г</div><button onclick="addToCart('Судак вяленый',400)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Щука вяленая</h3><div class="ves">НАША РЫБКА</div><div class="price">300 ₸ / 100 г</div><button onclick="addToCart('Щука вяленая',300)">В корзину</button></div>
+<div class="card"><div class="emoji">🐠</div><h3>Брюшки семги</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">980 ₸ / 100 г</div><button onclick="addToCart('Брюшки семги',980)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Вобла Атырау</h3><div class="ves">Базар</div><div class="price">600 ₸ / 100 г</div><button onclick="addToCart('Вобла Атырау',600)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Жерех</h3><div class="ves">Базар</div><div class="price">600 ₸ / 100 г</div><button onclick="addToCart('Жерех',600)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Пелядь</h3><div class="ves">ПЕЛЯДЬ</div><div class="price">500 ₸ / 100 г</div><button onclick="addToCart('Пелядь',500)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Плавники судака с паприкой</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">350 ₸ / 100 г</div><button onclick="addToCart('Плавники судака с паприкой',350)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Спинки воблы</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">300 ₸ / 100 г</div><button onclick="addToCart('Спинки воблы',300)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Филе леща</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">420 ₸ / 100 г</div><button onclick="addToCart('Филе леща',420)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Филе судака</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">730 ₸ / 100 г</div><button onclick="addToCart('Филе судака',730)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Филе щуки</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">570 ₸ / 100 г</div><button onclick="addToCart('Филе щуки',570)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Хребет семги</h3><div class="ves">РЫБА ВОСТОК</div><div class="price">350 ₸ / 100 г</div><button onclick="addToCart('Хребет семги',350)">В корзину</button></div>
+<div class="card"><div class="emoji">🐟</div><h3>Карась х/к</h3><div class="ves">СЫРЫМ</div><div class="price">220 ₸ / 100 г</div><button onclick="addToCart('Карась х/к',220)">В корзину</button></div>
+<div class="card"><div class="emoji">🦐</div><h3>Шашлычки креветка-кальмар-лосось</h3><div class="ves">СЫРЫМ</div><div class="price">881 ₸ / 100 г</div><button onclick="addToCart('Шашлычки креветка-кальмар-лосось',881)">В корзину</button></div>
 </div>
+<script>
+function addToCart(name, price){
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+cart.push({name:name, price:price});
+localStorage.setItem('cart', JSON.stringify(cart));
+document.getElementById('cartCount').innerText = cart.length;
+alert(name + ' добавлено в корзину! 🐟');
+}
+let c = JSON.parse(localStorage.getItem('cart') || '[]');
+document.getElementById('cartCount').innerText = c.length;
+</script>
 </body>
 </html>
