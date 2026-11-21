@@ -6,47 +6,8 @@
 <title>Рыба | Pivas Store</title>
 <style>
 body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:0}
-.top{display:flex;gap:8px;justify-content:center;padding:12px;flex-wrap:wrap;align-items:center}
-.top a{background:#2a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
-.top a.active{background:#ff8c00}
-.cart-btn{background:#ff8c00!important;font-weight:bold}
-h1{text-align:center;color:#ff8c00;margin:5px 0 0;font-size:22px}
-p{text-align:center;color:#ccc;font-size:13px;margin:5px 0 15px}
-.container{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
-.card{background:#222244;border-radius:10px;padding:12px;text-align:center}
-.card h3{font-size:14px;margin:5px 0;min-height:32px}
-.price{font-size:19px;font-weight:bold;color:#ff8c00;margin-top:8px}
-.unit{font-size:11px;color:#aaa}
-.add{background:#ff8c00;color:white;border:none;padding:8px 12px;border-radius:20px;margin-top:8px;font-weight:bold;cursor:pointer;width:100%}
-.add:active{background:#e67e00}
-@media(max-width:600px){.container{grid-template-columns:1fr 1fr}}
-</style>
-</head>
-<body>
-<div class="top">
-<a href="index.html">🍺 Пиво</a>
-<a href="krepkoe.html">🥃 Крепкое</a>
-<a href="sneki.html">🍿 Снэки</a>
-<a href="ryba.html" class="active">🐟 Рыба</a>
-<a href="#" class="cart-btn" onclick="showCart()">🛒 Корзина (<span id="cartCount">0</span>)</a>
-</div>
-<h1>🐟 РЫБА</h1>
-<p>Вся рыба — за 1 кг. Нажми «В корзину»</p>
-<div class="container" id="list"></div>
-<script>
-const items=[
-["Лещ х/к",2000],["Лещ вяленый",2200],["Карась х.к",2200],["Щука Вяленая",3000],["Окунь потрошен",3000],["Окунь г/к",3000],["Спинки Воблы",3000],["Плавники Судака с паприкой",3500],["Хребет Семги",3500],["Судак Вяленый",4000],["Филе Леща",4200],["Пелядь",5000],["Скумбрия без головы",5100],["Филе Щуки",5700],["Вобла Атырау",6000],["Жерех",6000],["Филе Судака",7300],["Брюшки Семги",9800]
-];
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-function fmt(n){return n.toLocaleString('ru-RU').replace(/,/g,'.')+' ₸'}
-function render(){
-document.getElementById('list').innerHTML=items.map((it,i)=>`<div class="card"><h3>${it[0]}</h3><div class="price">${fmt(it[1])}</div><div class="unit">за 1 кг</div><button class="add" onclick="add(${i})">+ В корзину</button></div>`).join('');
-update();
-}
-function add(i){cart.push({name:items[i][0],price:items[i][1]});localStorage.setItem('cart',JSON.stringify(cart));update();
-function update(){let c=cart.reduce((a,b)=>a+1,0);document.getElementById('cartCount').innerText=c;}
-function showCart(){if(cart.length==0){alert('Корзина пустая');return}let t=cart.map((x,idx)=>(idx+1)+'. '+x.name+' — '+fmt(x.price)).join('\n');let sum=cart.reduce((a,b)=>a+b.price,0);alert(t+'\n\nИтого: '+fmt(sum)+'\n\nНапиши нам в WhatsApp для заказа!');}
-render();
-</script>
-</body>
-</html>
+.top{display:flex;gap:10px;justify-content:center;padding:12px;flex-wrap:wrap;align-items:center}
+.top a{background:#1a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
+.cart-btn{background:#ffbc00!important;font-weight:bold}
+h1{text-align:center;color:#ffbc00;margin:15px 0 0;font-size:22px}
+p{text-align:center;color:#ccc;font-size:13px;margin:
