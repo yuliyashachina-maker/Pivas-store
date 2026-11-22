@@ -6,6 +6,6 @@ const beers=[{name:"ŽATECKÝ GUS",price:750,img:"1-gus.jpg"},{name:"ШЫМКЕ�
 let selected={};
 function render(){let h='';for(let i=0;i<beers.length;i++){let b=beers[i];h+='<div class="card"><img src="'+b.img+'"><h3>'+b.name+'</h3><div class="price">'+b.price+' ₸ / л</div><div class="btns">';for(let v of [0.5,1,2,5]){h+='<button class="'+((selected[i]||1)==v?'selected':'')+'" onclick="selectLiters('+i+','+v+',this)">'+v+' л</button>';}h+='</div><button class="cart-btn" onclick="addToCart('+i+')">В корзину</button></div>';}document.getElementById('products').innerHTML=h;}
 function selectLiters(i,liters,btn){selected[i]=liters;let b=btn.parentElement.querySelectorAll('button');b.forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');}
-function addToCart(i){let b=beers[i];let liters=selected[i]||1;let cart=JSON.parse(localStorage.getItem('cart')||'[]');cart.push({name:b.name,price:b.price,liters:liters});localStorage.setItem('cart',JSON.stringify(cart));alert('Добавлено: '+b.name+' '+liters+' л');}
+function addToCart(i){let b=beers[i];let liters=selected[i]||1;let cart=JSON.parse(localStorage.getItem('cart')||'[]');cart.push({name:b.name,price:b.price,liters:liters});localStorage.setItem('cart',JSON.stringify(cart));
 render();
 </script></body></html>
