@@ -51,18 +51,16 @@ const beers=[
 ];
 let selected={};
 function render(){
-document.getElementById('products').innerHTML=beers.map((b,i)=>{
-let sel=selected[i]||1;
-return `<div class="card"><h3>${b.name}</h3><div class="price">${b.price} ₸ / л</div>
-<div class="btns">
-<button class="${sel==0.5?'selected':''}" onclick="selectLiters(${i},0.5,this)">0.5 л</button>
-<button class="${sel==1?'selected':''}" onclick="selectLiters(${i},1,this)">1 л</button>
-<button class="${sel==2?'selected':''}" onclick="selectLiters(${i},2,this)">2 л</button>
-<button class="${sel==5?'selected':''}" onclick="selectLiters(${i},5,this)">5 л</button>
-</div>
-<div style="margin-top:6px;font-size:13px;color:#ccc">Выбрано: ${sel} л = ${sel*b.price} ₸</div>
-<button class="cart-btn" onclick="addToCart(${i})">🛒 В корзину</button>
-</div>`}).join('');
+let h='';
+for(let i=0;i<beers.length;i++){
+let b=beers[i];
+h+='<div class="card"><h3>'+b.name+'</h3><div class="price">'+b.price+' ₸/л</div><div class="btns">';
+for(let v of [1,1.5,2,3,5]){
+h+='<button class="'+((selected[i]||1)==v?'selected':'')+'" onclick="selectLiters('+i+','+v+',this)">'+v+' л</button>';
+}
+h+='</div><button class="cart-btn" onclick="addToCart('+i+')">В корзину</button></div>';
+}
+document.getElementById('products').innerHTML=h;
 }
 function selectLiters(i,liters,btn){selected[i]=liters;render();}
 function addToCart(i){
