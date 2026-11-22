@@ -183,6 +183,20 @@ button.add-to-cart.add-to-cart.add-to-cart {
   border: 2px solid #FFD700 !important;
 }
 </style>
+<script>
+function makeGold(){
+  document.querySelectorAll('button, .btn, a').forEach(function(el){
+    if(el.textContent.includes('корзину')){
+      el.style.setProperty('background','#FFD700','important');
+      el.style.setProperty('background-image','none','important');
+      el.style.setProperty('background-color','#FFD700','important');
+      el.style.setProperty('color','#000','important');
+    }
+  });
+}
+makeGold();
+setInterval(makeGold,1000);
+</script>
 </body>
 </html>
  
