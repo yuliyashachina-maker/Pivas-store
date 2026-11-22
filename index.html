@@ -6,15 +6,16 @@
 <title>Пивас Store</title>
 <style>
 body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bottom:130px; scroll-behavior:smooth; }
-.banner-wrap { position:relative; width:100%; }
 .banner-img { width:100%; display:block; }
-.banner-text { position:absolute; left:0; right:0; bottom:12px; text-align:center; font-size:24px; font-weight:bold; text-shadow:0 2px 8px #000, 0 0 2px #000; padding:0 12px; }
 .lang { display:flex; justify-content:center; gap:8px; margin:14px 0; }
 .lang button { background:#222; color:#fff; border:1px solid #555; padding:10px 26px; border-radius:20px; font-weight:bold; font-size:16px; }
 .lang button.active { background:#7a4a00; border-color:#7a4a00; }
 .section-title { text-align:center; font-size:22px; margin:22px 0 10px; }
 .top-menu { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:10px; position:sticky; top:0; background:#000; z-index:100; }
-.top-menu a { background:#5a3a00; color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:bold; }
+.top-menu button { background:#5a3a00; color:#fff; padding:10px 16px; border-radius:12px; border:none; font-weight:bold; font-size:16px; cursor:pointer; }
+.top-menu button.active { background:#9c5c00; }
+.cat { display:none; }
+.cat.active { display:block; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px; }
 .card { background:#111; border-radius:16px; padding:10px; text-align:center; }
 .card h3 { margin:10px 0 5px; font-size:17px; }
@@ -22,7 +23,6 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 .per { font-size:13px; opacity:0.8; display:block; margin-top:3px; font-weight:normal; }
 .vols { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; }
 .vols button { background:#7a4a00; color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:bold; font-size:15px; }
-.empty { text-align:center; padding:20px 16px; font-size:18px; line-height:1.6; opacity:0.9; background:#111; margin:12px; border-radius:16px; }
 .footer { text-align:center; padding:20px 12px; opacity:0.8; font-size:14px; line-height:1.6; }
 .cart-bar { position:fixed; bottom:0; left:0; right:0; background:#7a3b00; color:#fff; text-align:center; padding:16px; font-size:19px; font-weight:bold; z-index:998; cursor:pointer; }
 .whatsapp-btn { position:fixed; bottom:75px; right:15px; width:64px; height:64px; z-index:999; }
@@ -38,22 +38,20 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 </style>
 </head>
 <body>
-<div class="banner-wrap">
 <img class="banner-img" id="bannerImg" src="banner_kz.jpg" alt="Пивас">
-<div class="banner-text" id="bannerText" data-kz="ПИВАС — ең дәмді сыра" data-ru="ПИВАС — самое вкусное пиво">ПИВАС — ең дәмді сыра</div>
-</div>
 <div class="lang">
 <button id="btn-kz" class="active" onclick="setLang('kz')">ҚАЗ</button>
 <button id="btn-ru" onclick="setLang('ru')">РУС</button>
 </div>
 <div class="top-menu">
-<a href="#pivo" data-kz="🍺 Сыра" data-ru="🍺 Пиво">🍺 Сыра</a>
-<a href="#sneki" data-kz="🥨 Снектер" data-ru="🥨 Снеки">🥨 Снектер</a>
-<a href="#ryba" data-kz="🐟 Балық" data-ru="🐟 Рыба">🐟 Балық</a>
-<a href="#krepkiy" data-kz="🥃 Күшті" data-ru="🥃 Крепкое">🥃 Күшті</a>
+<button id="tab-pivo" class="active" onclick="showCat('pivo')" data-kz="🍺 Сыра" data-ru="🍺 Пиво">🍺 Сыра</button>
+<button id="tab-sneki" onclick="showCat('sneki')" data-kz="🥨 Снектер" data-ru="🥨 Снеки">🥨 Снектер</button>
+<button id="tab-ryba" onclick="showCat('ryba')" data-kz="🐟 Балық" data-ru="🐟 Рыба">🐟 Балық</button>
+<button id="tab-krepkiy" onclick="showCat('krepkiy')" data-kz="🥃 Күшті" data-ru="🥃 Крепкое">🥃 Күшті</button>
 </div>
 
-<div id="pivo" class="section-title" data-kz="🍺 Сыра — 11 түр" data-ru="🍺 Пиво — 11 сортов">🍺 Сыра — 11 түр</div>
+<div id="pivo" class="cat active">
+<div class="section-title" data-kz="🍺 Сыра" data-ru="🍺 Пиво">🍺 Сыра</div>
 <div class="grid">
 <div class="card"><h3>Гусь</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Гусь 0.5л',375)">0.5 л</button><button onclick="add('Гусь 1л',750)">1 л</button><button onclick="add('Гусь 2л',1500)">2 л</button></div></div>
 <div class="card"><h3>Шымкент Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Прага 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Прага 1л',750)">1 л</button><button onclick="add('Шымкент Прага 2л',1500)">2 л</button></div></div>
@@ -67,8 +65,10 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <div class="card"><h3>Чешское</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Чешское 0.5л',375)">0.5 л</button><button onclick="add('Чешское 1л',750)">1 л</button><button onclick="add('Чешское 2л',1500)">2 л</button></div></div>
 <div class="card"><h3>Шымкент Мягкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Мягкое 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Мягкое 1л',750)">1 л</button><button onclick="add('Шымкент Мягкое 2л',1500)">2 л</button></div></div>
 </div>
+</div>
 
-<div id="sneki" class="section-title" data-kz="🥨 Снектер — үстеме +30%" data-ru="🥨 Снеки — наценка +30%">🥨 Снектер — үстеме +30%</div>
+<div id="sneki" class="cat">
+<div class="section-title" data-kz="🥨 Снектер" data-ru="🥨 Снеки">🥨 Снектер</div>
 <div class="grid">
 <div class="card"><h3>Lays Сыр 70гр</h3><div class="price">660 ₸</div><div class="vols"><button class="add-btn" onclick="add('Lays Сыр 70гр',660)">Себетке</button></div></div>
 <div class="card"><h3>Lays Краб 70гр</h3><div class="price">660 ₸</div><div class="vols"><button class="add-btn" onclick="add('Lays Краб 70гр',660)">Себетке</button></div></div>
@@ -119,8 +119,10 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <div class="card"><h3>Биг Боб Ядра 50гр</h3><div class="price">270 ₸</div><div class="vols"><button class="add-btn" onclick="add('Биг Боб Ядра',270)">Себетке</button></div></div>
 <div class="card"><h3>Крутики</h3><div class="price">200 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Крутики 100гр',200)">100 гр</button></div></div>
 </div>
+</div>
 
-<div id="ryba" class="section-title" data-kz="🐟 Балық — үстеме +30%" data-ru="🐟 Рыба — наценка +30%">🐟 Балық — үстеме +30%</div>
+<div id="ryba" class="cat">
+<div class="section-title" data-kz="🐟 Балық" data-ru="🐟 Рыба">🐟 Балық</div>
 <div class="grid">
 <div class="card"><h3>Лещ х/к</h3><div class="price">260 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Лещ х/к 100гр',260)">100 гр</button><button onclick="add('Лещ х/к 200гр',520)">200 гр</button></div></div>
 <div class="card"><h3>Лещ вяленый</h3><div class="price">290 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Лещ вяленый 100гр',290)">100 гр</button></div></div>
@@ -142,9 +144,70 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <div class="card"><h3>Плавники Судака с паприкой</h3><div class="price">460 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Плавники Судака 100гр',460)">100 гр</button></div></div>
 <div class="card"><h3>Шашлычки Креветка Кальмар Лосось</h3><div class="price">1150 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Шашлычки 100гр',1150)">100 гр</button></div></div>
 </div>
+</div>
 
-<div id="krepkiy" class="section-title" data-kz="🥃 Күшті" data-ru="🥃 Крепкое">🥃 Күшті</div>
-<div class="empty" data-kz="Жақында сатылымда" data-ru="Скоро в продаже">Жақында сатылымда</div>
+<div id="krepkiy" class="cat">
+<div class="section-title" data-kz="🥃 Күшті" data-ru="🥃 Крепкое">🥃 Күшті</div>
+<div class="grid">
+<div class="card"><h3>Водка Родная Степь 0,2</h3><div class="price">720 ₸</div><div class="vols"><button class="add-btn" onclick="add('Водка Родная Степь 0,2',720)">Себетке</button></div></div>
+<div class="card"><h3>Водка Годунов 0,2</h3><div class="price">1090 ₸</div><div class="vols"><button class="add-btn" onclick="add('Водка Годунов 0,2',1090)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хаома Зеренда 0,2</h3><div class="price">1150 ₸</div><div class="vols"><button class="add-btn" onclick="add('Водка Хаома Зеренда 0,2',1150)">Себетке</button></div></div>
+<div class="card"><h3>Водка Мороша №1 0,2</h3><div class="price">1310 ₸</div><div class="vols"><button class="add-btn" onclick="add('Водка Мороша 0,2',1310)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хортица классическая 0,25</h3><div class="price">1340 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хортица классическая 0,25',1340)">Себетке</button></div></div>
+<div class="card"><h3>Хортица Серебряная Прохлада 0,25</h3><div class="price">1340 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хортица Серебряная 0,25',1340)">Себетке</button></div></div>
+<div class="card"><h3>Водка Кызыл Жар чёрная 0,2</h3><div class="price">1530 ₸</div><div class="vols"><button class="add-btn" onclick="add('Кызыл Жар чёрная 0,2',1530)">Себетке</button></div></div>
+<div class="card"><h3>Водка Родная Степь 0,5</h3><div class="price">1530 ₸</div><div class="vols"><button class="add-btn" onclick="add('Водка Родная Степь 0,5',1530)">Себетке</button></div></div>
+<div class="card"><h3>Водка Tau Samali 0,5</h3><div class="price">1640 ₸</div><div class="vols"><button class="add-btn" onclick="add('Tau Samali 0,5',1640)">Себетке</button></div></div>
+<div class="card"><h3>Водка Wolf</h3><div class="price">1750 ₸</div><div class="vols"><button class="add-btn" onclick="add('Водка Wolf',1750)">Себетке</button></div></div>
+<div class="card"><h3>Водка Синяя Гора мягкая</h3><div class="price">1960 ₸</div><div class="vols"><button class="add-btn" onclick="add('Синяя Гора мягкая',1960)">Себетке</button></div></div>
+<div class="card"><h3>Водка Godunoff Gold 0,5</h3><div class="price">2170 ₸</div><div class="vols"><button class="add-btn" onclick="add('Godunoff Gold 0,5',2170)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хаома 0,5 Зеренда</h3><div class="price">2340 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хаома 0,5 Зеренда',2340)">Себетке</button></div></div>
+<div class="card"><h3>Водка Полюс 0,5</h3><div class="price">2400 ₸</div><div class="vols"><button class="add-btn" onclick="add('Полюс 0,5',2400)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хортица Клюква с мятой</h3><div class="price">2440 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хортица Клюква с мятой',2440)">Себетке</button></div></div>
+<div class="card"><h3>Водка Godunov 0,7</h3><div class="price">2650 ₸</div><div class="vols"><button class="add-btn" onclick="add('Godunov 0,7',2650)">Себетке</button></div></div>
+<div class="card"><h3>Водка Мороша 0,5</h3><div class="price">2770 ₸</div><div class="vols"><button class="add-btn" onclick="add('Мороша 0,5',2770)">Себетке</button></div></div>
+<div class="card"><h3>Водка Синяя Гора 0,65</h3><div class="price">2830 ₸</div><div class="vols"><button class="add-btn" onclick="add('Синяя Гора 0,65',2830)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хортица Айс 0,5</h3><div class="price">3060 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хортица Айс 0,5',3060)">Себетке</button></div></div>
+<div class="card"><h3>Водка Полюс Платинум 0,7</h3><div class="price">3100 ₸</div><div class="vols"><button class="add-btn" onclick="add('Полюс Платинум 0,7',3100)">Себетке</button></div></div>
+<div class="card"><h3>Водка Кызыл Жар чёрная 0,5</h3><div class="price">3260 ₸</div><div class="vols"><button class="add-btn" onclick="add('Кызыл Жар чёрная 0,5',3260)">Себетке</button></div></div>
+<div class="card"><h3>Водка Синяя Гора 0,9</h3><div class="price">3590 ₸</div><div class="vols"><button class="add-btn" onclick="add('Синяя Гора 0,9',3590)">Себетке</button></div></div>
+<div class="card"><h3>Водка Godunov 1л</h3><div class="price">3650 ₸</div><div class="vols"><button class="add-btn" onclick="add('Godunov 1л',3650)">Себетке</button></div></div>
+<div class="card"><h3>Водка Кызыл Жар чёрная 0,7</h3><div class="price">3910 ₸</div><div class="vols"><button class="add-btn" onclick="add('Кызыл Жар чёрная 0,7',3910)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хортица 0,7</h3><div class="price">3940 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хортица 0,7',3940)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хаома 1л Зеренда</h3><div class="price">4290 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хаома 1л Зеренда',4290)">Себетке</button></div></div>
+<div class="card"><h3>Водка Хортица 1л</h3><div class="price">5510 ₸</div><div class="vols"><button class="add-btn" onclick="add('Хортица 1л',5510)">Себетке</button></div></div>
+<div class="card"><h3>Водка Кызыл Жар 1л</h3><div class="price">6080 ₸</div><div class="vols"><button class="add-btn" onclick="add('Кызыл Жар 1л',6080)">Себетке</button></div></div>
+<div class="card"><h3>Водка Capital Black 0,25</h3><div class="price">1100 ₸</div><div class="vols"><button class="add-btn" onclick="add('Capital Black 0,25',1100)">Себетке</button></div></div>
+<div class="card"><h3>Nemiroff Деликат 0,5</h3><div class="price">4160 ₸</div><div class="vols"><button class="add-btn" onclick="add('Nemiroff Деликат 0,5',4160)">Себетке</button></div></div>
+<div class="card"><h3>Nemiroff Деликат 0,7</h3><div class="price">5690 ₸</div><div class="vols"><button class="add-btn" onclick="add('Nemiroff Деликат 0,7',5690)">Себетке</button></div></div>
+<div class="card"><h3>Nemiroff Деликат 1л</h3><div class="price">7180 ₸</div><div class="vols"><button class="add-btn" onclick="add('Nemiroff Деликат 1л',7180)">Себетке</button></div></div>
+<div class="card"><h3>Водка Абсолют 0,5</h3><div class="price">7380 ₸</div><div class="vols"><button class="add-btn" onclick="add('Абсолют 0,5',7380)">Себетке</button></div></div>
+<div class="card"><h3>Водка Абсолют 0,7</h3><div class="price">9620 ₸</div><div class="vols"><button class="add-btn" onclick="add('Абсолют 0,7',9620)">Себетке</button></div></div>
+<div class="card"><h3>Коньячок 0,2</h3><div class="price">940 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньячок 0,2',940)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Казахстан 0,2</h3><div class="price">950 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньяк Казахстан 0,2',950)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Казахстан 0,35</h3><div class="price">1620 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньяк Казахстан 0,35',1620)">Себетке</button></div></div>
+<div class="card"><h3>Казахстан коньяк 0,2л</h3><div class="price">1770 ₸</div><div class="vols"><button class="add-btn" onclick="add('Казахстан коньяк 0,2л',1770)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Казахстан 0,5 3№</h3><div class="price">2160 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньяк Казахстан 0,5 3',2160)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Казахстан 0,5 5№</h3><div class="price">2170 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньяк Казахстан 0,5 5',2170)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Глобал Вайн 0,5</h3><div class="price">2500 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньяк Глобал Вайн 0,5',2500)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Al Farabi 0,5</h3><div class="price">2700 ₸</div><div class="vols"><button class="add-btn" onclick="add('Al Farabi 0,5',2700)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Шустов 5 звёзд 0,5</h3><div class="price">2770 ₸</div><div class="vols"><button class="add-btn" onclick="add('Шустов 5 звёзд 0,5',2770)">Себетке</button></div></div>
+<div class="card"><h3>Казахстан коньяк 0,375л</h3><div class="price">3120 ₸</div><div class="vols"><button class="add-btn" onclick="add('Казахстан коньяк 0,375л',3120)">Себетке</button></div></div>
+<div class="card"><h3>Коньяк Казахстан 0,5л</h3><div class="price">4160 ₸</div><div class="vols"><button class="add-btn" onclick="add('Коньяк Казахстан 0,5л',4160)">Себетке</button></div></div>
+<div class="card"><h3>Казахстан коньяк 0,75</h3><div class="price">5510 ₸</div><div class="vols"><button class="add-btn" onclick="add('Казахстан коньяк 0,75',5510)">Себетке</button></div></div>
+<div class="card"><h3>Виски Macintyres 100мл</h3><div class="price">1930 ₸</div><div class="vols"><button class="add-btn" onclick="add('Виски Macintyres 100мл',1930)">Себетке</button></div></div>
+<div class="card"><h3>Виски Brothers 0,5</h3><div class="price">5000 ₸</div><div class="vols"><button class="add-btn" onclick="add('Виски Brothers 0,5',5000)">Себетке</button></div></div>
+<div class="card"><h3>Виски William Lawson 0,5</h3><div class="price">6370 ₸</div><div class="vols"><button class="add-btn" onclick="add('William Lawson 0,5',6370)">Себетке</button></div></div>
+<div class="card"><h3>Виски Ballantines 0,5</h3><div class="price">7790 ₸</div><div class="vols"><button class="add-btn" onclick="add('Ballantines 0,5',7790)">Себетке</button></div></div>
+<div class="card"><h3>Виски William Lawson 0,7</h3><div class="price">8380 ₸</div><div class="vols"><button class="add-btn" onclick="add('William Lawson 0,7',8380)">Себетке</button></div></div>
+<div class="card"><h3>Виски Ballantines 0,7</h3><div class="price">10510 ₸</div><div class="vols"><button class="add-btn" onclick="add('Ballantines 0,7',10510)">Себетке</button></div></div>
+<div class="card"><h3>Виски Jameson 0,5</h3><div class="price">12240 ₸</div><div class="vols"><button class="add-btn" onclick="add('Jameson 0,5',12240)">Себетке</button></div></div>
+<div class="card"><h3>Вино Bacchus Classic Red / White / Chardonnay</h3><div class="price">2700 ₸</div><div class="vols"><button class="add-btn" onclick="add('Bacchus Classic',2700)">Себетке</button></div></div>
+<div class="card"><h3>Семиз Козы 0,2</h3><div class="price">750 ₸</div><div class="vols"><button class="add-btn" onclick="add('Семиз Козы 0,2',750)">Себетке</button></div></div>
+<div class="card"><h3>Семиз Козы рюмка</h3><div class="price">1860 ₸</div><div class="vols"><button class="add-btn" onclick="add('Семиз Козы рюмка',1860)">Себетке</button></div></div>
+<div class="card"><h3>Семиз Козы 0,7</h3><div class="price">3170 ₸</div><div class="vols"><button class="add-btn" onclick="add('Семиз Козы 0,7',3170)">Себетке</button></div></div>
+</div>
+</div>
 
 <div class="footer">
 <span data-kz="WhatsApp арқылы тапсырыс" data-ru="Заказ через WhatsApp">WhatsApp арқылы тапсырыс</span><br>
@@ -167,6 +230,13 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <script>
 let lang = localStorage.getItem('pivas_lang') || 'kz';
 let cart = JSON.parse(localStorage.getItem('pivas_cart') || '{"total":0,"count":0,"items":[]}');
+function showCat(id){
+  document.querySelectorAll('.cat').forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.top-menu button').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
 function setLang(l){
   lang=l; localStorage.setItem('pivas_lang', l);
   document.getElementById('btn-kz').className = l=='kz' ? 'active' : '';
@@ -209,4 +279,4 @@ function goWhatsApp(){
 setLang(lang);
 </script>
 </body>
-  </html>
+</html>
