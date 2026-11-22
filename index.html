@@ -172,6 +172,19 @@ function makeGold(){
 makeGold();
 setInterval(makeGold,1000);
 </script>
+<script>
+function addToCart(name,price){
+var cart=JSON.parse(localStorage.getItem('cart')||'[]');
+var f=cart.find(i=>i.name===name);
+if(f){f.qty=(f.qty||1)+1}else{cart.push({name:name,price:price,qty:1})}
+localStorage.setItem('cart',JSON.stringify(cart));
+var bar=document.getElementById('cart-bar');
+if(!bar){bar=document.createElement('div');bar.id='cart-bar';bar.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;background:#111;color:#fff;padding:14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center';bar.innerHTML='<span id="cart-bar-text"></span><a href="cart.html" style="color:#fff">В корзину →</a>';document.body.appendChild(bar);}
+var q=cart.reduce((s,i)=>s+(i.qty||1),0);
+document.getElementById('cart-bar-text').textContent='В корзине: '+q+' тов.';
+bar.style.display='flex';
+}
+</script>
 </body>
 </html>
  
