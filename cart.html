@@ -29,6 +29,7 @@ a{color:#ff8c00}
 <script>
 function render(){
 let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+cart=cart.filter(x=>x.liters&&x.price);
 let list=document.getElementById('list');
 let totalBox=document.getElementById('total');
 if(cart.length==0){list.innerHTML='<p style="text-align:center">Корзина пустая</p>';totalBox.innerHTML='';return;}
