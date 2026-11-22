@@ -44,10 +44,10 @@ return;
 let html = '';
 let totalSum = 0;
 cart.forEach(function(item, index){
-let grams = item.qty * 100;
+
 let sum = item.qty * item.price;
 totalSum = totalSum + sum;
-html += '<div class="item"><div><b>' + item.name + '</b><br><small>' + grams + ' г — ' + sum + ' ₸</small></div><div class="controls"><button onclick="changeQty(' + index + ',-1)">-</button><b>' + item.qty + '</b><button onclick="changeQty(' + index + ',1)">+</button><button class="del" onclick="removeItem(' + index + ')">x</button></div></div>';
+html += '<div class="item"><div><b>' + item.name + '</b><br><small>' + item.qty + ' шт — ' + sum + ' ₸</small></div><div class="controls"><button onclick="changeQty(' + index + ',-1)">-</button><b>' + item.qty + '</b><button onclick="changeQty(' + index + ',1)">+</button><button class="del" onclick="removeItem(' + index + ')">x</button></div></div>';
 });
 list.innerHTML = html;
 totalBox.innerHTML = '<div class="total">Итого: ' + totalSum + ' ₸</div><button class="order" onclick="order()">Оформить заказ в WhatsApp</button><button class="clear" onclick="clearCart()">Очистить корзину</button>';
