@@ -6,9 +6,10 @@
 <title>Пивас Store</title>
 <style>
 body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bottom:130px; }
-.banner { background:linear-gradient(135deg,#7a4a00,#3a1f00); padding:20px 12px; text-align:center; }
+.banner-img { width:100%; height:210px; object-fit:cover; display:block; }
+.banner { background:linear-gradient(135deg,#7a4a00,#3a1f00); padding:16px 12px; text-align:center; }
 .banner h1 { font-size:36px; margin:0; }
-.banner p { font-size:17px; margin:8px 0 0; opacity:0.9; }
+.banner p { font-size:17px; margin:8px 0 0; opacity:0.95; }
 .lang { display:flex; justify-content:center; gap:8px; margin:14px 0; }
 .lang button { background:#222; color:#fff; border:1px solid #555; padding:10px 26px; border-radius:20px; font-weight:bold; font-size:16px; }
 .lang button.active { background:#7a4a00; border-color:#7a4a00; }
@@ -18,7 +19,7 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px; }
 .card { background:#111; border-radius:16px; padding:10px; text-align:center; }
 .card img { width:100%; height:160px; object-fit:cover; border-radius:12px; }
-.card h3 { margin:10px 0 5px; font-size:19px; }
+.card h3 { margin:10px 0 5px; font-size:19px; line-height:1.2; }
 .price { margin:5px 0 10px; font-size:17px; }
 .per { font-size:13px; opacity:0.8; display:block; margin-top:3px; }
 .vols { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; }
@@ -31,6 +32,8 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 </head>
 <body>
 
+<img class="banner-img" src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=1200" alt="Пиво">
+
 <div class="banner">
 <h1 data-ru="Пивас Store" data-kz="Пивас Store">Пивас Store</h1>
 <p data-ru="Свежее разливное пиво • Быстрая доставка • Всегда холодное 🍺" data-kz="Жаңа құйылған сыра • Жылдам жеткізу • Әрқашан салқын 🍺">Свежее разливное пиво • Быстрая доставка • Всегда холодное 🍺</p>
@@ -42,7 +45,6 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 </div>
 
 <div class="section-title" data-ru="Категории" data-kz="Санаттар">Категории</div>
-
 <div class="top-menu">
 <a href="pivo.html" data-ru="🍺 Пиво" data-kz="🍺 Сыра">🍺 Пиво</a>
 <a href="krepkiy.html" data-ru="🥃 Крепкое" data-kz="🥃 Күшті сусын">🥃 Крепкое</a>
@@ -50,7 +52,7 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <a href="ryba.html" data-ru="🐟 Рыба" data-kz="🐟 Балық">🐟 Рыба</a>
 </div>
 
-<div class="section-title" data-ru="Популярное пиво" data-kz="Танымал сыра">Популярное пиво</div>
+<div class="section-title" data-ru="Все сорта пива — 11 видов" data-kz="Сыраның барлық түрі — 11 түр">Все сорта пива — 11 видов</div>
 
 <div class="grid">
 
@@ -72,7 +74,7 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600">
 <h3 data-ru="Жигулёвское" data-kz="Жигулёвское">Жигулёвское</h3>
 <div class="price">650 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Жигулёвское 0.5л',325)">0.5 л</button><button onclick="add('Жигулёвское 1л',650)">1 л</button><button onclick="add('Жигулёвское 2л',1300)">2 л</button><button onclick="add('Жигулёвское 5л',3250)">5 л</button></div>
+<div class="vols"><button onclick="add('Жигулевское 0.5л',325)">0.5 л</button><button onclick="add('Жигулевское 1л',650)">1 л</button><button onclick="add('Жигулевское 2л',1300)">2 л</button><button onclick="add('Жигулевское 5л',3250)">5 л</button></div>
 </div>
 
 <div class="card">
@@ -80,6 +82,55 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <h3 data-ru="Чешское" data-kz="Чех сырасы">Чешское</h3>
 <div class="price">850 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
 <div class="vols"><button onclick="add('Чешское 0.5л',425)">0.5 л</button><button onclick="add('Чешское 1л',850)">1 л</button><button onclick="add('Чешское 2л',1700)">2 л</button><button onclick="add('Чешское 5л',4250)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=600">
+<h3 data-ru="Балтика 7" data-kz="Балтика 7">Балтика 7</h3>
+<div class="price">900 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Балтика 0.5л',450)">0.5 л</button><button onclick="add('Балтика 1л',900)">1 л</button><button onclick="add('Балтика 2л',1800)">2 л</button><button onclick="add('Балтика 5л',4500)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600">
+<h3 data-ru="Карагандинское" data-kz="Қарағанды">Карагандинское</h3>
+<div class="price">700 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Карагандинское 0.5л',350)">0.5 л</button><button onclick="add('Карагандинское 1л',700)">1 л</button><button onclick="add('Карагандинское 2л',1400)">2 л</button><button onclick="add('Карагандинское 5л',3500)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=600">
+<h3 data-ru="Ирбис" data-kz="Ірбіс">Ирбис</h3>
+<div class="price">700 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Ирбис 0.5л',350)">0.5 л</button><button onclick="add('Ирбис 1л',700)">1 л</button><button onclick="add('Ирбис 2л',1400)">2 л</button><button onclick="add('Ирбис 5л',3500)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600">
+<h3 data-ru="Холстен" data-kz="Холстен">Холстен</h3>
+<div class="price">800 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Холстен 0.5л',400)">0.5 л</button><button onclick="add('Холстен 1л',800)">1 л</button><button onclick="add('Холстен 2л',1600)">2 л</button><button onclick="add('Холстен 5л',4000)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=600">
+<h3 data-ru="Келлер" data-kz="Келлер">Келлер</h3>
+<div class="price">850 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Келлер 0.5л',425)">0.5 л</button><button onclick="add('Келлер 1л',850)">1 л</button><button onclick="add('Келлер 2л',1700)">2 л</button><button onclick="add('Келлер 5л',4250)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=600">
+<h3 data-ru="Светлое фирменное" data-kz="Ашық фирмалық">Светлое фирменное</h3>
+<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Светлое 0.5л',375)">0.5 л</button><button onclick="add('Светлое 1л',750)">1 л</button><button onclick="add('Светлое 2л',1500)">2 л</button><button onclick="add('Светлое 5л',3750)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=600">
+<h3 data-ru="Тёмное" data-kz="Қараңғы">Тёмное</h3>
+<div class="price">850 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Темное 0.5л',425)">0.5 л</button><button onclick="add('Темное 1л',850)">1 л</button><button onclick="add('Темное 2л',1700)">2 л</button><button onclick="add('Темное 5л',4250)">5 л</button></div>
 </div>
 
 </div>
