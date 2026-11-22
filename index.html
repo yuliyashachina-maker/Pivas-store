@@ -75,19 +75,13 @@ let btn=document.querySelector('.cart-bar-btn');
 if(btn) btn.textContent=t.go;
 }
     }
-
-
-    
-
-
-</script>
-<a id="waBtn" href="https://wa.me/77017531337" target="_blank" style="position:fixed;bottom:100px;right:20px;background:#25D366;color:#fff;padding:14px 22px;border-radius:30px;font-weight:900;text-decoration:none;z-index:9999">💬 WhatsApp-қа жазу</a>
 <div style="height:70px"></div>
 <div class="cart-bar" onclick="location.href='cart.html'">
 <div class="cart-bar-info">🛒 Себет: <b><span id="cart-count">0</span></b><br><span id="cart-total">0 ₸</span></div>
 <a class="cart-bar-btn">Перейти →</a>
 </div>
 <script>
+<a id="waBtn" href="https://wa.me/77017539905?text=Сәлеметсіз%20бе!" target="_blank" style="position:fixed;bottom:100px;right:20px;z-index:9999;width:56px;height:56px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)">W</a>
 setLang(localStorage.getItem('lang')||'kz');setLang(localStorage.getItem('lang')||'kz');
 function addToCart(name, price){
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
