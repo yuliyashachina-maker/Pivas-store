@@ -93,6 +93,20 @@ if(count>0){ bar.style.display='flex'; info.textContent = count + ' тов. • 
 }
 </script> 
 <a id="waBtn" href="https://wa.me/77017531337?text=Сәлеметсіз%20бе!" target="_blank" style="position:fixed;bottom:100px;right:20px;z-index:9999;width:60px;height:60px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:36px;height:36px"></a>
+<script>
+document.querySelectorAll('button').forEach(function(b){
+  if(b.textContent.includes('В корзину')){
+    b.onclick = function(){
+      var card = b.closest('div');
+      var name = card ? card.querySelector('h3')?.textContent?.trim() || 'Пиво' : 'Пиво';
+      var priceText = card ? card.textContent.match(/(\d+)\s*₸/) : null;
+      var price = priceText ? parseInt(priceText[1]) : 0;
+      addToCart(name, price);
+    };
+  }
+});
+</script>
+
 </body>
 </html>
  
