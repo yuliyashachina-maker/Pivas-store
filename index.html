@@ -182,10 +182,10 @@ function setVol(el,name,v){
   el.parentElement.querySelectorAll('.vol').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
 }
-function addVol(name,price){
-  let v = vols[name] || 1;
-  addToCart(name+' '+v+' л', price*v);
-}   
+function addVol(name,price,v){
+  let vol = v || vols[name] || 1;
+  addToCart(name+' '+vol+' л', price*vol);
+}
 function addToCart(name,price){
 var cart=JSON.parse(localStorage.getItem('cart')||'[]');
 var f=cart.find(i=>i.name===name);
