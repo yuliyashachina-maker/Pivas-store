@@ -3,67 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Корзина | Pivas Store</title>
+<title>Корзина</title>
 <style>
-body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:10px}
-h1{text-align:center;color:#ff8c00;font-size:22px}
+body{background:#0d0d1a;color:#fff;font-family:Arial;margin:0;padding:12px}
 a{color:#ff8c00}
-.item{background:#222244;border-radius:10px;padding:12px;margin-bottom:10px}
-.item h3{margin:0 0 5px;font-size:15px}
-.item p{margin:3px 0;color:#ccc;font-size:14px}
-.item b{color:#ff8c00;font-size:16px}
-.btns{display:flex;gap:8px;margin-top:8px}
-.btns button{background:#333366;color:white;border:none;padding:6px 12px;border-radius:15px;font-size:16px}
-.del{background:#ff4444!important}
-.total{background:#ff8c00;color:black;font-weight:bold;padding:14px;border-radius:10px;text-align:center;font-size:18px;margin-top:10px}
-.order{background:#25D366;color:white;border:none;padding:14px;width:100%;border-radius:10px;font-size:16px;font-weight:bold;margin-top:10px}
+h1{text-align:center;color:#ff8c00}
+.item{background:#1e1e3a;padding:12px;border-radius:10px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.item b{font-size:15px}
+.item span{color:#ff8c00;font-weight:bold}
+.del{background:#ff4444;color:#fff;border:none;padding:8px 12px;border-radius:10px}
+.clear{background:#333;color:#fff;border:none;padding:10px;width:100%;border-radius:10px;margin-top:10px}
+.wa{display:block;text-align:center;background:#25D366;color:#fff;font-weight:bold;padding:14px;border-radius:12px;text-decoration:none;margin-top:12px;font-size:17px}
+.total{text-align:center;font-size:19px;font-weight:bold;margin-top:14px}
+.total span{color:#ff8c00}
 </style>
 </head>
 <body>
 <a href="index.html">← Назад к пиву</a>
 <h1>🛒 Корзина</h1>
 <div id="list"></div>
-<div id="total"></div>
-<button class="order" onclick="order()">Заказать в WhatsApp</button>
-
+<div class="total" id="total"></div>
+<a id="waBtn" class="wa" href="#" target="_blank">Заказать в WhatsApp</a>
+<button class="clear" onclick="clearCart()">Очистить корзину</button>
 <script>
+function getCart(){
+  let c = JSON.parse(localStorage.getItem('cart')||'[]');
+  if(c.length) return c;
+  // если другие страницы сохраняли под другим именем
+  let c2 = JSON.parse(localStorage.getItem('cartItems')||'[]');
+  if(c2.length) return c2;
+  let c3 = JSON.parse(localStorage.getItem('basket')||'[]');
+  return c3;
+}
+function saveCart(c){localStorage.setItem('cart',JSON.stringify(c));}
 function render(){
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-cart=cart.filter(x=>x.liters&&x.price);
-let list=document.getElementById('list');
-let totalBox=document.getElementById('total');
-if(cart.length==0){list.innerHTML='<p style="text-align:center">Корзина пустая</p>';totalBox.innerHTML='';return;}
-let totalSum=0; let totalLiters=0;
-list.innerHTML=cart.map((it,idx)=>{
-let litersAll=it.qty*it.liters;
-let sum=litersAll*it.price;
-totalSum+=sum; totalLiters+=litersAll;
-return `<div class="item"><h3>${it.name}</h3>
-<p>${it.liters} л × ${it.qty} = <b>${litersAll} л</b></p>
-<p>Цена: ${it.price} ₸ / л</p>
-<p>Сумма: <b>${sum} ₸</b></p>
-<div class="btns"><button onclick="changeQty(${idx},-1)">-</button><button>${it.qty}</button><button onclick="changeQty(${idx},1)">+</button><button class="del" onclick="removeItem(${idx})">Удалить</button></div></div>`;
-}).join('');
-totalBox.innerHTML=`<div class="total">Всего: ${totalLiters} л — ${totalSum} ₸</div>`;
+  let cart=getCart();
+  let list=document.getElementById('list');
+  if(!cart.length){
+    list.innerHTML='<p style="text-align:center">Корзина пустая</p>';
+    document.getElementById('total').textContent='';
+    return;
+  }
+  let total=0;
+  list.innerHTML=cart.map((it,i)=>{
+    let qty=it.qty||1;
+    let price=it.price||0;
+    total+=qty*price;
+    let name=it.name||'Товар';
+    return '<div class="item"><div><b>'+name+'</b><br>'+qty+' шт × '+price+' ₸</div><div><span>'+(qty*price)+' ₸</span><br><button class="del" onclick="delItem('+i+')">✕</button></div></div>';
+  }).join('');
+  document.getElementById('total').innerHTML='Итого: <span>'+total+' ₸</span>';
+  let text='Здравствуйте! Хочу заказать:%0A';
+  cart.forEach(it=>{text+= '- '+(it.name||'Товар')+' - '+(it.qty||1)+' шт - '+(it.qty||1)*(it.price||0)+' ₸%0A';});
+  text+='Итого: '+total+' ₸';
+  // ПОМЕНЯЙ НОМЕР ТУТ: 77017531337 -> твой номер
+  document.getElementById('waBtn').href='https://wa.me/77017531337?text='+text;
 }
-function changeQty(i,d){
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-cart[i].qty+=d; if(cart[i].qty<=0) cart.splice(i,1);
-localStorage.setItem('cart',JSON.stringify(cart)); render();
+function delItem(i){
+  let cart=getCart(); cart.splice(i,1); saveCart(cart); render();
 }
-function removeItem(i){
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-cart.splice(i,1); localStorage.setItem('cart',JSON.stringify(cart)); render();
-}
-function order(){
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-if(cart.length==0){alert('Корзина пустая');return;}
-let text='Здравствуйте! Хочу заказать:%0A';
-let sum=0;
-cart.forEach(it=>{let l=it.qty*it.liters; let s=l*it.price; sum+=s; text+=`- ${it.name} ${l} л = ${s} ₸%0A`;});
-text+=`Итого: ${sum} ₸`;
-window.open('https://wa.me/77000000000?text='+text,'_blank');
-}
+function clearCart(){localStorage.removeItem('cart');localStorage.removeItem('cartItems');localStorage.removeItem('basket');render();}
 render();
 </script>
 </body>
