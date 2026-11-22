@@ -1,11 +1,13 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Пиво</title><style>body{background:#111;color:#fff;font-family:sans-serif;text-align:center}.top a{color:#fff;margin:5px;text-decoration:none}.top a.active{color:#ff8c00}.container{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}.card{background:#222244;border-radius:10px;padding:10px}.card img{width:100%;border-radius:10px}.price{font-size:18px;font-weight:bold}.btns{display:flex;gap:5px;justify-content:center}.btns button{background:#333366;color:#fff;border:none;padding:5px;border-radius:5px}.btns button.selected{background:#ff8c00}.cart-btn{background:#ff8c00;border:none;padding:8px;border-radius:5px;margin-top:5px}.cart-link{display:block;text-align:center;color:#ff8c00;margin:15px}</style></head><body>
-<div class="top"><a href="index.html" class="active">🍺 Пиво</a> <a href="krepkiy.html">🥃 Крепкое</a> <a href="snacks.html">🍿 Снэки</a> <a href="ryba.html">🐟 Рыба</a></div>
-<h1>🍺 РАЗЛИВНОЕ ПИВО</h1><p>Выбери объём и нажми 🛒</p><div class="container" id="products"></div><a href="cart.html" class="cart-link">🛒 Перейти в корзину</a>
-<script>
-const beers=[{name:"ŽATECKÝ GUS",price:750,img:"1-gus.jpg"},{name:"ШЫМКЕНТ ПРАГА",price:750,img:"2-shym-praga.jpg"},{name:"СССР",price:750,img:"3-sssr.jpg"},{name:"АЛМА-АТА",price:750,img:"4-alma-ata.jpg"},{name:"БИРХАН",price:750,img:"5-birhan.jpg"},{name:"МИЛБОРГ",price:750,img:"6-milborg.jpg"},{name:"ШТУТГАРТ",price:750,img:"7-stuttgart.jpg"},{name:"ДЕРБЕС НЕМЕЦКОЕ",price:750,img:"8-derbes-nem.jpg"},{name:"ДЕРБЕС ПРАГА",price:750,img:"9-derbes-praga.jpg"},{name:"ЧЕШСКОЕ",price:750,img:"10-chesh.jpg"},{name:"ШЫМКЕНТ МЯГКОЕ",price:750,img:"11-shym-myag.jpg"}];
-let selected={};
-function render(){let h='';for(let i=0;i<beers.length;i++){let b=beers[i];h+='<div class="card"><img src="'+b.img+'"><h3>'+b.name+'</h3><div class="price">'+b.price+' ₸ / л</div><div class="btns">';for(let v of [0.5,1,2,5]){h+='<button class="'+((selected[i]||1)==v?'selected':'')+'" onclick="selectLiters('+i+','+v+',this)">'+v+' л</button>';}h+='</div><button class="cart-btn" onclick="addToCart('+i+')">В корзину</button></div>';}document.getElementById('products').innerHTML=h;}
-function selectLiters(i,liters,btn){selected[i]=liters;let b=btn.parentElement.querySelectorAll('button');b.forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');}
-function addToCart(i){let b=beers[i];let liters=selected[i]||1;let cart=JSON.parse(localStorage.getItem('cart')||'[]');cart.push({name:b.name,price:b.price,liters:liters});localStorage.setItem('cart',JSON.stringify(cart));
-render();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пиво</title>
+<style>
+body{background:#111;color:#fff;font-family:Arial;margin:0;padding:10px}
+h1{text-align:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#222;border-radius:12px;padding:10px;text-align:center}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:10px}
+button{background:#ffcc00;border:
