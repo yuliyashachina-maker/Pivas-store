@@ -5,39 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Пивас Store</title>
 <style>
-body { font-family: sans-serif; background: #f9f5ec; text-align: center; padding: 20px; }
-h1 { font-size: 32px; }
-a { display: inline-block; background: #ffcc00; padding: 12px 20px; margin: 8px; border-radius: 10px; text-decoration: none; color: #000; font-weight: bold; }
+body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bottom:130px; }
+.banner { background:linear-gradient(135deg,#7a4a00,#3a1f00); padding:20px 12px; text-align:center; }
+.banner h1 { font-size:36px; margin:0; }
+.banner p { font-size:17px; margin:8px 0 0; opacity:0.9; }
+.lang { display:flex; justify-content:center; gap:8px; margin:14px 0; }
+.lang button { background:#222; color:#fff; border:1px solid #555; padding:10px 26px; border-radius:20px; font-weight:bold; font-size:16px; }
+.lang button.active { background:#7a4a00; border-color:#7a4a00; }
+.section-title { text-align:center; font-size:22px; margin:10px 0; }
+.top-menu { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:0 10px; }
+.top-menu a { background:#5a3a00; color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:bold; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px; }
+.card { background:#111; border-radius:16px; padding:10px; text-align:center; }
+.card img { width:100%; height:160px; object-fit:cover; border-radius:12px; }
+.card h3 { margin:10px 0 5px; font-size:19px; }
+.price { margin:5px 0 10px; font-size:17px; }
+.per { font-size:13px; opacity:0.8; display:block; margin-top:3px; }
+.vols { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; }
+.vols button { background:#7a4a00; color:#fff; border:none; padding:8px 11px; border-radius:10px; font-weight:bold; font-size:15px; }
+.footer { text-align:center; padding:20px 12px; opacity:0.8; font-size:14px; line-height:1.6; }
+.cart-bar { position:fixed; bottom:0; left:0; right:0; background:#7a3b00; color:#fff; text-align:center; padding:16px; font-size:19px; font-weight:bold; z-index:998; }
+.whatsapp-btn { position:fixed; bottom:75px; right:15px; width:64px; height:64px; z-index:999; }
+.whatsapp-btn img { width:64px; height:64px; border-radius:18px; box-shadow:0 6px 14px rgba(0,0,0,0.5); }
 </style>
 </head>
 <body>
-<h1>🍺 Пивас Store</h1>
-<p>Пиво, снеки и рыба с доставкой!</p>
-<a href="pivo.html">🍺 Пиво</a>
-<a href="krepkiy.html">🥃 Крепкое</a>
-<a href="sneki.html">🥨 Снеки</a>
-<a href="ryba.html">🐟 Рыба</a>
-<style>
-.whatsapp-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 999;
-}
-</style>
 
-<a class="whatsapp-btn" href="https://wa.me/77017531337" target="_blank">💬</a>
-</body>
+<div class="banner">
+<h1 data-ru="Пивас Store" data-kz="Пивас Store">Пивас Store</h1>
+<p data-ru="Свежее разливное пиво • Быстрая доставка • Всегда холодное 🍺" data-kz="Жаңа құйылған сыра • Жылдам жеткізу • Әрқашан салқын 🍺">Свежее разливное пиво • Быстрая доставка • Всегда холодное 🍺</p>
+</div>
+
+<div class="lang">
+<button id="btn-ru" class="active" onclick="setLang('ru')">РУС</button>
+<button id="btn-kz" onclick="setLang('kz')">ҚАЗ</button>
+</div>
+
+<div class="section-title" data-ru="Категории" data-kz="Санаттар">Категории</div>
+
+<div class="top-menu">
+<a href="pivo.html" data-ru="🍺 Пиво" data-kz="🍺 Сыра">🍺 Пиво</a>
+<a href="krepkiy.html" data-ru="🥃 Крепкое" data-kz="🥃 Күшті сусын">🥃 Крепкое</a>
+<a href="sneki.html" data-ru="🥨 Снеки" data-kz="🥨 Тіскебасар">🥨 Снеки</a>
+<a href="ryba.html" data-ru="🐟 Рыба" data-kz="🐟 Балық">🐟 Рыба</a>
+</div>
+
+<div class="section-title" data-ru="Популярное пиво" data-kz="Танымал сыра">Популярное пиво</div>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=600">
+<h3 data-ru="Гусь" data-kz="Қаз">Гусь</h3>
+<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Гусь 0.5л',375)">0.5 л</button><button onclick="add('Гусь 1л',750)">1 л</button><button onclick="add('Гусь 2л',1500)">2 л</button><button onclick="add('Гусь 5л',3750)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600">
+<h3 data-ru="Шымкент Прага" data-kz="Шымкент Прага">Шымкент Прага</h3>
+<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Прага 0.5л',375)">0.5 л</button><button onclick="add('Прага 1л',750)">1 л</button><button onclick="add('Прага 2л',1500)">2 л</button><button onclick="add('Прага 5л',3750)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600">
+<h3 data-ru="Жигулёвское" data-kz="Жигулёвское">Жигулёвское</h3>
+<div class="price">650 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Жигулёвское 0.5л',325)">0.5 л</button><button onclick="add('Жигулёвское 1л',650)">1 л</button><button onclick="add('Жигулёвское 2л',1300)">2 л</button><button onclick="add('Жигулёвское 5л',3250)">5 л</button></div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1584225064785-c62a8b43d148?w=600">
+<h3 data-ru="Чешское" data-kz="Чех сырасы">Чешское</h3>
+<div class="price">850 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
+<div class="vols"><button onclick="add('Чешское 0.5л',425)">0.5 л</button><button onclick="add('Чешское 1л',850)">1 л</button><button onclick="add('Чешское 2л',1700)">2 л</button><button onclick="add('Чешское 5л',4250)">5 л</button></div>
+</div>
+
+</div>
+
+<div class="footer">
+<span data-ru="Доставка по городу • Заказ через WhatsApp" data-kz="Қала бойынша жеткізу • WhatsApp арқылы тапсырыс">Доставка по городу • Заказ через WhatsApp</span><br>
+<span data-ru="Работаем каждый день с 10:00 до 23:00" data-kz="Күн сайын 10:00-ден 23:00-ге дейін жұмыс істейміз">Работаем каждый день с 10:00 до 23:00</span><br>
+<span data-ru="Телефон: +7 701 753 13 37" data-kz="Телефон: +7 701 753 13 37">Телефон: +7 701 753 13 37</span>
+</div>
+
+<a class="whatsapp-btn" href="https://wa.me/77017531337" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp"></a>
+<div class="cart-bar" id="cart">Корзина пуста</div>
+
+<script>
+let total=0, count=0, items=[];
+let lang='ru';
+function setLang(l){
+  lang=l;
+  document.getElementById('btn-ru').className = l=='ru' ? 'active' : '';
+  document.getElementById('btn-kz').className = l=='kz' ? 'active' : '';
+  document.querySelectorAll('[data-ru]').forEach(el=>{ el.innerText = el.getAttribute('data-'+l); });
+  document.documentElement.lang = l;
+  updateCart();
+}
+function updateCart(){
+  if(count==0){ document.getElementById('cart').innerText = lang=='ru' ? 'Корзина пуста' : 'Себет бос'; }
+  else { document.getElementById('cart').innerText = lang=='ru' ? 'Корзина: '+count+' тов. — '+total+' ₸ • Оформить в WhatsApp' : 'Себет: '+count+' тауар — '+total+' ₸ • WhatsApp арқылы рәсімдеу'; }
+}
+function add(name,price){ total+=price; count++; items.push(name); updateCart(); document.getElementById('cart').onclick = function(){ let msg = lang=='ru' ? 'Здравствуйте! Хочу заказать: ' : 'Сәлеметсіз бе! Тапсырыс бергім келеді: '; window.open('https://wa.me/77017531337?text='+msg+items.join(', ')+' Итого: '+total+' тг','_blank'); }; }
+</script>
 </body>
 </html>
