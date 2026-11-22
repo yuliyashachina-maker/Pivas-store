@@ -5,83 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Корзина | Pivas Store</title>
 <style>
-body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:15px}
-.top{display:flex;gap:10px;justify-content:center;padding:10px;flex-wrap:wrap}
-.top a{background:#1a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
-h1{text-align:center;color:#ffbc00}
-.item{background:#222244;border-radius:10px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.item b{font-size:14px}
-.item small{color:#aaa;font-size:12px}
-.controls{display:flex;gap:6px;align-items:center}
-.controls button{width:32px;height:32px;border:none;border-radius:50%;font-size:18px;font-weight:bold;background:#ffbc00}
-.del{background:#ff4444!important;color:white!important;width:32px!important}
-.total{font-size:18px;font-weight:bold;text-align:center;margin:15px 0;color:#ffbc00}
-.order{width:100%;background:#4CAF50;color:white;border:none;padding:14px;border-radius:25px;font-size:16px;font-weight:bold}
-.clear{width:100%;background:#555;color:white;border:none;padding:10px;border-radius:25px;margin-top:10px}
-.empty{text-align:center;color:#aaa;margin-top:30px}
+body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:10px}
+h1{text-align:center;color:#ff8c00;font-size:22px}
+a{color:#ff8c00}
+.item{background:#222244;border-radius:10px;padding:12px;margin-bottom:10px}
+.item h3{margin:0 0 5px;font-size:15px}
+.item p{margin:3px 0;color:#ccc;font-size:14px}
+.item b{color:#ff8c00;font-size:16px}
+.btns{display:flex;gap:8px;margin-top:8px}
+.btns button{background:#333366;color:white;border:none;padding:6px 12px;border-radius:15px;font-size:16px}
+.del{background:#ff4444!important}
+.total{background:#ff8c00;color:black;font-weight:bold;padding:14px;border-radius:10px;text-align:center;font-size:18px;margin-top:10px}
+.order{background:#25D366;color:white;border:none;padding:14px;width:100%;border-radius:10px;font-size:16px;font-weight:bold;margin-top:10px}
 </style>
 </head>
 <body>
-<div class="top">
-<a href="index.html">Главная</a>
-<a href="pivo.html">Пиво</a>
-<a href="ryba.html">Рыба</a>
-<a href="snacks.html">Снэки</a>
-</div>
-<h1>🛒 КОРЗИНА</h1>
+<a href="index.html">← Назад к пиву</a>
+<h1>🛒 Корзина</h1>
 <div id="list"></div>
-<div id="totalBox"></div>
+<div id="total"></div>
+<button class="order" onclick="order()">Заказать в WhatsApp</button>
+
 <script>
 function render(){
-let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-let list = document.getElementById('list');
-let totalBox = document.getElementById('totalBox');
-if(cart.length === 0){
-list.innerHTML = '<div class="empty">Корзина пустая 😔<br>Добавь что-нибудь вкусное!</div>';
-totalBox.innerHTML = '';
-return;
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+let list=document.getElementById('list');
+let totalBox=document.getElementById('total');
+if(cart.length==0){list.innerHTML='<p style="text-align:center">Корзина пустая</p>';totalBox.innerHTML='';return;}
+let totalSum=0; let totalLiters=0;
+list.innerHTML=cart.map((it,idx)=>{
+let litersAll=it.qty*it.liters;
+let sum=litersAll*it.price;
+totalSum+=sum; totalLiters+=litersAll;
+return `<div class="item"><h3>${it.name}</h3>
+<p>${it.liters} л × ${it.qty} = <b>${litersAll} л</b></p>
+<p>Цена: ${it.price} ₸ / л</p>
+<p>Сумма: <b>${sum} ₸</b></p>
+<div class="btns"><button onclick="changeQty(${idx},-1)">-</button><button>${it.qty}</button><button onclick="changeQty(${idx},1)">+</button><button class="del" onclick="removeItem(${idx})">Удалить</button></div></div>`;
+}).join('');
+totalBox.innerHTML=`<div class="total">Всего: ${totalLiters} л — ${totalSum} ₸</div>`;
 }
-let html = '';
-let totalSum = 0;
-cart.forEach(function(item, index){
-
-let sum = item.qty * item.price;
-totalSum = totalSum + sum;
-html += '<div class="item"><div><b>' + item.name + '</b><br><small>' + item.qty + ' шт — ' + sum + ' ₸</small></div><div class="controls"><button onclick="changeQty(' + index + ',-1)">-</button><b>' + item.qty + '</b><button onclick="changeQty(' + index + ',1)">+</button><button class="del" onclick="removeItem(' + index + ')">x</button></div></div>';
-});
-list.innerHTML = html;
-totalBox.innerHTML = '<div class="total">Итого: ' + totalSum + ' ₸</div><button class="order" onclick="order()">Оформить заказ в WhatsApp</button><button class="clear" onclick="clearCart()">Очистить корзину</button>';
+function changeQty(i,d){
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+cart[i].qty+=d; if(cart[i].qty<=0) cart.splice(i,1);
+localStorage.setItem('cart',JSON.stringify(cart)); render();
 }
-function changeQty(index, delta){
-let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-cart[index].qty = cart[index].qty + delta;
-if(cart[index].qty <= 0){ cart.splice(index, 1); }
-localStorage.setItem('cart', JSON.stringify(cart));
-render();
-}
-function removeItem(index){
-let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-cart.splice(index, 1);
-localStorage.setItem('cart', JSON.stringify(cart));
-render();
-}
-function clearCart(){
-localStorage.removeItem('cart');
-render();
+function removeItem(i){
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+cart.splice(i,1); localStorage.setItem('cart',JSON.stringify(cart)); render();
 }
 function order(){
-let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-if(cart.length === 0){ alert('Корзина пустая!'); return; }
-let text = 'Здравствуйте! Хочу заказать:%0A';
-let total = 0;
-cart.forEach(function(i){
-
-let sum = i.qty * i.price;
-total = total + sum;
-text += '- ' + i.name + ' - ' + i.qty + ' шт - ' + (i.qty * i.price) + ' тг\n';
-});
-text += 'Итого: ' + total + ' ₸';
-window.open('https://wa.me/77017531337?text=' + text, '_blank');
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+if(cart.length==0){alert('Корзина пустая');return;}
+let text='Здравствуйте! Хочу заказать:%0A';
+let sum=0;
+cart.forEach(it=>{let l=it.qty*it.liters; let s=l*it.price; sum+=s; text+=`- ${it.name} ${l} л = ${s} ₸%0A`;});
+text+=`Итого: ${sum} ₸`;
+window.open('https://wa.me/77000000000?text='+text,'_blank');
 }
 render();
 </script>
