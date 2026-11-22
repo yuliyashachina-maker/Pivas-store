@@ -129,7 +129,7 @@ function addToCart(idx){
   if(found){found.qty+=1;} else {cart.push({name:p.name,price:p.price,qty:1,unit:'шт'});}
   localStorage.setItem('cart',JSON.stringify(cart));
   updateCount();
-  alert(p.name+' — 1 шт добавлено');
+
 }
 function updateCount(){
   let cart=JSON.parse(localStorage.getItem('cart')||'[]');
