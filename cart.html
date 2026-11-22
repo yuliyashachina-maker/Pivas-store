@@ -75,10 +75,10 @@ if(cart.length === 0){ alert('Корзина пустая!'); return; }
 let text = 'Здравствуйте! Хочу заказать:%0A';
 let total = 0;
 cart.forEach(function(i){
-let grams = i.qty * 100;
+
 let sum = i.qty * i.price;
 total = total + sum;
-text += '- ' + i.name + ' — ' + grams + ' г — ' + sum + ' ₸%0A';
+text += '- ' + i.name + ' - ' + i.qty + ' шт - ' + (i.qty * i.price) + ' тг\n';
 });
 text += 'Итого: ' + total + ' ₸';
 window.open('https://wa.me/77000000000?text=' + text, '_blank');
