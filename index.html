@@ -1,64 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Пиво</title>
 <style>
-body{background:#111;color:#fff;font-family:Arial;margin:0;padding:10px}
-h1{text-align:center}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{background:#222;border-radius:12px;padding:10px;text-align:center}
-.card img{width:100%;height:140px;object-fit:cover;border-radius:10px}
-button{background:#ffcc00;border:0;padding:8px 12px;border-radius:8px;font-weight:bold;margin-top:5px}
-select{padding:5px;border-radius:6px}
-.cart{position:fixed;bottom:0;left:0;right:0;background:#ffcc00;color:#000;padding:12px;text-align:center;font-weight:bold}
+body{background:#111;color:#fff;font-family:Arial;margin:0;padding:10px;padding-bottom:70px}
+h1{text-align:center;font-size:32px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#1e1e1e;border-radius:14px;padding:10px;text-align:center}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:10px}
+.card h3{margin:10px 0 5px}
+.card p{margin:5px 0}
+button{background:#ffcc00;color:#000;border:0;padding:9px 14px;border-radius:9px;font-weight:bold;margin-top:6px}
+select{padding:6px 10px;border-radius:8px;background:#333;color:#fff;border:0}
+.cart{position:fixed;bottom:0;left:0;right:0;background:#ffcc00;color:#000;padding:14px;text-align:center;font-weight:bold;font-size:16px}
 </style>
-</head>
-<body>
-<h1>Пиво</h1>
-<div class="grid" id="list"></div>
-<div class="cart" id="cart">Корзина пуста</div>
-<script>
-  let beers=[
-{name:"Чешское",price:650,img:"https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=400"},
-{name:"Немецкое",price:650,img:"https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400"},
-{name:"Жигулевское",price:400,img:"https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=400"},
-{name:"Карагандинское",price:550,img:"https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=400"},
-{name:"Ирландское",price:650,img:"https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400"},
-{name:"Бельгийское",price:750,img:"https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=400"},
-{name:"Крушовице",price:700,img:"https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=400"},
-{name:"Балтика 9",price:450,img:"https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400"},
-{name:"Жигулевское бочковое",price:500,img:"https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=400"},
-{name:"Белый медведь",price:400,img:"https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=400"},
-{name:"Балтика 7",price:500,img:"https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400"}
-];
-let cart=JSON.parse(localStorage.getItem('cart')||'[]');
-  function render(){
-document.getElementById('list').innerHTML=beers.map((b,i)=>`
-<div class="card">
-<img src="${b.img}">
-<h3>${b.name}</h3>
-<p>${b.price} тг / 1л</p>
-<select id="v${i}">
-${[0.5,1,2,5].map(v=>`<option value="${v}">${v} л</option>`).join('')}
-</select><br>
-<button onclick="add(${i})">В корзину</button>
-</div>`).join('');
-updateCart();
-}
-function add(i){
-let liters=parseFloat(document.getElementById('v'+i).value);
-let b=beers[i];
-cart.push({name:b.name,liters:liters,price:b.price*liters});
-localStorage.setItem('cart',JSON.stringify(cart));
-updateCart();
-}
-function updateCart(){
-let total=cart.reduce((s,x)=>s+x.price,0);
-document.getElementById('cart').innerText=cart.length?`Корзина: ${cart.length} шт - ${total} тг`:'Корзина пуста';
-}
-render();
-</script>
-</body>
-</html>
