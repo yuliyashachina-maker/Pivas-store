@@ -71,8 +71,7 @@ let cart=JSON.parse(localStorage.getItem('cart')||'[]');
 let found=cart.find(x=>x.name==b.name && x.liters==liters);
 if(found){found.qty+=1;} else {cart.push({name:b.name,price:b.price,liters:liters,qty:1});}
 localStorage.setItem('cart',JSON.stringify(cart));
-alert(b.name+' '+liters+' л добавлено! Сумма: '+(liters*b.price)+' ₸');
-}
+
 render();
 </script>
 </body>
