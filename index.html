@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Пивас Store</title>
 <style>
-body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bottom:130px; }
+body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bottom:130px; scroll-behavior:smooth; }
 .banner-img { width:100%; display:block; }
 .lang { display:flex; justify-content:center; gap:8px; margin:14px 0; }
 .lang button { background:#222; color:#fff; border:1px solid #555; padding:10px 26px; border-radius:20px; font-weight:bold; font-size:16px; }
 .lang button.active { background:#7a4a00; border-color:#7a4a00; }
-.section-title { text-align:center; font-size:22px; margin:10px 0; }
-.top-menu { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:0 10px; }
+.section-title { text-align:center; font-size:22px; margin:22px 0 10px; }
+.top-menu { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:10px; position:sticky; top:0; background:#000; z-index:100; }
 .top-menu a { background:#5a3a00; color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none; font-weight:bold; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px; }
 .card { background:#111; border-radius:16px; padding:10px; text-align:center; }
-.card img { width:100%; height:160px; object-fit:cover; border-radius:12px; }
-.card h3 { margin:10px 0 5px; font-size:19px; }
-.price { margin:5px 0 10px; font-size:17px; }
-.per { font-size:13px; opacity:0.8; display:block; margin-top:3px; }
+.card h3 { margin:10px 0 5px; font-size:17px; }
+.price { margin:5px 0 10px; font-size:17px; font-weight:bold; }
+.per { font-size:13px; opacity:0.8; display:block; margin-top:3px; font-weight:normal; }
 .vols { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; }
-.vols button { background:#7a4a00; color:#fff; border:none; padding:8px 11px; border-radius:10px; font-weight:bold; font-size:15px; }
+.vols button { background:#7a4a00; color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:bold; font-size:15px; }
+.empty { text-align:center; padding:20px 16px; font-size:18px; line-height:1.6; opacity:0.9; background:#111; margin:12px; border-radius:16px; }
 .footer { text-align:center; padding:20px 12px; opacity:0.8; font-size:14px; line-height:1.6; }
-.cart-bar { position:fixed; bottom:0; left:0; right:0; background:#7a3b00; color:#fff; text-align:center; padding:16px; font-size:19px; font-weight:bold; z-index:998; }
+.cart-bar { position:fixed; bottom:0; left:0; right:0; background:#7a3b00; color:#fff; text-align:center; padding:16px; font-size:19px; font-weight:bold; z-index:998; cursor:pointer; }
 .whatsapp-btn { position:fixed; bottom:75px; right:15px; width:64px; height:64px; z-index:999; }
-.whatsapp-btn img { width:64px; height:64px; border-radius:18px; box-shadow:0 6px 14px rgba(0,0,0,0.5); }
+.whatsapp-btn img { width:64px; height:64px; border-radius:18px; }
 </style>
 </head>
 <body>
@@ -33,117 +33,133 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <button id="btn-ru" class="active" onclick="setLang('ru')">РУС</button>
 <button id="btn-kz" onclick="setLang('kz')">ҚАЗ</button>
 </div>
-<div class="section-title" data-ru="Категории" data-kz="Санаттар">Категории</div>
 <div class="top-menu">
-<a href="pivo.html" data-ru="🍺 Пиво" data-kz="🍺 Сыра">🍺 Пиво</a>
-<a href="krepkiy.html" data-ru="🥃 Крепкое" data-kz="🥃 Күшті сусын">🥃 Крепкое</a>
-<a href="sneki.html" data-ru="🥨 Снеки" data-kz="🥨 Тіскебасар">🥨 Снеки</a>
-<a href="ryba.html" data-ru="🐟 Рыба" data-kz="🐟 Балық">🐟 Рыба</a>
+<a href="#pivo">🍺 Пиво</a>
+<a href="#sneki">🥨 Снеки</a>
+<a href="#ryba">🐟 Рыба</a>
+<a href="#krepkiy">🥃 Крепкое</a>
 </div>
-<div class="section-title" data-ru="Популярное пиво" data-kz="Танымал сыра">Популярное пиво</div>
+
+<div id="pivo" class="section-title">🍺 Пиво — 11 сортов</div>
 <div class="grid">
-
-<div class="card">
-<img src="1-gus.jpg">
-<h3 data-ru="Гусь" data-kz="Қаз">Гусь</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Гусь 0.5л',375)">0.5 л</button><button onclick="add('Гусь 1л',750)">1 л</button><button onclick="add('Гусь 2л',1500)">2 л</button><button onclick="add('Гусь 5л',3750)">5 л</button></div>
+<div class="card"><h3>Гусь</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Гусь 0.5л',375)">0.5 л</button><button onclick="add('Гусь 1л',750)">1 л</button><button onclick="add('Гусь 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Шымкент Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Прага 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Прага 1л',750)">1 л</button><button onclick="add('Шымкент Прага 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>СССР</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('СССР 0.5л',375)">0.5 л</button><button onclick="add('СССР 1л',750)">1 л</button><button onclick="add('СССР 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Алма-Ата</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Алма-Ата 0.5л',375)">0.5 л</button><button onclick="add('Алма-Ата 1л',750)">1 л</button><button onclick="add('Алма-Ата 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Бирхан</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Бирхан 0.5л',375)">0.5 л</button><button onclick="add('Бирхан 1л',750)">1 л</button><button onclick="add('Бирхан 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Милборг</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Милборг 0.5л',375)">0.5 л</button><button onclick="add('Милборг 1л',750)">1 л</button><button onclick="add('Милборг 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Штутгарт</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Штутгарт 0.5л',375)">0.5 л</button><button onclick="add('Штутгарт 1л',750)">1 л</button><button onclick="add('Штутгарт 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Дербес Немецкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Дербес Немецкое 0.5л',375)">0.5 л</button><button onclick="add('Дербес Немецкое 1л',750)">1 л</button><button onclick="add('Дербес Немецкое 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Дербес Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Дербес Прага 0.5л',375)">0.5 л</button><button onclick="add('Дербес Прага 1л',750)">1 л</button><button onclick="add('Дербес Прага 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Чешское</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Чешское 0.5л',375)">0.5 л</button><button onclick="add('Чешское 1л',750)">1 л</button><button onclick="add('Чешское 2л',1500)">2 л</button></div></div>
+<div class="card"><h3>Шымкент Мягкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Мягкое 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Мягкое 1л',750)">1 л</button><button onclick="add('Шымкент Мягкое 2л',1500)">2 л</button></div></div>
 </div>
 
-<div class="card">
-<img src="2-shym-praga.jpg">
-<h3 data-ru="Шымкент Прага" data-kz="Шымкент Прага">Шымкент Прага</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Шымкент Прага 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Прага 1л',750)">1 л</button><button onclick="add('Шымкент Прага 2л',1500)">2 л</button><button onclick="add('Шымкент Прага 5л',3750)">5 л</button></div>
+<div id="sneki" class="section-title">🥨 Снеки — наценка +30%</div>
+<div class="grid">
+<div class="card"><h3>Lays Сыр 70гр</h3><div class="price">660 ₸</div><div class="vols"><button onclick="add('Lays Сыр 70гр',660)">В корзину</button></div></div>
+<div class="card"><h3>Lays Краб 70гр</h3><div class="price">660 ₸</div><div class="vols"><button onclick="add('Lays Краб 70гр',660)">В корзину</button></div></div>
+<div class="card"><h3>Lays Паприка 70гр</h3><div class="price">660 ₸</div><div class="vols"><button onclick="add('Lays Паприка 70гр',660)">В корзину</button></div></div>
+<div class="card"><h3>Лэйс Шашлык 70гр</h3><div class="price">660 ₸</div><div class="vols"><button onclick="add('Лэйс Шашлык 70гр',660)">В корзину</button></div></div>
+<div class="card"><h3>Lays Рифленые Лобстер 70гр</h3><div class="price">660 ₸</div><div class="vols"><button onclick="add('Lays Лобстер 70гр',660)">В корзину</button></div></div>
+<div class="card"><h3>Lays Сметана и зелень 140гр</h3><div class="price">1140 ₸</div><div class="vols"><button onclick="add('Lays Сметана 140гр',1140)">В корзину</button></div></div>
+<div class="card"><h3>Lays Краб 140гр</h3><div class="price">1140 ₸</div><div class="vols"><button onclick="add('Lays Краб 140гр',1140)">В корзину</button></div></div>
+<div class="card"><h3>Lays Сыр 140гр</h3><div class="price">1140 ₸</div><div class="vols"><button onclick="add('Lays Сыр 140гр',1140)">В корзину</button></div></div>
+<div class="card"><h3>Lays Лобстер 140гр</h3><div class="price">1140 ₸</div><div class="vols"><button onclick="add('Lays Лобстер 140гр',1140)">В корзину</button></div></div>
+<div class="card"><h3>Lays Лосось 140гр</h3><div class="price">1140 ₸</div><div class="vols"><button onclick="add('Lays Лосось 140гр',1140)">В корзину</button></div></div>
+<div class="card"><h3>Lays Из печи Лисички 81гр</h3><div class="price">860 ₸</div><div class="vols"><button onclick="add('Lays Из печи Лисички',860)">В корзину</button></div></div>
+<div class="card"><h3>Lays Из печи Лосось и авокадо 81гр</h3><div class="price">860 ₸</div><div class="vols"><button onclick="add('Lays Из печи Лосось',860)">В корзину</button></div></div>
+<div class="card"><h3>Кириешки с чесноком</h3><div class="price">300 ₸</div><div class="vols"><button onclick="add('Кириешки с чесноком',300)">В корзину</button></div></div>
+<div class="card"><h3>Чипсы шашлык 250гр</h3><div class="price">1070 ₸</div><div class="vols"><button onclick="add('Чипсы шашлык 250гр',1070)">В корзину</button></div></div>
+<div class="card"><h3>Чипсоны Зеленый Лук</h3><div class="price">1070 ₸</div><div class="vols"><button onclick="add('Чипсоны Зеленый Лук',1070)">В корзину</button></div></div>
+<div class="card"><h3>Луковые кольца сладкий чили 200гр</h3><div class="price">820 ₸</div><div class="vols"><button onclick="add('Луковые кольца чили',820)">В корзину</button></div></div>
+<div class="card"><h3>Пеллет краб 200гр</h3><div class="price">790 ₸</div><div class="vols"><button onclick="add('Пеллет краб 200гр',790)">В корзину</button></div></div>
+<div class="card"><h3>Греночки Телятина</h3><div class="price">580 ₸</div><div class="vols"><button onclick="add('Греночки Телятина',580)">В корзину</button></div></div>
+<div class="card"><h3>Греночки С Чесноком</h3><div class="price">580 ₸</div><div class="vols"><button onclick="add('Греночки Чеснок',580)">В корзину</button></div></div>
+<div class="card"><h3>Гренки Крылышки Баффало</h3><div class="price">580 ₸</div><div class="vols"><button onclick="add('Гренки Баффало',580)">В корзину</button></div></div>
+<div class="card"><h3>Гренки Томат Спайси</h3><div class="price">580 ₸</div><div class="vols"><button onclick="add('Гренки Томат Спайси',580)">В корзину</button></div></div>
+<div class="card"><h3>Сухарики Флинт 100гр</h3><div class="price">420 ₸<span class="per">Краб / Салями / Шашлык / Сметана / Сыр</span></div><div class="vols"><button onclick="add('Сухарики Флинт 100гр',420)">В корзину</button></div></div>
+<div class="card"><h3>Сухарики Флинт 190гр</h3><div class="price">720 ₸<span class="per">Краб / Шашлык / Сметана / Сыр / Икра</span></div><div class="vols"><button onclick="add('Сухарики Флинт 190гр',720)">В корзину</button></div></div>
+<div class="card"><h3>Ассорти к пиву №1-№5</h3><div class="price">900 ₸</div><div class="vols"><button onclick="add('Ассорти к пиву',900)">В корзину</button></div></div>
+<div class="card"><h3>Пивное Ассорти №3</h3><div class="price">900 ₸</div><div class="vols"><button onclick="add('Пивное Ассорти №3',900)">В корзину</button></div></div>
+<div class="card"><h3>Хрустим Краб / Сметана</h3><div class="price">440 ₸</div><div class="vols"><button onclick="add('Хрустим',440)">В корзину</button></div></div>
+<div class="card"><h3>Зинг Зинг</h3><div class="price">560 ₸<span class="per">Палочки / Ломтики / Классические</span></div><div class="vols"><button onclick="add('Зинг Зинг',560)">В корзину</button></div></div>
+<div class="card"><h3>Караван 90гр</h3><div class="price">320 ₸</div><div class="vols"><button onclick="add('Караван 90гр',320)">В корзину</button></div></div>
+<div class="card"><h3>Джинн Арахис Соленый 50гр</h3><div class="price">260 ₸</div><div class="vols"><button onclick="add('Джинн Арахис 50гр',260)">В корзину</button></div></div>
+<div class="card"><h3>Арахис в баночке</h3><div class="price">610 ₸</div><div class="vols"><button onclick="add('Арахис в баночке',610)">В корзину</button></div></div>
+<div class="card"><h3>Семечки Великан 100гр</h3><div class="price">530 ₸</div><div class="vols"><button onclick="add('Семечки Великан 100гр',530)">В корзину</button></div></div>
+<div class="card"><h3>Джинн Великан соль 200гр</h3><div class="price">1040 ₸</div><div class="vols"><button onclick="add('Джинн Великан 200гр',1040)">В корзину</button></div></div>
+<div class="card"><h3>Городские семечки 100гр</h3><div class="price">460 ₸</div><div class="vols"><button onclick="add('Городские семечки 100гр',460)">В корзину</button></div></div>
+<div class="card"><h3>Джинн с солью 70г</h3><div class="price">350 ₸</div><div class="vols"><button onclick="add('Джинн с солью 70г',350)">В корзину</button></div></div>
+<div class="card"><h3>Семечки Джинн с солью 300гр</h3><div class="price">1500 ₸</div><div class="vols"><button onclick="add('Семечки Джинн 300гр',1500)">В корзину</button></div></div>
+<div class="card"><h3>Бирка Фисташки соленые</h3><div class="price">990 ₸</div><div class="vols"><button onclick="add('Бирка Фисташки',990)">В корзину</button></div></div>
+<div class="card"><h3>Фисташки соленые</h3><div class="price">950 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Фисташки 100гр',950)">100 гр</button><button onclick="add('Фисташки 200гр',1900)">200 гр</button></div></div>
+<div class="card"><h3>Арахис Жареный Соленый</h3><div class="price">220 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Арахис 100гр',220)">100 гр</button><button onclick="add('Арахис 200гр',440)">200 гр</button></div></div>
+<div class="card"><h3>Чечел Кнут / Грузинский</h3><div class="price">820 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Чечел Кнут 100гр',820)">100 гр</button><button onclick="add('Чечел Кнут 200гр',1640)">200 гр</button></div></div>
+<div class="card"><h3>Чечел Паутинка</h3><div class="price">440 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Чечел Паутинка 100гр',440)">100 гр</button></div></div>
+<div class="card"><h3>Курт Био Молочный</h3><div class="price">100 ₸</div><div class="vols"><button onclick="add('Курт Био',100)">В корзину</button></div></div>
+<div class="card"><h3>Курт Ала Молочный 30гр</h3><div class="price">290 ₸</div><div class="vols"><button onclick="add('Курт Ала',290)">В корзину</button></div></div>
+<div class="card"><h3>Курт Жаннур 40гр</h3><div class="price">340 ₸</div><div class="vols"><button onclick="add('Курт Жаннур',340)">В корзину</button></div></div>
+<div class="card"><h3>Курт таблетка</h3><div class="price">420 ₸</div><div class="vols"><button onclick="add('Курт таблетка',420)">В корзину</button></div></div>
+<div class="card"><h3>Курт Золото Тюрков</h3><div class="price">460 ₸</div><div class="vols"><button onclick="add('Курт Золото Тюрков',460)">В корзину</button></div></div>
+<div class="card"><h3>Колбаски Гризли 40гр</h3><div class="price">770 ₸</div><div class="vols"><button onclick="add('Колбаски Гризли',770)">В корзину</button></div></div>
+<div class="card"><h3>Биг Боб Ядра 50гр</h3><div class="price">270 ₸</div><div class="vols"><button onclick="add('Биг Боб Ядра',270)">В корзину</button></div></div>
+<div class="card"><h3>Крутики</h3><div class="price">200 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Крутики 100гр',200)">100 гр</button></div></div>
 </div>
 
-<div class="card">
-<img src="3-sssr.jpg">
-<h3 data-ru="СССР" data-kz="КСРО">СССР</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('СССР 0.5л',375)">0.5 л</button><button onclick="add('СССР 1л',750)">1 л</button><button onclick="add('СССР 2л',1500)">2 л</button><button onclick="add('СССР 5л',3750)">5 л</button></div>
+<div id="ryba" class="section-title">🐟 Рыба — наценка +30%</div>
+<div class="grid">
+<div class="card"><h3>Лещ х/к</h3><div class="price">260 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Лещ х/к 100гр',260)">100 гр</button><button onclick="add('Лещ х/к 200гр',520)">200 гр</button></div></div>
+<div class="card"><h3>Лещ вяленый</h3><div class="price">290 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Лещ вяленый 100гр',290)">100 гр</button></div></div>
+<div class="card"><h3>Щука Вяленая</h3><div class="price">390 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Щука Вяленая 100гр',390)">100 гр</button></div></div>
+<div class="card"><h3>Судак Вяленый</h3><div class="price">520 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Судак Вяленый 100гр',520)">100 гр</button></div></div>
+<div class="card"><h3>Окунь</h3><div class="price">390 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Окунь 100гр',390)">100 гр</button></div></div>
+<div class="card"><h3>Окунь г/к</h3><div class="price">460 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Окунь г/к 100гр',460)">100 гр</button></div></div>
+<div class="card"><h3>Скумбрия без головы</h3><div class="price">660 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Скумбрия 100гр',660)">100 гр</button></div></div>
+<div class="card"><h3>Пелядь</h3><div class="price">650 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Пелядь 100гр',650)">100 гр</button></div></div>
+<div class="card"><h3>Филе Щуки</h3><div class="price">740 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Филе Щуки 100гр',740)">100 гр</button></div></div>
+<div class="card"><h3>Филе Судака</h3><div class="price">950 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Филе Судака 100гр',950)">100 гр</button></div></div>
+<div class="card"><h3>Филе Леща</h3><div class="price">550 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Филе Леща 100гр',550)">100 гр</button></div></div>
+<div class="card"><h3>Хребет Семги</h3><div class="price">460 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Хребет Семги 100гр',460)">100 гр</button></div></div>
+<div class="card"><h3>Брюшки Семги</h3><div class="price">1270 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Брюшки Семги 100гр',1270)">100 гр</button></div></div>
+<div class="card"><h3>Спинки Воблы</h3><div class="price">390 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Спинки Воблы 100гр',390)">100 гр</button></div></div>
+<div class="card"><h3>Вобла Атырау</h3><div class="price">780 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Вобла Атырау 100гр',780)">100 гр</button></div></div>
+<div class="card"><h3>Жерех</h3><div class="price">780 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Жерех 100гр',780)">100 гр</button></div></div>
+<div class="card"><h3>Карась х.к</h3><div class="price">290 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Карась х.к 100гр',290)">100 гр</button></div></div>
+<div class="card"><h3>Плавники Судака с паприкой</h3><div class="price">460 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Плавники Судака 100гр',460)">100 гр</button></div></div>
+<div class="card"><h3>Шашлычки Креветка Кальмар Лосось</h3><div class="price">1150 ₸<span class="per">/ 100 гр</span></div><div class="vols"><button onclick="add('Шашлычки 100гр',1150)">100 гр</button></div></div>
 </div>
 
-<div class="card">
-<img src="4-alma-ata.jpg">
-<h3 data-ru="Алма-Ата" data-kz="Алматы">Алма-Ата</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Алма-Ата 0.5л',375)">0.5 л</button><button onclick="add('Алма-Ата 1л',750)">1 л</button><button onclick="add('Алма-Ата 2л',1500)">2 л</button><button onclick="add('Алма-Ата 5л',3750)">5 л</button></div>
-</div>
+<div id="krepkiy" class="section-title">🥃 Крепкое</div>
+<div class="empty">Скоро — крепкое из твоего файла. Скажи, какие позиции из Алкоголя ставить на сайт, а какие нет?</div>
 
-<div class="card">
-<img src="5-birhan.jpg">
-<h3 data-ru="Бирхан" data-kz="Бирхан">Бирхан</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Бирхан 0.5л',375)">0.5 л</button><button onclick="add('Бирхан 1л',750)">1 л</button><button onclick="add('Бирхан 2л',1500)">2 л</button><button onclick="add('Бирхан 5л',3750)">5 л</button></div>
-</div>
-
-<div class="card">
-<img src="6-milborg.jpg">
-<h3 data-ru="Милборг" data-kz="Милборг">Милборг</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Милборг 0.5л',375)">0.5 л</button><button onclick="add('Милборг 1л',750)">1 л</button><button onclick="add('Милборг 2л',1500)">2 л</button><button onclick="add('Милборг 5л',3750)">5 л</button></div>
-</div>
-
-<div class="card">
-<img src="7-stuttgart.jpg">
-<h3 data-ru="Штутгарт" data-kz="Штутгарт">Штутгарт</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Штутгарт 0.5л',375)">0.5 л</button><button onclick="add('Штутгарт 1л',750)">1 л</button><button onclick="add('Штутгарт 2л',1500)">2 л</button><button onclick="add('Штутгарт 5л',3750)">5 л</button></div>
-</div>
-
-<div class="card">
-<img src="8-derbes-nem.jpg">
-<h3 data-ru="Дербес Немецкое" data-kz="Дербес Неміс">Дербес Немецкое</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Дербес Немецкое 0.5л',375)">0.5 л</button><button onclick="add('Дербес Немецкое 1л',750)">1 л</button><button onclick="add('Дербес Немецкое 2л',1500)">2 л</button><button onclick="add('Дербес Немецкое 5л',3750)">5 л</button></div>
-</div>
-
-<div class="card">
-<img src="9-derbes-praga.jpg">
-<h3 data-ru="Дербес Прага" data-kz="Дербес Прага">Дербес Прага</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Дербес Прага 0.5л',375)">0.5 л</button><button onclick="add('Дербес Прага 1л',750)">1 л</button><button onclick="add('Дербес Прага 2л',1500)">2 л</button><button onclick="add('Дербес Прага 5л',3750)">5 л</button></div>
-</div>
-
-<div class="card">
-<img src="10-chesh.jpg">
-<h3 data-ru="Чешское" data-kz="Чех сырасы">Чешское</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Чешское 0.5л',375)">0.5 л</button><button onclick="add('Чешское 1л',750)">1 л</button><button onclick="add('Чешское 2л',1500)">2 л</button><button onclick="add('Чешское 5л',3750)">5 л</button></div>
-</div>
-
-<div class="card">
-<img src="11-shym-myag.jpg">
-<h3 data-ru="Шымкент Мягкое" data-kz="Шымкент Жұмсақ">Шымкент Мягкое</h3>
-<div class="price">750 ₸ <span class="per" data-ru="/ 1 литр" data-kz="/ 1 литр">/ 1 литр</span></div>
-<div class="vols"><button onclick="add('Шымкент Мягкое 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Мягкое 1л',750)">1 л</button><button onclick="add('Шымкент Мягкое 2л',1500)">2 л</button><button onclick="add('Шымкент Мягкое 5л',3750)">5 л</button></div>
-</div>
-
-</div>
 <div class="footer">
-<span data-ru="Доставка по городу • Заказ через WhatsApp" data-kz="Қала бойынша жеткізу • WhatsApp арқылы тапсырыс">Доставка по городу • Заказ через WhatsApp</span><br>
-<span data-ru="Работаем каждый день с 10:00 до 23:00" data-kz="Күн сайын 10:00-ден 23:00-ге дейін жұмыс істейміз">Работаем каждый день с 10:00 до 23:00</span><br>
-<span data-ru="Телефон: +7 701 753 13 37" data-kz="Телефон: +7 701 753 13 37">Телефон: +7 701 753 13 37</span>
+<span>Доставка по городу • Заказ через WhatsApp</span><br>
+<span>Работаем каждый день с 10:00 до 23:00</span><br>
+<span>Телефон: +7 701 753 13 37</span>
 </div>
 <a class="whatsapp-btn" href="https://wa.me/77017531337" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp"></a>
-<div class="cart-bar" id="cart">Корзина пуста</div>
+<div class="cart-bar" id="cart" onclick="goWhatsApp()">Корзина пуста</div>
 <script>
-let total=0, count=0, items=[];
-let lang='ru';
+let lang = localStorage.getItem('pivas_lang') || 'ru';
+let cart = JSON.parse(localStorage.getItem('pivas_cart') || '{"total":0,"count":0,"items":[]}');
 function setLang(l){
-  lang=l;
+  lang=l; localStorage.setItem('pivas_lang', l);
   document.getElementById('btn-ru').className = l=='ru' ? 'active' : '';
   document.getElementById('btn-kz').className = l=='kz' ? 'active' : '';
-  document.querySelectorAll('[data-ru]').forEach(el=>{ el.innerText = el.getAttribute('data-'+l); });
-  document.documentElement.lang = l;
   updateCart();
 }
+function saveCart(){ localStorage.setItem('pivas_cart', JSON.stringify(cart)); }
 function updateCart(){
-  if(count==0){ document.getElementById('cart').innerText = lang=='ru' ? 'Корзина пуста' : 'Себет бос'; }
-  else { document.getElementById('cart').innerText = lang=='ru' ? 'Корзина: '+count+' тов. — '+total+' ₸ • Оформить в WhatsApp' : 'Себет: '+count+' тауар — '+total+' ₸ • WhatsApp арқылы рәсімдеу'; }
+  if(cart.count==0){ document.getElementById('cart').innerText = 'Корзина пуста'; }
+  else { document.getElementById('cart').innerText = 'Корзина: '+cart.count+' тов. — '+cart.total+' ₸ • Оформить в WhatsApp'; }
 }
-function add(name,price){ total+=price; count++; items.push(name); updateCart(); document.getElementById('cart').onclick = function(){ let msg = lang=='ru' ? 'Здравствуйте! Хочу заказать: ' : 'Сәлеметсіз бе! Тапсырыс бергім келеді: '; window.open('https://wa.me/77017531337?text='+msg+items.join(', ')+' Итого: '+total+' тг','_blank'); }; }
+function add(name,price){ cart.total+=price; cart.count++; cart.items.push(name); saveCart(); updateCart(); }
+function goWhatsApp(){
+  if(cart.count==0) return;
+  window.open('https://wa.me/77017531337?text='+encodeURIComponent('Здравствуйте! Хочу заказать: '+cart.items.join(', ')+' Итого: '+cart.total+' тг'),'_blank');
+}
+setLang(lang);
 </script>
 </body>
 </html>
