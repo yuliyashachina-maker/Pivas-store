@@ -1,5 +1,36 @@
 <!DOCTYPE html>
 <html lang="ru">
+<style>
+button{
+  background: linear-gradient(135deg,#FFD700,#FFA500) !important;
+  color:#000 !important;
+  border:none !important;
+  padding:12px 20px !important;
+  border-radius:25px !important;
+  font-weight:800 !important;
+  font-size:15px !important;
+  box-shadow:0 4px 15px rgba(255,180,0,.4) !important;
+  cursor:pointer;
+  transition:.2s;
+}
+button:active{ transform:scale(.95); }
+.cart-bar{
+  position:fixed !important;
+  bottom:0 !important; left:0 !important; right:0 !important;
+  background:#111 !important; color:#FFD700 !important;
+  padding:14px 16px !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  z-index:9999 !important;
+  font-weight:800 !important;
+  box-shadow:0 -4px 20px rgba(0,0,0,.3) !important;
+}
+.cart-bar button{
+  background:#FFD700 !important;
+  padding:10px 18px !important;
+}
+</style>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,7 +125,7 @@ if(count>0){ bar.style.display='flex'; info.textContent = count + ' тов. • 
 </script> 
 <a id="waBtn" href="https://wa.me/77017531337?text=Сәлеметсіз%20бе!" target="_blank" style="position:fixed;bottom:100px;right:20px;z-index:9999;width:60px;height:60px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:36px;height:36px"></a>
 <script>
- alert('НОВАЯ ВЕРСИЯ ЗАГРУЖЕНА');
+ 
 document.addEventListener('click', function(e){
   var t = e.target;
   if(!t || !t.textContent || !t.textContent.includes('В корзину')) return;
