@@ -1,204 +1,79 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pivas Store</title>
+<title>Pivas Store - Пиво</title>
 <style>
-body{background:#000;color:#fff;font-family:Arial;margin:0}
-.banner{position:relative}
-.banner img{width:100%;display:block}
-.langs{position:absolute;top:12px;right:12px;left:auto;z-index:99;display:flex;gap:6px}
-.langs button{background:#111;color:#d4af37;border:1px solid #d4af37;padding:7px 18px;border-radius:20px;margin:0 6px}
-h1{text-align:center;color:#d4af37;margin:12px 0 2px}
-.sub{text-align:center;color:#aaa;margin-bottom:14px}
-.products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 10px 90px}
-.card{background:#121212;border:1px solid #d4af37;border-radius:14px;padding:8px;text-align:center}
-.card img{width:100%;height:170px;object-fit:cover;border-radius:10px;background:#000}
-    .cart-bar{position:fixed;bottom:0;left:0;right:0;background:#d4af37;color:#000;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;z-index:9999;font-weight:bold}
-.card b{color:#d4af37;display:block;margin:4px 0}
-button.buy{width:100%!important;background:#FFFF00!important;color:#000!important;border:none!important;padding:12px!important;border-radius:999px!important;font-weight:700!important;font-size:16px!important;cursor:pointer!important;margin-top:10px!important}
-.cart-bar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #d4af37;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;z-index:9999}
-.cart-bar-info{color:#fff;font-size:14px}
-.cart-bar-info b{color:#d4af37}
-.cart-bar-btn{background:#d4af37;color:#000;padding:10px 22px;border-radius:10px;text-decoration:none;font-weight:bold}
-#cart-count{background:#000;color:#d4af37;border-radius:50%;padding:2px 7px;margin-left:5px}
-.card button{background:#FFFF00!important;color:#000!important}
-button{background:#FFFF00!important;color:#000!important}
-.cart-bar-btn{background:#FFFF00!important;color:#000!important}
-.cart-bar-btn{...}
- .vol-row{display:flex;gap:4px;align-items:center;justify-content:center;margin-top:6px}
-.vol{padding:4px 7px!important;font-size:12px!important;border:1px solid #c9a227!important;background:#1a1a1a!important;color:#fff!important;border-radius:8px}
-.vol.active{background:#f5c542!important;color:#000!important;font-weight:bold}
-.cart-btn{padding:5px 9px!important;font-size:15px!important;border-radius:10px!important;background:#f5c542!important;border:none}   
+body{font-family:Arial,sans-serif;background:#1a1a2e;color:white;margin:0;padding:0}
+.top{display:flex;gap:8px;justify-content:center;padding:12px;flex-wrap:wrap}
+.top a{background:#2a2a44;color:white;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:14px}
+.top a.active{background:#ff8c00}
+h1{text-align:center;color:#ff8c00;margin:5px 0 0;font-size:22px}
+p{text-align:center;color:#ccc;font-size:13px;margin:5px 0 15px}
+.container{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
+.card{background:#222244;border-radius:10px;padding:12px;text-align:center}
+.card h3{font-size:14px;margin:5px 0;min-height:32px}
+.price{font-size:18px;font-weight:bold;color:#ff8c00;margin:8px 0}
+.btns{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.btns button{background:#333366;color:white;border:1px solid #555;padding:6px 10px;border-radius:15px;font-size:13px;cursor:pointer}
+.btns button.selected{background:#ff8c00;color:black;font-weight:bold}
+.cart-btn{background:#ff8c00;color:black;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;margin-top:8px;width:100%;font-size:14px;cursor:pointer}
+.cart-link{display:block;text-align:center;background:#ff8c00;color:black;font-weight:bold;padding:12px;margin:10px;border-radius:10px;text-decoration:none}
+@media(max-width:600px){.container{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-
-    <div class="banner"><img src="banner.jpg">
-    <div class="langs"><button onclick="setLang('kz')">KZ</button><button onclick="setLang('ru')">RU</button></div>
-    </div> 
+<div class="top">
+<a href="index.html" class="active">🍺 Пиво</a>
+<a href="krepkoe.html">🥃 Крепкое</a>
+<a href="sneki.html">🍿 Снэки</a>
+<a href="ryba.html">🐟 Рыба</a>
 </div>
+<h1>🍺 РАЗЛИВНОЕ ПИВО</h1>
+<p>Выбери объём и нажми 🛒</p>
+<div class="container" id="products"></div>
+<a href="cart.html" class="cart-link">🛒 Перейти в корзину</a>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px">
-  <a href="index.html" style="background:#ffcc00;color:#000;padding:14px;border-radius:12px;text-align:center;text-decoration:none;font-weight:bold;border:2px solid #ffcc00">🍺 Пиво</a>
-  <a href="krepkiy.html" style="background:#1a1a1a;color:#fff;padding:14px;border-radius:12px;text-align:center;text-decoration:none;font-weight:bold;border:1px solid #333">🥃 Крепкое</a>
-  <a href="snacks.html" style="background:#1a1a1a;color:#fff;padding:14px;border-radius:12px;text-align:center;text-decoration:none;font-weight:bold;border:1px solid #333">🥜 Снэки</a>
-  <a href="ryba.html" style="background:#1a1a1a;color:#fff;padding:14px;border-radius:12px;text-align:center;text-decoration:none;font-weight:bold;border:1px solid #333">🐟 Рыба</a>
+<script>
+const beers=[
+{name:"Шымкент Прага",price:750},
+{name:"СССР",price:650},
+{name:"Алма-Ата Жигулёвское",price:650},
+{name:"Чешское Элитное",price:700},
+{name:"Дербес Прага",price:800},
+{name:"Дербес Немецкое",price:800},
+{name:"Шымкент Мягкое",price:750},
+{name:"MILBORG",price:900},
+{name:"STUTTGART",price:1000},
+{name:"Бирхан Нефильтрованное",price:1000},
+{name:"Квас",price:500},
+];
+let selected={};
+function render(){
+document.getElementById('products').innerHTML=beers.map((b,i)=>{
+let sel=selected[i]||1;
+return `<div class="card"><h3>${b.name}</h3><div class="price">${b.price} ₸ / л</div>
+<div class="btns">
+<button class="${sel==0.5?'selected':''}" onclick="selectLiters(${i},0.5,this)">0.5 л</button>
+<button class="${sel==1?'selected':''}" onclick="selectLiters(${i},1,this)">1 л</button>
+<button class="${sel==2?'selected':''}" onclick="selectLiters(${i},2,this)">2 л</button>
+<button class="${sel==5?'selected':''}" onclick="selectLiters(${i},5,this)">5 л</button>
 </div>
-<h1>Pivas Store 🍺</h1>
-</div>
-
-<div class="products"><div class="card"><img src="1-gus.jpg"><h3>Гусь</h3><p>750 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Гусь',750,1)">1л</button><button class="vol" onclick="addVol('Гусь',750,1.5)">1.5л</button><button class="vol" onclick="addVol('Гусь',750,2)">2л</button></div></div>
-<div class="card"><img src="2-shym-praga.jpg"><h3>Шымкент Прага</h3><p>750 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Шымкент Прага',750,1)">1л</button><button class="vol" onclick="addVol('Шымкент Прага',750,1.5)">1.5л</button><button class="vol" onclick="addVol('Шымкент Прага',750,2)">2л</button></div></div>
-<div class="card"><img src="3-sssr.jpg"><h3>СССР</h3><p>750 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('СССР',750,1)">1л</button><button class="vol" onclick="addVol('СССР',750,1.5)">1.5л</button><button class="vol" onclick="addVol('СССР',750,2)">2л</button></div></div>
-<div class="card"><img src="4-alma-ata.jpg"><h3>Алма-Ата Жигулёвское</h3><p>750 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Алма-Ата Жигулёвское',750,1)">1л</button><button class="vol" onclick="addVol('Алма-Ата Жигулёвское',750,1.5)">1.5л</button><button class="vol" onclick="addVol('Алма-Ата Жигулёвское',750,2)">2л</button></div></div>
-<div class="card"><img src="5-birhan.jpg"><h3>Бирхан Нефильтрованное</h3><p>1000 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Бирхан Нефильтрованное',1000,1)">1л</button><button class="vol" onclick="addVol('Бирхан Нефильтрованное',1000,1.5)">1.5л</button><button class="vol" onclick="addVol('Бирхан Нефильтрованное',1000,2)">2л</button></div></div>
-<div class="card"><img src="6-milborg.jpg"><h3>MILBORG</h3><p>900 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('MILBORG',900,1)">1л</button><button class="vol" onclick="addVol('MILBORG',900,1.5)">1.5л</button><button class="vol" onclick="addVol('MILBORG',900,2)">2л</button></div></div>
-<div class="card"><img src="7-stuttgart.jpg"><h3>STUTTGART</h3><p>1000 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('STUTTGART',1000,1)">1л</button><button class="vol" onclick="addVol('STUTTGART',1000,1.5)">1.5л</button><button class="vol" onclick="addVol('STUTTGART',1000,2)">2л</button></div></div>
-<div class="card"><img src="8-derbes-nem.jpg"><h3>Дербес Немецкое</h3><p>800 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Дербес Немецкое',800,1)">1л</button><button class="vol" onclick="addVol('Дербес Немецкое',800,1.5)">1.5л</button><button class="vol" onclick="addVol('Дербес Немецкое',800,2)">2л</button></div></div>
-<div class="card"><img src="9-derbes-pra.jpg"><h3>Дербес Прага</h3><p>800 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Дербес Прага',800,1)">1л</button><button class="vol" onclick="addVol('Дербес Прага',800,1.5)">1.5л</button><button class="vol" onclick="addVol('Дербес Прага',800,2)">2л</button></div></div>
-<div class="card"><img src="10-chesh.jpg"><h3>Чешское Элитное</h3><p>700 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Чешское Элитное',700,1)">1л</button><button class="vol" onclick="addVol('Чешское Элитное',700,1.5)">1.5л</button><button class="vol" onclick="addVol('Чешское Элитное',700,2)">2л</button></div></div>
-<div class="card"><img src="11-shym-myag.jpg"><h3>Шымкент Мягкое</h3><p>750 ₸ / 1 л</p><div class="vol-row"><button class="vol" onclick="addVol('Шымкент Мягкое',750,1)">1л</button><button class="vol" onclick="addVol('Шымкент Мягкое',750,1.5)">1.5л</button><button class="vol" onclick="addVol('Шымкент Мягкое',750,2)">2л</button></div></div></div>
-<script>
-function setLang(lang){
-localStorage.setItem('lang',lang);
-document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-let t=translations[lang];
-// категории
-
-// категории - 4 кнопки
-let cats=document.querySelectorAll('a,button');
-let list=[];
-for(let el of cats){
-let tt=(el.textContent||'').trim()
- if(/Пиво|Сыра|Креп|Мықты|Снэк|Тіске|Рыба|Балық/.test(tt))list.push(el);}   
-if(list[0]) list[0].textContent=lang==='kz'?'🍺 Сыра':'🍺 Пиво';
-if(list[1]) list[1].textContent=lang==='kz'?'💪 Мықты':'💪 Крепкое';
-if(list[2]) list[2].textContent=lang==='kz'?'🥨 Тіскебасар':'🥨 Закуски';
-if(list[3]) list[3].textContent=lang==='kz'?'🐟 Балық':'🐟 Рыба';
-// корзина внизу
-let info=document.querySelector('.cart-bar-info');
-let btn=document.querySelector('.cart-bar-btn');
-if(btn) btn.textContent=t.go;
-setLang(localStorage.getItem('lang')||'kz');setLang(localStorage.getItem('lang')||'kz');
-function addToCart(name, price){
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let f = cart.find(x => x.name === name);
-if(f){ f.qty++; } else { cart.push({name:name, price:price, qty:1, unit:'шт'}); }
-localStorage.setItem('cart', JSON.stringify(cart));
-updateBadge();
+<div style="margin-top:6px;font-size:13px;color:#ccc">Выбрано: ${sel} л = ${sel*b.price} ₸</div>
+<button class="cart-btn" onclick="addToCart(${i})">🛒 В корзину</button>
+</div>`}).join('');
 }
-function updateBadge(){
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let count = cart.reduce((s,i)=>s+i.qty,0);
-let total = cart.reduce((s,i)=>s+i.qty*i.price,0);
-let bar = document.querySelector('.cart-bar');
-if(!bar){ bar = document.createElement('div'); bar.className='cart-bar'; bar.innerHTML='<span class="cart-bar-info"></span><button class="cart-bar-btn">Корзина</button>'; document.body.appendChild(bar); bar.querySelector('.cart-bar-btn').onclick=()=>{ window.location.href='cart.html'; }; }
-let info = bar.querySelector('.cart-bar-info');
-if(count>0){ bar.style.display='flex'; info.textContent = count + ' тов. • ' + total + ' ₸'; } else { bar.style.display='none'; }
-}
-</script> 
-
-
-<style>
-button{
-  background: linear-gradient(135deg,#FFD700,#FFA500) !important;
-  color:#000 !important;
-  border:none !important;
-  padding:12px 20px !important;
-  border-radius:25px !important;
-  font-weight:800 !important;
-  font-size:15px !important;
-  box-shadow:0 4px 15px rgba(255,180,0,.4) !important;
-  cursor:pointer;
-  transition:.2s;
-}
-button:active{ transform:scale(.95); }
-.cart-bar{
-  position:fixed !important;
-  bottom:0 !important; left:0 !important; right:0 !important;
-  background:#111 !important; color:#FFD700 !important;
-  padding:14px 16px !important;
-  display:flex !important;
-  justify-content:space-between !important;
-  align-items:center !important;
-  z-index:9999 !important;
-  font-weight:800 !important;
-  box-shadow:0 -4px 20px rgba(0,0,0,.3) !important;
-}
-.cart-bar button{
-  background:#FFD700 !important;
-  padding:10px 18px !important;
-}
-</style>
-<style>
-html body button,
-html body .product-card button,
-html body .card button,
-html body .btn {
-  background: #FFD700 !important;
-  background-image: none !important;
-  color: #000 !important;
-  border: 2px solid #FFD700 !important;
-}
-</style>
-<style>
-:root {
-  --gold: #FFD700 !important;
-  --primary: #FFD700 !important;
-  --accent: #FFD700 !important;
-  --brown: #FFD700 !important;
-}
-.product-card.product-card.product-card button,
-.card.card.card button,
-button.btn.btn.btn,
-button.add-to-cart.add-to-cart.add-to-cart {
-  background: #FFD700 !important;
-  background-image: none !important;
-  background-color: #FFD700 !important;
-  color: #000 !important;
-  border: 2px solid #FFD700 !important;
-}
-</style>
-<script>
-function makeGold(){
-  document.querySelectorAll('_').forEach(function(el){
-    if(el.textContent.includes('корзину')){
-      el.style.setProperty('background','#FFD700','important');
-      el.style.setProperty('background-image','none','important');
-      el.style.setProperty('background-color','#FFD700','important');
-      el.style.setProperty('color','#000','important');
-    }
-  });
-}
-makeGold();
-setInterval(makeGold,1000);
-</script>
-<script>
- let vols={};
-function setVol(el,name,v){
-  vols[name]=v;
-  el.parentElement.querySelectorAll('.vol').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-}
-function addVol(name,price,v){
-  let vol = v || vols[name] || 1;
-  addToCart(name+' '+vol+' л', price*vol);
-}
-function addToCart(name,price){
-var cart=JSON.parse(localStorage.getItem('cart')||'[]');
-var f=cart.find(i=>i.name===name);
-if(f){f.qty=(f.qty||1)+1}else{cart.push({name:name,price:price,qty:1})}
+function selectLiters(i,liters,btn){selected[i]=liters;render();}
+function addToCart(i){
+let b=beers[i]; let liters=selected[i]||1;
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+let found=cart.find(x=>x.name==b.name && x.liters==liters);
+if(found){found.qty+=1;} else {cart.push({name:b.name,price:b.price,liters:liters,qty:1});}
 localStorage.setItem('cart',JSON.stringify(cart));
-var bar=document.getElementById('cart-bar');
-if(!bar){bar=document.createElement('div');bar.id='cart-bar';bar.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;background:#111;color:#fff;padding:14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center';bar.innerHTML='<span id="cart-bar-text"></span><a href="cart.html" style="color:#fff">В корзину →</a>';document.body.appendChild(bar);}
-var q=cart.reduce((s,i)=>s+(i.qty||1),0);
-document.getElementById('cart-bar-text').textContent=q;
-bar.style.display='flex';
+alert(b.name+' '+liters+' л добавлено! Сумма: '+(liters*b.price)+' ₸');
 }
+render();
 </script>
 </body>
 </html>
- 
