@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Пивас Store</title>
+<link rel="preload" as="image" href="banner_kz.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://cdn-icons-png.flaticon.com">
 <style>
 body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bottom:130px; scroll-behavior:smooth; }
-.banner-img { width:100%; display:block; }
+.banner-img { width:100%; display:block; aspect-ratio: 16/7; background:#1a1a1a; }
 .lang { display:flex; justify-content:center; gap:8px; margin:14px 0; }
 .lang button { background:#222; color:#fff; border:1px solid #555; padding:10px 26px; border-radius:20px; font-weight:bold; font-size:16px; }
 .lang button.active { background:#7a4a00; border-color:#7a4a00; }
@@ -18,7 +20,7 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 .cat.active { display:block; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px; }
 .card { background:#111; border-radius:16px; padding:10px; text-align:center; }
-.card img { width:100%; height:150px; object-fit:cover; border-radius:12px; display:block; }
+.card img { width:100%; height:150px; object-fit:cover; border-radius:12px; display:block; background:#222; }
 .card h3 { margin:10px 0 5px; font-size:17px; }
 .price { margin:5px 0 10px; font-size:17px; font-weight:bold; }
 .per { font-size:13px; opacity:0.8; display:block; margin-top:3px; font-weight:normal; }
@@ -39,7 +41,7 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 </style>
 </head>
 <body>
-<img class="banner-img" id="bannerImg" src="banner_kz.jpg" alt="Пивас">
+<img class="banner-img" id="bannerImg" src="banner_kz.jpg" alt="Пивас" fetchpriority="high" decoding="async">
 <div class="lang">
 <button id="btn-kz" class="active" onclick="setLang('kz')">ҚАЗ</button>
 <button id="btn-ru" onclick="setLang('ru')">РУС</button>
@@ -54,17 +56,17 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <div id="pivo" class="cat active">
 <div class="section-title" data-kz="🍺 Сыра" data-ru="🍺 Пиво">🍺 Сыра</div>
 <div class="grid">
-<div class="card"><img src="1-gus.jpg" alt="Гусь"><h3>Гусь</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Гусь 0.5л',375)">0.5 л</button><button onclick="add('Гусь 1л',750)">1 л</button><button onclick="add('Гусь 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="2-shym-praga.jpg" alt="Шымкент Прага"><h3>Шымкент Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Прага 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Прага 1л',750)">1 л</button><button onclick="add('Шымкент Прага 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="3-sssr.jpg" alt="СССР"><h3>СССР</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('СССР 0.5л',375)">0.5 л</button><button onclick="add('СССР 1л',750)">1 л</button><button onclick="add('СССР 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="4-alma-ata.jpg" alt="Алма-Ата"><h3>Алма-Ата</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Алма-Ата 0.5л',375)">0.5 л</button><button onclick="add('Алма-Ата 1л',750)">1 л</button><button onclick="add('Алма-Ата 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="5-birhan.jpg" alt="Бирхан"><h3>Бирхан</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Бирхан 0.5л',375)">0.5 л</button><button onclick="add('Бирхан 1л',750)">1 л</button><button onclick="add('Бирхан 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="6-milborg.jpg" alt="Милборг"><h3>Милборг</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Милборг 0.5л',375)">0.5 л</button><button onclick="add('Милборг 1л',750)">1 л</button><button onclick="add('Милборг 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="7-stuttgart.jpg" alt="Штутгарт"><h3>Штутгарт</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Штутгарт 0.5л',375)">0.5 л</button><button onclick="add('Штутгарт 1л',750)">1 л</button><button onclick="add('Штутгарт 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="8-derbes-nem.jpg" alt="Дербес Немецкое"><h3>Дербес Немецкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Дербес Немецкое 0.5л',375)">0.5 л</button><button onclick="add('Дербес Немецкое 1л',750)">1 л</button><button onclick="add('Дербес Немецкое 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="9-derbes-praga.jpg" alt="Дербес Прага"><h3>Дербес Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Дербес Прага 0.5л',375)">0.5 л</button><button onclick="add('Дербес Прага 1л',750)">1 л</button><button onclick="add('Дербес Прага 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="10-chesh.jpg" alt="Чешское"><h3>Чешское</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Чешское 0.5л',375)">0.5 л</button><button onclick="add('Чешское 1л',750)">1 л</button><button onclick="add('Чешское 2л',1500)">2 л</button></div></div>
-<div class="card"><img src="11-shym-myag.jpg" alt="Шымкент Мягкое"><h3>Шымкент Мягкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Мягкое 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Мягкое 1л',750)">1 л</button><button onclick="add('Шымкент Мягкое 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="1-gus.jpg" alt="Гусь" loading="eager" decoding="async" fetchpriority="high"><h3>Гусь</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Гусь 0.5л',375)">0.5 л</button><button onclick="add('Гусь 1л',750)">1 л</button><button onclick="add('Гусь 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="2-shym-praga.jpg" alt="Шымкент Прага" loading="lazy" decoding="async"><h3>Шымкент Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Прага 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Прага 1л',750)">1 л</button><button onclick="add('Шымкент Прага 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="3-sssr.jpg" alt="СССР" loading="lazy" decoding="async"><h3>СССР</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('СССР 0.5л',375)">0.5 л</button><button onclick="add('СССР 1л',750)">1 л</button><button onclick="add('СССР 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="4-alma-ata.jpg" alt="Алма-Ата" loading="lazy" decoding="async"><h3>Алма-Ата</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Алма-Ата 0.5л',375)">0.5 л</button><button onclick="add('Алма-Ата 1л',750)">1 л</button><button onclick="add('Алма-Ата 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="5-birhan.jpg" alt="Бирхан" loading="lazy" decoding="async"><h3>Бирхан</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Бирхан 0.5л',375)">0.5 л</button><button onclick="add('Бирхан 1л',750)">1 л</button><button onclick="add('Бирхан 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="6-milborg.jpg" alt="Милборг" loading="lazy" decoding="async"><h3>Милборг</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Милборг 0.5л',375)">0.5 л</button><button onclick="add('Милборг 1л',750)">1 л</button><button onclick="add('Милборг 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="7-stuttgart.jpg" alt="Штутгарт" loading="lazy" decoding="async"><h3>Штутгарт</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Штутгарт 0.5л',375)">0.5 л</button><button onclick="add('Штутгарт 1л',750)">1 л</button><button onclick="add('Штутгарт 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="8-derbes-nem.jpg" alt="Дербес Немецкое" loading="lazy" decoding="async"><h3>Дербес Немецкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Дербес Немецкое 0.5л',375)">0.5 л</button><button onclick="add('Дербес Немецкое 1л',750)">1 л</button><button onclick="add('Дербес Немецкое 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="9-derbes-praga.jpg" alt="Дербес Прага" loading="lazy" decoding="async"><h3>Дербес Прага</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Дербес Прага 0.5л',375)">0.5 л</button><button onclick="add('Дербес Прага 1л',750)">1 л</button><button onclick="add('Дербес Прага 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="10-chesh.jpg" alt="Чешское" loading="lazy" decoding="async"><h3>Чешское</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Чешское 0.5л',375)">0.5 л</button><button onclick="add('Чешское 1л',750)">1 л</button><button onclick="add('Чешское 2л',1500)">2 л</button></div></div>
+<div class="card"><img src="11-shym-myag.jpg" alt="Шымкент Мягкое" loading="lazy" decoding="async"><h3>Шымкент Мягкое</h3><div class="price">750 ₸<span class="per">/ 1 литр</span></div><div class="vols"><button onclick="add('Шымкент Мягкое 0.5л',375)">0.5 л</button><button onclick="add('Шымкент Мягкое 1л',750)">1 л</button><button onclick="add('Шымкент Мягкое 2л',1500)">2 л</button></div></div>
 </div>
 </div>
 
@@ -216,7 +218,7 @@ body { margin:0; background:#000; color:#fff; font-family:sans-serif; padding-bo
 <span data-kz="Телефон: +7 701 753 13 37" data-ru="Телефон: +7 701 753 13 37">Телефон: +7 701 753 13 37</span>
 </div>
 
-<a class="whatsapp-btn" href="https://wa.me/77017531337" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp"></a>
+<a class="whatsapp-btn" href="https://wa.me/77017531337" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" loading="lazy" decoding="async"></a>
 <div class="cart-bar" id="cart" onclick="openCart()">Себет бос</div>
 
 <div class="modal" id="cartModal"><div class="modal-box">
@@ -280,4 +282,4 @@ function goWhatsApp(){
 setLang(lang);
 </script>
 </body>
-                                                                                          </html>
+                                                   </html>
