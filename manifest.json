@@ -8,7 +8,7 @@
   "description": "Пивас Store - Лесная Поляна, заказ через WhatsApp",
   "icons": [
     {
-      "src": "icon2.png",
+     "src": "icon2.png?v=99", 
       "sizes": "512x512",
       "type": "image/png"
     }
